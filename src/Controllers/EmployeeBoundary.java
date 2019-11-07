@@ -24,6 +24,7 @@ public class EmployeeBoundary extends UserInterface
 	@Override
 	public void startInterface(Scanner sc, CineplexGroup cineplex_group) 
 	{	
+		
 		this.cineplex_group = cineplex_group;
 		
 		int option = -1;
