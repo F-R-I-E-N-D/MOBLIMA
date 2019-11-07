@@ -31,7 +31,6 @@ public abstract class UserInterface {
 		}
 		
 		return column.stream().mapToInt(i->i).toArray();
-	
 	}
 	
 	public String getString (String message)
