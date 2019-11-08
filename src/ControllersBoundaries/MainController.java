@@ -18,9 +18,11 @@ public class MainController implements Serializable{
 		// load all existing data into the single instance of ReservationManager
 		ReservationManager reservationManager = ReservationManager.getInstance();
 		loadFile("CustomerData", reservationManager);
+		
 		//load all existing data into the single instance of EmployeeManager
 		AdminManager adminManager = AdminManager.getInstance(); 
 		loadFile("EmployeeData", adminManager);
+		saveFile("EmployeeData", adminManager);
 		//load all existing data into the single instance of CineplexGroup
 		CineplexGroup cineplexGroup = CineplexGroup.getInstance(); 
 		loadFile("CinemaData", cineplexGroup);
