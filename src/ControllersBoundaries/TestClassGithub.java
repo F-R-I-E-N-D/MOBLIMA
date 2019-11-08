@@ -1,4 +1,4 @@
-package Controllers;
+package ControllersBoundaries;
 
 public class TestClassGithub {
 	

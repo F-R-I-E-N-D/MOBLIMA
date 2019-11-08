@@ -1,4 +1,4 @@
-package Controllers;
+package ControllersBoundaries;
 
 import java.util.Scanner;
 import java.util.ArrayList;
