@@ -174,5 +174,21 @@ public class CineplexGroup
     			cineplexList.get(cineplexID).removeReservationFromList(reservationID);
     }
     
+    public int countNumTicketSales (int movieID)
+    {
+    	int count = 0;
+    	for (Cineplex cplex : cineplexList)
+    	{
+    		for (Reservation r : cplex.getReservationList())
+    		{	
+    			if (cplex.getShowList().get(r.getShowID()).getMovie().getMovieId() == movieID)
+    			{
+    				count++;
+    			}
+    		}
+    	}
+    	return count;
+    }
+    
         
 }
