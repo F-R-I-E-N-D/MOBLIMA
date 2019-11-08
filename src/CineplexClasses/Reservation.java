@@ -20,7 +20,7 @@ public class Reservation {
 		this.setRow(row);
 		this.setLane(lane);
 		this.setSeat(seat);
-		setDate(new Date());
+		setDate(new Date()); // Initialised with current date
 	}
 
 	public int getUserID() 
