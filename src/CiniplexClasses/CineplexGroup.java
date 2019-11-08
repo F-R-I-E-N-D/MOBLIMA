@@ -151,9 +151,14 @@ public class CineplexGroup
     
     // Reservation
     
-    public void createReservation(int cineplexID, int userID, int showID, char row, int lane, int seat)
+    public ArrayList<Reservation> getReservations(int cineplexID)
     {
-    	if (cineplexList.get(cineplexID).addReservationToList(userID, showID, row, lane, seat))
+    	return cineplexList.get(cineplexID).getReservationList();
+    }
+    
+    public void createReservation(int cineplexID, int userID, int showID, char row, int lane, int seat, String date_string)
+    {
+    	if (cineplexList.get(cineplexID).addReservationToList(userID, showID, row, lane, seat, date_string))
     		cineplexList.get(cineplexID).getShowList().get(showID).assignSeat(row, lane, seat);
     }
     

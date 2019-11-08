@@ -4,21 +4,21 @@ package Users;
 //any ideas of methods to be abstract?
 public abstract class User {
 	
-	protected String loginID;
+	protected int loginID;
 	protected String password;
 	protected String name;
 	
 	
-	public User(String loginID, String password) {
+	public User(int loginID, String password) {
 		this.loginID = loginID;
 		this.password = password;
 	}
 	
-	public void changeLoginID(String LoginID) {
+	public void changeLoginID(int LoginID) {
 		this.loginID = LoginID;
 	}
 	
-	public String getLoginID(){
+	public int getLoginID(){
 		return loginID;
 	}
 	

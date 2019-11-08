@@ -4,7 +4,7 @@ public class CustomerUser extends User {
 	
 	private int age;
 	
-	public CustomerUser(String loginID, String password) {
+	public CustomerUser(int loginID, String password) {
 		super(loginID, password);
 	}
 	

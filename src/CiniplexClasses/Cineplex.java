@@ -77,11 +77,11 @@ public class Cineplex
 		return reservationList;
 	}
     
-    public boolean addReservationToList(int userID, int showID, char row, int lane, int seat)
+    public boolean addReservationToList(int userID, int showID, char row, int lane, int seat, String date_string)
     {
     	try
     	{
-	    	reservationList.add(new Reservation(reservationList.size(), userID, showID, row, lane, seat));
+	    	reservationList.add(new Reservation(reservationList.size(), userID, showID, row, lane, seat, date_string));
 	    	return true;
     	}
     	catch (Exception e)

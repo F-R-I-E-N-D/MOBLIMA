@@ -1,5 +1,7 @@
 package CiniplexClasses;
 
+import java.util.Date;
+
 public class Reservation {
 	
 	private int reservationID;
@@ -8,8 +10,10 @@ public class Reservation {
 	private char row;
 	private int lane;
 	private int seat;
+	private Date date;
 	
-	public Reservation(int reservationID, int userID, int showID, char row, int lane, int seat)
+	@SuppressWarnings("deprecation")
+	public Reservation(int reservationID, int userID, int showID, char row, int lane, int seat, String date_string)
 	{
 		this.setReservationID(reservationID);
 		this.userID = userID;
@@ -17,6 +21,7 @@ public class Reservation {
 		this.setRow(row);
 		this.setLane(lane);
 		this.setSeat(seat);
+		setDate(new Date(date_string));
 	}
 
 	public int getUserID() 
@@ -58,6 +63,14 @@ public class Reservation {
 
 	public void setSeat(int seat) {
 		this.seat = seat;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 }

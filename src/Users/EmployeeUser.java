@@ -3,7 +3,7 @@ package Users;
 public class EmployeeUser extends User {
 
 	
-	public EmployeeUser(String loginID, String password) {
+	public EmployeeUser(int loginID, String password) {
 		super(loginID, password);
 	}
 	

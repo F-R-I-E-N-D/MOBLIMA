@@ -61,8 +61,17 @@ public abstract class UserInterface {
 				System.out.println("Only integers are allowed. Please try again");
 			
 		}
-		
 		return option;
+	}
+	
+	public void printStringArray(String message, String [] array)
+	{
+		System.out.println(message);
+		for (String s : array)
+		{
+			System.out.print(s + ", ");
+		}
+		System.out.println();
 	}
 	
 }

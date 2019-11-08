@@ -6,7 +6,7 @@ public class Movie {
 	
     public enum Genre {ACTION, COMEDY, FANTASY, HORROR, ROMANCE, MUSICAL, OTHERS}
     public enum Type {THREE_D, BLOCKBUSTER, STANDARD, BLOCKBUSTER_3D}
-    public enum ShowingStatus {COMING_SOON, PREVIEW, NOW_SHOWING, DISCOUNTINUED}
+    public enum ShowingStatus {COMING_SOON, PREVIEW, NOW_SHOWING, DISCONTINUED}
     public enum Restriction {G, PG, PG13, NC16, M18, R21, NAR}
 
     private String title;

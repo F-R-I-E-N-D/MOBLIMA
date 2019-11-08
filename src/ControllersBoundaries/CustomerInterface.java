@@ -7,6 +7,8 @@ import java.util.Scanner;
 import CiniplexClasses.Cineplex;
 import CiniplexClasses.CineplexGroup;
 import CiniplexClasses.Movie;
+import CiniplexClasses.Movie.ShowingStatus;
+import CiniplexClasses.Reservation;
 import CiniplexClasses.Show;
 import Users.CustomerUser;
 
@@ -46,18 +48,36 @@ public class CustomerInterface extends UserInterface {
                 }
 
                 case 2: {
-                    buyTicket();
+                    buyTicket(customer);
                     break;
                 }
 
                 case 3: {
-                    // view booking history
+                    printBookingHistory(customer);
+                    break;
                 }
             }
         }
     }
 
-    // viewMovies method
+    private void printBookingHistory(CustomerUser customer) 
+    {
+    	for (Cineplex cplex : cineplex_group.getCineplexList())
+    	{
+    		for (Reservation r : cplex.getReservationList())
+    		{
+    			if (r.getUserID() == customer.getLoginID())
+    			{
+    				System.out.println("Reservation ID:\t" + r.getReservationID());
+    				System.out.println("Date:\t" + r.getDate());
+    				System.out.println("Movie Name:\t" + cplex.getShowList().get(r.getShowID()).getMovie().getTitle());
+    				System.out.println("Seat:\t" + r.getRow() +"-"+ r.getLane() + "-" + r.getSeat());
+    			}
+    		}
+    	}
+	}
+
+	// viewMovies method
     public void viewMovies() {
         int option2 = -1;
         while (option2 != 4) {
@@ -74,9 +94,8 @@ public class CustomerInterface extends UserInterface {
                 case 1: {
                     for (Movie movie : movieList) {
                         //show all movies that are ComingSoon, Preview, NowShowing
-                        if (movie.getShowingStatus() != movie.getShowingStatus().DISCOUNTINUED)
+                        if (movie.getShowingStatus() != ShowingStatus.DISCONTINUED)
                             System.out.println("Title: " + movie.getTitle());
-
                     }
                     break;
                 }
@@ -114,7 +133,7 @@ public class CustomerInterface extends UserInterface {
                             System.out.println("Showing Status: " + movie.getShowingStatus());
                             System.out.println("Synopsis: " + movie.getSynopsis());
                             System.out.println("Director: " + movie.getDirector());
-                            System.out.println("Cast: " + movie.getCast());
+                            printStringArray("Cast: ", movie.getCast());
                             System.out.println("Type: " + movie.getType());
                             System.out.println("Genre: " + movie.getGenre());
                             movie.printReviewsAndRatings();
@@ -130,7 +149,8 @@ public class CustomerInterface extends UserInterface {
     }
 
     //buyTicket method
-    public void buyTicket() {
+    public void buyTicket(CustomerUser customer) 
+    {
         ArrayList<Cineplex> cineplexList = cineplex_group.getCineplexList();
         System.out.println("------------------------------------------------");
         System.out.println("Cineplexes:");
@@ -176,13 +196,13 @@ public class CustomerInterface extends UserInterface {
         for (i = 0; i < numOfSeats; i++) {
             System.out.println("Ticket " + (i + 1));
             System.out.println("Please enter row:");
-            int row = sc.nextInt();
+            char row = sc.next().charAt(0);
             System.out.println("Please enter lane:");
             int lane = sc.nextInt();
             System.out.println("Please enter seat:");
             int seat = sc.nextInt();
-            //cineplex_group.createReservation(cineplexID,userID,showID,row,lane, seat);
-            // how to get UserID?
+//            cineplex_group.createReservation(cineplexID, userID, showID, row, lane, seat);
+            cineplex_group.createReservation(cineplexID, customer.getLoginID() ,showID,row,lane, seat);
         }
     }
 
