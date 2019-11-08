@@ -6,7 +6,7 @@ public class DateExperiments {
 	
 	public static void main (String [] args)
 	{	
-		Date date =  new Date();
+		Date date =  new Date(); // Sets Default Date
 		System.out.println(date);
 	}
 }
