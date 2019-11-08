@@ -201,8 +201,9 @@ public class CustomerInterface extends UserInterface {
             int lane = sc.nextInt();
             System.out.println("Please enter seat:");
             int seat = sc.nextInt();
+            String date_string = getString("Enter date: MM/DD/YYYY");
 //            cineplex_group.createReservation(cineplexID, userID, showID, row, lane, seat);
-            cineplex_group.createReservation(cineplexID, customer.getLoginID() ,showID,row,lane, seat);
+            cineplex_group.createReservation(cineplexID, customer.getLoginID() ,showID,row,lane, seat, date_string);
         }
     }
 

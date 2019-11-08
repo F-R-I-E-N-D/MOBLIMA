@@ -3,6 +3,8 @@ package ControllersBoundaries;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import Users.CustomerUser;
+
 public class ReservationManager extends Manager implements Serializable{
 	//singleton class to facilitate access to the instance from any class
 
@@ -21,13 +23,13 @@ public class ReservationManager extends Manager implements Serializable{
         return reservationManager;
     }
 	
-	public CustomerUser verifyExistingCustomer(String ID, String pw) {
+	public CustomerUser verifyExistingCustomer(int ID, String pw) {
 		int i;
 		CustomerUser current;
 		System.out.println(customerRecord);
 		
 		for(CustomerUser user: customerRecord) {
-			if(user.loginID.equals(ID) && user.password.equals(pw)) {
+			if(user.getLoginID() == ID && user.getPassword().equals(pw)) {
 				System.out.println("Logged in as Customer");
 				return user;
 			}

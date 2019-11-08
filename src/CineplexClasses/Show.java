@@ -23,7 +23,6 @@ public class Show {
     }
     
     private void setShowID(int showID) {
-		// TODO Auto-generated method stub
 		this.showID = showID;
 	}
 

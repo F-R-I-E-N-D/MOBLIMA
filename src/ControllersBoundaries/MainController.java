@@ -2,6 +2,8 @@ package ControllersBoundaries;
 
 import java.io.*;
 
+import CineplexClasses.CineplexGroup;
+
 public class MainController implements Serializable{
 	
 	/**
