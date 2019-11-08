@@ -2,6 +2,7 @@ package ControllersBoundaries;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import CiniplexClasses.CineplexGroup;
 
 public abstract class UserInterface {
 	
@@ -12,7 +13,7 @@ public abstract class UserInterface {
 		
 	}
 	
-	public abstract void startInterface(Scanner sc, CiniplexClasses.CineplexGroup cplex_grp);
+	public void startInterface(Scanner sc, CineplexGroup cplex_grp) {}
 	
 	public int [] getIntegerArray(String message)
 	{

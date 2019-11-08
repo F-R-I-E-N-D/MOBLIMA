@@ -8,6 +8,7 @@ import CiniplexClasses.Cineplex;
 import CiniplexClasses.CineplexGroup;
 import CiniplexClasses.Movie;
 import CiniplexClasses.Show;
+import Users.CustomerUser;
 
 public class CustomerInterface extends UserInterface {
 
@@ -22,9 +23,9 @@ public class CustomerInterface extends UserInterface {
 
         return customerInterface;
     }
-
-    @Override
-    public void startInterface(Scanner sc, CineplexGroup cineplex_group) {
+    
+    public void startInterface(Scanner sc, CineplexGroup cineplex_group, CustomerUser customer) 
+    {
         this.cineplex_group = cineplex_group;
 
         int option = -1;
