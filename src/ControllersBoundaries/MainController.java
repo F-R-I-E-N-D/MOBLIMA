@@ -2,14 +2,14 @@ package ControllersBoundaries;
 
 import java.io.*;
 
-public class MainController implements Serializable{
-	
-	/**
-	 * 
-	 */
+import CineplexClasses.CineplexGroup;
+
+public class MainController implements Serializable
+{	
 	private static final long serialVersionUID = 8130355990188225040L;
 
-	public MainController() {
+	public MainController() 
+	{
 		
 	}
 	

@@ -27,8 +27,8 @@ public class CustomerInterface extends UserInterface {
     }
     
     public void startInterface(Scanner sc, CineplexGroup cineplex_group, CustomerUser customer) 
-    {
-        this.cineplex_group = cineplex_group;
+    {    	
+    	this.cineplex_group = cineplex_group;
 
         int option = -1;
 
@@ -213,10 +213,11 @@ public class CustomerInterface extends UserInterface {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        CineplexGroup goldenVillage = new CineplexGroup();
+        CineplexGroup goldenVillage =  CineplexGroup.getInstance();
 
         CustomerInterface testInterface = CustomerInterface.getInstance();
-        testInterface.startInterface(sc, goldenVillage);
+        CustomerUser customer = new CustomerUser(0, "hello");
+        testInterface.startInterface(sc, goldenVillage, customer);
         sc.close();
     }
 }

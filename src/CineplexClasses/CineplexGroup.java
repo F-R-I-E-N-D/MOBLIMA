@@ -6,11 +6,20 @@ public class CineplexGroup
 {
     private ArrayList<Cineplex> cineplexList;
     private ArrayList<Movie> movieList;
-
-    public CineplexGroup()
+    
+    private static CineplexGroup cineplex_group = null;
+    
+    private CineplexGroup()
     {
         cineplexList = new ArrayList<Cineplex>();
         movieList = new ArrayList<Movie>();
+    }
+
+    public static CineplexGroup getInstance() {
+        if (cineplex_group == null)
+        	cineplex_group = new CineplexGroup();
+
+        return cineplex_group;
     }
     
     // Cinema Hall
@@ -156,9 +165,9 @@ public class CineplexGroup
     	return cineplexList.get(cineplexID).getReservationList();
     }
     
-    public void createReservation(int cineplexID, int userID, int showID, char row, int lane, int seat, String date_string)
+    public void createReservation(int cineplexID, int userID, int showID, char row, int lane, int seat)
     {
-    	if (cineplexList.get(cineplexID).addReservationToList(userID, showID, row, lane, seat, date_string))
+    	if (cineplexList.get(cineplexID).addReservationToList(userID, showID, row, lane, seat))
     		cineplexList.get(cineplexID).getShowList().get(showID).assignSeat(row, lane, seat);
     }
     
@@ -172,6 +181,22 @@ public class CineplexGroup
     	
     	if (cineplexList.get(cineplexID).getShowList().get(showID).unassignSeat(row, lane, seat))
     			cineplexList.get(cineplexID).removeReservationFromList(reservationID);
+    }
+    
+    public int countNumTicketSales (int movieID)
+    {
+    	int count = 0;
+    	for (Cineplex cplex : cineplexList)
+    	{
+    		for (Reservation r : cplex.getReservationList())
+    		{	
+    			if (cplex.getShowList().get(r.getShowID()).getMovie().getMovieId() == movieID)
+    			{
+    				count++;
+    			}
+    		}
+    	}
+    	return count;
     }
     
         

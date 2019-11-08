@@ -12,8 +12,7 @@ public class Reservation {
 	private int seat;
 	private Date date;
 	
-	@SuppressWarnings("deprecation")
-	public Reservation(int reservationID, int userID, int showID, char row, int lane, int seat, String date_string)
+	public Reservation(int reservationID, int userID, int showID, char row, int lane, int seat)
 	{
 		this.setReservationID(reservationID);
 		this.userID = userID;
@@ -21,7 +20,7 @@ public class Reservation {
 		this.setRow(row);
 		this.setLane(lane);
 		this.setSeat(seat);
-		setDate(new Date(date_string));
+		setDate(new Date()); // Initialised with current date
 	}
 
 	public int getUserID() 
