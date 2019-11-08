@@ -4,11 +4,12 @@ import java.io.*;
 
 import CineplexClasses.CineplexGroup;
 
-public class MainController implements Serializable{
-	
+public class MainController implements Serializable
+{	
 	private static final long serialVersionUID = 8130355990188225040L;
 
-	public MainController() {
+	public MainController() 
+	{
 		
 	}
 	

@@ -201,9 +201,8 @@ public class CustomerInterface extends UserInterface {
             int lane = sc.nextInt();
             System.out.println("Please enter seat:");
             int seat = sc.nextInt();
-            String date_string = getString("Enter date: MM/DD/YYYY");
 //            cineplex_group.createReservation(cineplexID, userID, showID, row, lane, seat);
-            cineplex_group.createReservation(cineplexID, customer.getLoginID() ,showID,row,lane, seat, date_string);
+            cineplex_group.createReservation(cineplexID, customer.getLoginID() ,showID,row,lane, seat);
         }
     }
 
@@ -212,7 +211,7 @@ public class CustomerInterface extends UserInterface {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        CineplexGroup goldenVillage = new CineplexGroup();
+        CineplexGroup goldenVillage =  CineplexGroup.getInstance();
 
         CustomerInterface testInterface = CustomerInterface.getInstance();
         CustomerUser customer = new CustomerUser(0, "hello");

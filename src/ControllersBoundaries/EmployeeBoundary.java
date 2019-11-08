@@ -385,7 +385,7 @@ public class EmployeeBoundary extends UserInterface
 	{
 		Scanner sc = new Scanner(System.in);
 		
-		CineplexGroup goldenVillage = new CineplexGroup();
+		CineplexGroup goldenVillage = CineplexGroup.getInstance();
 		
 		EmployeeBoundary testInterface = EmployeeBoundary.getInstance();
 		testInterface.startInterface(sc , goldenVillage);
