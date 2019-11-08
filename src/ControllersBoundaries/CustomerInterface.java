@@ -109,6 +109,7 @@ public class CustomerInterface extends UserInterface {
                 }
                 case 3: {
                     // top 5 movies by ticket sales
+                	// 
                 }
 
             }
@@ -201,8 +202,9 @@ public class CustomerInterface extends UserInterface {
             int lane = sc.nextInt();
             System.out.println("Please enter seat:");
             int seat = sc.nextInt();
+            String date = getString("Enter Date in MM/DD/YYYY");
 //            cineplex_group.createReservation(cineplexID, userID, showID, row, lane, seat);
-            cineplex_group.createReservation(cineplexID, customer.getLoginID() ,showID,row,lane, seat);
+            cineplex_group.createReservation(cineplexID, customer.getLoginID(), showID, row, lane, seat, date);
         }
     }
 
