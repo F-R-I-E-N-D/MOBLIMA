@@ -1,8 +1,8 @@
 package ControllersBoundaries;
 
-import CiniplexClasses.Cinema;
-import CiniplexClasses.Movie;
-import CiniplexClasses.Show;
+import CineplexClasses.Cinema;
+import CineplexClasses.Movie;
+import CineplexClasses.Show;
 
 public class PriceManager {
     private double studentMarkdown;

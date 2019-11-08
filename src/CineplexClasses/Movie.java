@@ -1,4 +1,4 @@
-package CiniplexClasses;
+package CineplexClasses;
 
 import java.util.ArrayList;
 

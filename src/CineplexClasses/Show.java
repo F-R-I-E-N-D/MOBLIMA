@@ -1,4 +1,4 @@
-package CiniplexClasses;
+package CineplexClasses;
 
 public class Show {
     

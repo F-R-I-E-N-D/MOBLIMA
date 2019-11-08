@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
 
-import CiniplexClasses.Cineplex;
-import CiniplexClasses.CineplexGroup;
-import CiniplexClasses.Movie;
-import CiniplexClasses.Movie.ShowingStatus;
-import CiniplexClasses.Reservation;
-import CiniplexClasses.Show;
+import CineplexClasses.Cineplex;
+import CineplexClasses.CineplexGroup;
+import CineplexClasses.Movie;
+import CineplexClasses.Movie.ShowingStatus;
+import CineplexClasses.Reservation;
+import CineplexClasses.Show;
 import Users.CustomerUser;
 
 public class CustomerInterface extends UserInterface {

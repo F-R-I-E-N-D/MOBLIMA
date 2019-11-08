@@ -2,7 +2,7 @@ package ControllersBoundaries;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-import CiniplexClasses.CineplexGroup;
+import CineplexClasses.CineplexGroup;
 
 public abstract class UserInterface {
 	

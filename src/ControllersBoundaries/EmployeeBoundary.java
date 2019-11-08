@@ -1,9 +1,9 @@
 package ControllersBoundaries;
 
-import CiniplexClasses.*;
-import CiniplexClasses.Cinema.ClassType;
-import CiniplexClasses.Movie.Genre;
-import CiniplexClasses.Show.DayType;
+import CineplexClasses.*;
+import CineplexClasses.Cinema.ClassType;
+import CineplexClasses.Movie.Genre;
+import CineplexClasses.Show.DayType;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -23,7 +23,6 @@ public class EmployeeBoundary extends UserInterface
         return employeeBoundary; 
 	}
 	
-	@Override
 	public void startInterface(Scanner sc, CineplexGroup cineplex_group) 
 	{	
 		this.cineplex_group = cineplex_group;
@@ -259,7 +258,7 @@ public class EmployeeBoundary extends UserInterface
 		while (option!=6)
 		{
 			System.out.println("------------------------------------------------");
-			System.out.println("Show Options:\n");
+			System.out.println("Movie Options:\n");
 			System.out.println("1.\tCreate Movie");
 			System.out.println("2.\tRemove Movie");
 			System.out.println("3.\tView Movies");
@@ -311,7 +310,7 @@ public class EmployeeBoundary extends UserInterface
 				case 2:
 					for (Movie m : cineplex_group.getMovieList())
 					{
-						System.out.println("Movie ID:\t" + m.getMovieId());
+						System.out.println("\nMovie ID:\t" + m.getMovieId());
 						System.out.println("Movie Name:\t"+ m.getTitle());
 					}
 					
@@ -327,6 +326,7 @@ public class EmployeeBoundary extends UserInterface
 						System.out.println("Movie Genre:\t"+ m.getGenre());
 						System.out.println("Movie Type:\t"+ m.getType());
 						System.out.println("Movie Synopsis:\t" + m.getSynopsis());
+						printStringArray("Movie Cast:", m.getCast());
 						System.out.println("Average Rating:\t" + m.getAvgRating());
 					}
 					System.out.println("");
