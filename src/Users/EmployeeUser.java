@@ -1,8 +1,15 @@
 package Users;
 
-public class EmployeeUser extends User {
+import java.io.Serializable;
+
+public class EmployeeUser extends User implements Serializable {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public EmployeeUser(int loginID, String password) {
 		super(loginID, password);
 	}

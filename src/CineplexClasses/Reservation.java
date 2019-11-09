@@ -1,9 +1,13 @@
 package CineplexClasses;
-
+import java.io.*;
 import java.util.Date;
 
-public class Reservation {
+public class Reservation implements Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int reservationID;
 	private int userID;
 	private int showID;

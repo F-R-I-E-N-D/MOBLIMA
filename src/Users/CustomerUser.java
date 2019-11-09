@@ -1,7 +1,13 @@
 package Users;
 
-public class CustomerUser extends User {
+import java.io.Serializable;
+
+public class CustomerUser extends User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int age;
 	
 	public CustomerUser(int loginID, String password) {

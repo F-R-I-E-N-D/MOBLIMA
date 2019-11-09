@@ -1,6 +1,6 @@
 package CineplexClasses;
-
-public class Cinema {
+import java.io.*;
+public class Cinema implements Serializable {
 	
 	public enum ClassType {GOLD, DELUXE, GEMINI, MAX, STANDARD}
 	

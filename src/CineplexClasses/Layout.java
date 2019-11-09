@@ -1,7 +1,11 @@
 package CineplexClasses;
-
-public class Layout {
+import java.io.*;
+public class Layout implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Lane [][] seats;
 	
 	public Layout (int num_rows, int[] column) {

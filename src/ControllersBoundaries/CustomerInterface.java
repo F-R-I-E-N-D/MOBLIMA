@@ -1,5 +1,6 @@
 package ControllersBoundaries;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -12,9 +13,11 @@ import CineplexClasses.Reservation;
 import CineplexClasses.Show;
 import Users.CustomerUser;
 
-public class CustomerInterface extends UserInterface {
+public class CustomerInterface extends UserInterface implements Serializable{
 
-    private static CustomerInterface customerInterface = null;
+	private static final long serialVersionUID = 1L;
+	
+	private static CustomerInterface customerInterface = null;
     private CineplexGroup cineplex_group;
 
     private CustomerInterface() {}
@@ -78,8 +81,10 @@ public class CustomerInterface extends UserInterface {
 	}
 
 	// viewMovies method
-    public void viewMovies() {
+    public void viewMovies() 
+    {
         int option2 = -1;
+        System.out.println("we are in "+ cineplex_group.getCineplexList().get(0).getCineplexName());
         while (option2 != 4) {
             System.out.println("------------------------------------------------");
             System.out.println("1.\tView All Movies");
@@ -94,7 +99,7 @@ public class CustomerInterface extends UserInterface {
                 case 1: {
                     for (Movie movie : movieList) {
                         //show all movies that are ComingSoon, Preview, NowShowing
-                        if (movie.getShowingStatus() != ShowingStatus.DISCONTINUED)
+//                        if (movie.getShowingStatus() != ShowingStatus.DISCONTINUED)
                             System.out.println("Title: " + movie.getTitle());
                     }
                     break;

@@ -1,10 +1,15 @@
 package CineplexClasses;
 
 import java.util.ArrayList;
+import java.io.*;
 
-public class Cineplex
+public class Cineplex implements Serializable 
 {
-    // instance variables - replace the example below with your own
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	// instance variables - replace the example below with your own
     private ArrayList<Show> showList;
     private String cineplexName;
     private int cineplexId;

@@ -2,9 +2,15 @@ package CineplexClasses;
 
 import java.util.ArrayList;
 
-public class CineplexGroup
+import java.io.*;
+
+public class CineplexGroup implements java.io.Serializable
 {
-    private ArrayList<Cineplex> cineplexList;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6771695211220580754L;
+	private ArrayList<Cineplex> cineplexList;
     private ArrayList<Movie> movieList;
     
     private static CineplexGroup cineplex_group = null;

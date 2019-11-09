@@ -5,20 +5,23 @@ import CineplexClasses.Cinema.ClassType;
 import CineplexClasses.Movie.Genre;
 import CineplexClasses.Show.DayType;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class EmployeeBoundary extends UserInterface
+public class EmployeeInterface extends UserInterface implements Serializable
 {
-	private static EmployeeBoundary employeeBoundary = null; 
+	private static final long serialVersionUID = 1L;
+	
+	private static EmployeeInterface employeeBoundary = null; 
 	private CineplexGroup cineplex_group ;
 	  
-	private EmployeeBoundary() {}
+	private EmployeeInterface() {}
 	
-	public static EmployeeBoundary getInstance()
+	public static EmployeeInterface getInstance()
 	{
 		if (employeeBoundary == null) 
-			employeeBoundary = new EmployeeBoundary(); 
+			employeeBoundary = new EmployeeInterface(); 
   
         return employeeBoundary; 
 	}
@@ -387,7 +390,7 @@ public class EmployeeBoundary extends UserInterface
 		
 		CineplexGroup goldenVillage = CineplexGroup.getInstance();
 		
-		EmployeeBoundary testInterface = EmployeeBoundary.getInstance();
+		EmployeeInterface testInterface = EmployeeInterface.getInstance();
 		testInterface.startInterface(sc , goldenVillage);
 		sc.close();
 	}

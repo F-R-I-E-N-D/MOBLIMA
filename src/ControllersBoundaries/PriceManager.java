@@ -1,11 +1,16 @@
 package ControllersBoundaries;
 
+import java.io.Serializable;
+
 import CineplexClasses.Cinema;
 import CineplexClasses.Movie;
 import CineplexClasses.Show;
 
-public class PriceManager {
-    private double studentMarkdown;
+public class PriceManager implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private double studentMarkdown;
     private double elderlyMarkdown;
     private double weekdayMarkup;
     private double weekendMarkup;

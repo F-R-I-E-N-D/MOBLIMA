@@ -1,7 +1,11 @@
 package CineplexClasses;
-
-public class MovieReview {
+import java.io.*;
+public class MovieReview implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int reviewID;
 	private String review;
 	private int rating;

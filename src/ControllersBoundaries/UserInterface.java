@@ -1,11 +1,16 @@
 package ControllersBoundaries;
 
 import java.util.Scanner;
+import java.io.Serializable;
 import java.util.ArrayList;
 import CineplexClasses.CineplexGroup;
 
-public abstract class UserInterface {
+public abstract class UserInterface implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected Scanner sc = new Scanner(System.in);
 	
 	public UserInterface() 

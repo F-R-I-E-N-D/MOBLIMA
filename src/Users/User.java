@@ -1,9 +1,15 @@
 package Users;
 
+import java.io.Serializable;
+
 //abstract class to force implementation of either employee or customer
 //any ideas of methods to be abstract?
-public abstract class User {
+public abstract class User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected int loginID;
 	protected String password;
 	protected String name;

@@ -1,7 +1,11 @@
-package ControllersBoundaries; 
+package ControllersBoundaries;
 
-public class LoginInterface extends UserInterface{
+import java.io.Serializable;
+
+public class LoginInterface extends UserInterface implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	enum UserType{Customer, Employee}
 	
 	private UserType userType;
@@ -41,6 +45,12 @@ public class LoginInterface extends UserInterface{
 					System.out.println("Only options 1-3 are accepted, please try again.");
 			}
 		}
+	}
+	
+	public static void main (String[] args)
+	{
+		LoginInterface li = new LoginInterface();
+		li.print();
 	}
 
 

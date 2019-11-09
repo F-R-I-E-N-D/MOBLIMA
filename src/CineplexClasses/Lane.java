@@ -1,6 +1,7 @@
 package CineplexClasses;
+import java.io.*;
 
-public class Lane {
+public class Lane implements Serializable {
 	private boolean [] seats;
 	private int num_seats;
 	
