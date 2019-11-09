@@ -2,7 +2,6 @@ package movie;
 
 import java.io.*;
 
-<<<<<<< HEAD
 import movie.LoginInterface.UserType;
 import movie.ReservationManager;
 
@@ -22,37 +21,14 @@ public class MainController implements Serializable{
 	
 	
 	
-=======
-import java.io.*;
-
-import CineplexClasses.CineplexGroup;
-
-public class MainController implements Serializable
-{	
-	private static final long serialVersionUID = 8130355990188225040L;
-
-	public MainController() 
-	{
-		
-	}
-	
->>>>>>> 7c60bb6176aa7881b279d499e92c3df3cc1ec0ed
 	//static method used as an instance of MainController is never needed
 	public static void start() {
 		// load all existing data into the single instance of ReservationManager
 		ReservationManager reservationManager = ReservationManager.getInstance();
 		loadFile("CustomerData", reservationManager);
-<<<<<<< HEAD
 		//load all existing data into the single instance of EmployeeManager
 		AdminManager adminManager = AdminManager.getInstance(); 
 		loadFile("EmployeeData", adminManager);
-=======
-		
-		//load all existing data into the single instance of EmployeeManager
-		AdminManager adminManager = AdminManager.getInstance(); 
-		loadFile("EmployeeData", adminManager);
-		saveFile("EmployeeData", adminManager);
->>>>>>> 7c60bb6176aa7881b279d499e92c3df3cc1ec0ed
 		//load all existing data into the single instance of CineplexGroup
 		CineplexGroup cineplexGroup = CineplexGroup.getInstance(); 
 		loadFile("CinemaData", cineplexGroup);
@@ -109,10 +85,5 @@ public class MainController implements Serializable
 	        c.printStackTrace();
 	        return;
     	}
-<<<<<<< HEAD
-}
-=======
->>>>>>> 7c60bb6176aa7881b279d499e92c3df3cc1ec0ed
 }
 }
-

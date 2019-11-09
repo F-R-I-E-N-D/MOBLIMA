@@ -2,7 +2,6 @@ package ControllersBoundaries;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-import CineplexClasses.CineplexGroup;
 
 public abstract class UserInterface {
 	
@@ -13,7 +12,7 @@ public abstract class UserInterface {
 		
 	}
 	
-	public void startInterface(Scanner sc, CineplexGroup cplex_grp) {}
+	public abstract void startInterface(Scanner sc, CiniplexClasses.CineplexGroup cplex_grp);
 	
 	public int [] getIntegerArray(String message)
 	{
@@ -61,17 +60,8 @@ public abstract class UserInterface {
 				System.out.println("Only integers are allowed. Please try again");
 			
 		}
+		
 		return option;
-	}
-	
-	public void printStringArray(String message, String [] array)
-	{
-		System.out.println(message);
-		for (String s : array)
-		{
-			System.out.print(s + ", ");
-		}
-		System.out.println();
 	}
 	
 }
