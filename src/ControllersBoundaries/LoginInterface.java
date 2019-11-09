@@ -1,69 +1,30 @@
 package ControllersBoundaries;
 
-import java.io.Serializable;
+import java.util.Scanner;
 
-public class LoginInterface extends UserInterface implements Serializable{
-	
+import Users.CustomerUser;
+import Users.EmployeeUser;
+import Users.User;
+
+public class LoginInterface extends UserInterface{
+
 	private static final long serialVersionUID = 1L;
 
-	enum UserType{Customer, Employee}
-	
-	private UserType userType;
-	
-	//System.out.println("Choose to: \n1. Add new account\n2. Sign in with existing account\n3. Exit");
-
-	public UserType getUserType() {
-		return userType;
-	}
-	
-	public void print() {
-		System.out.println("Are you a: \n1. Customer\n2. Employee\n3. Exit from system");
-		scanInput();
-	}
-	
-	public void scanInput() {
-		int option;
-		boolean invalid = true;
-		while(invalid) {
-			option = getOnlyInteger("Please choose an option from 1-3.");
-			switch(option) {
-				case 1:
-					userType = UserType.Customer;
-					System.out.println("Thank you for coming to our cinema, how may we help you?");
-					invalid = false;
-					break;
-				case 2:
-					userType = UserType.Employee;
-					System.out.println("Welcome to the system for employees.");
-					invalid = false;
-					break;
-				case 3:
-					System.out.println("Thank you for using our system!");
-					invalid = false;
-					System.exit(0);
-				default:
-					System.out.println("Only options 1-3 are accepted, please try again.");
-			}
-		}
-	}
-	
-	public static void main (String[] args)
-	{
-		LoginInterface li = new LoginInterface();
-		li.print();
-	}
-
-
-}
+	public LoginInterface() {
 		
+	}
 	
-	/*public void chooseAction(LoginManager loginM, ReservationInterface resInt, AdminInterface adminInt) {
+	public void setupLoginManager() {
+		LoginManager loginM = new LoginManager();
+		chooseAction(loginM);
+	}
+	
+	public User chooseAction(LoginManager loginM) {
 		int option=0;
-		User currentUser;
 		String c;
 	
 		Scanner sc = new Scanner(System.in);
-		System.out.println();
+		System.out.println("Choose to: \n1. Add new account\n2. Sign in with existing account\n3. Exit");
 		try {
 			do {
 				option = sc.nextInt();
@@ -71,40 +32,38 @@ public class LoginInterface extends UserInterface implements Serializable{
 			
 			c=sc.nextLine();
 			
-			if(option==1) {
+			if(option==1) 
+			{
 				addAccount(loginM);
 			}
-			else if(option==2) {
-				currentUser = getLoginDetails(loginM);
-				if(currentUser.getClass()==CustomerUser.class)){
-					
-				}
-				else if(currentUser.getClass()==EmployeeUser.class) {
-					
-				}
-				else {
-					System.out.println("Sorry, your account could not be accessed. Please try again.");
-					chooseAction(loginM, resInt, adminInt);
-				}
+			else if(option==2) 
+			{
+				return getLoginDetails(loginM);
 			}
-			else if(option==3) {
+			else if(option==3) 
+			{
 				System.out.println("Thank you and have a good day.");
+				return null;
 			}
 		}
-		catch(Exception e) {
+		catch(Exception e) 
+		{
 			e.printStackTrace();
 			System.out.println("Choice must be either '1' or '2'");
-			chooseAction(loginM, resInt, adminInt);
+			chooseAction(loginM);
+			return null;
 		}
+		return null;
+		
 	}
 	
 	
 	//login attempts for employee and manager, check through existing ArrayList
 	public User getLoginDetails(LoginManager loginM) {
 		int option=0;
-		String ID = null;
+		int ID = 0;
 		String password = null;
-		User current=null;
+		boolean verified= false;
 		String c;
 		
 		Scanner sc = new Scanner(System.in);
@@ -117,33 +76,39 @@ public class LoginInterface extends UserInterface implements Serializable{
 			c=sc.nextLine();
 			
 			if(option==1) {
-				System.out.println("Enter Customer ID");
-				ID = sc.nextLine();
-				System.out.println("Enter Customer Password");
-				password = sc.nextLine();
-				current = loginM.customerLogin(ID, password);
+				ID = getOnlyInteger("Enter Customer ID:");
+				password = getString("Enter Password: ");
+				verified = loginM.verifyExistingCustomer(ID, password);
 			}
 			else if(option==2) {
-				System.out.println("Enter Employee ID");
-				ID = sc.nextLine();
-				System.out.println("Enter Employee Password");
-				password = sc.nextLine();
-				System.out.println(ID+password);
-				current = loginM.employeeLogin(ID, password);
+				ID = getOnlyInteger("Enter Customer ID:");
+				password = getString("Enter Password: ");
+				verified = loginM.verifyExistingEmployee(ID, password);
+				System.out.println(verified);
 			}
-			return current;
+			
+			if(verified && option == 1) {
+				System.out.println("here");
+				loginM.customerLogin();
+			}
+			
+			else if(verified && option == 2) {
+				loginM.employeeLogin();
+			}
+			return null;
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("Choice must be either '1', '2' or '3'");
-			return getLoginDetails(loginM);
+			getLoginDetails(loginM);
+			return null;
 		}
 	}
 	
 	//add customer or employee accounts to ArrayList
 	public LoginManager addAccount(LoginManager loginM) {
 		int option=0;
-		String ID = null;
+		int ID = 0;
 		String password = null;
 		String c;
 		
@@ -156,19 +121,19 @@ public class LoginInterface extends UserInterface implements Serializable{
 			
 			c=sc.nextLine();
 			
-			if(option==1) {
-				System.out.println("Enter Customer ID");
-				ID = sc.nextLine();
-				System.out.println("Enter Customer Password");
-				password = sc.nextLine();
+			if(option==1) 
+			{
+				
+				ID = getOnlyInteger("Enter Customer ID:");
+				password = getString("Enter Password: ");
+				
 				CustomerUser custUser = new CustomerUser(ID, password);
 				loginM.addNewCustomer(custUser);
 			}
 			else if(option==2) {
-				System.out.println("Enter Employee ID");
-				ID = sc.nextLine();
-				System.out.println("Enter Employee Password");
-				password = sc.nextLine();
+				ID = getOnlyInteger("Enter Customer ID:");
+				password = getString("Enter Password: ");
+				
 				EmployeeUser empUser = new EmployeeUser(ID, password);
 				loginM.addNewEmployee(empUser);
 			}
@@ -183,5 +148,5 @@ public class LoginInterface extends UserInterface implements Serializable{
 		}
 		return loginM;
 	}
-	*/
-
+	
+}

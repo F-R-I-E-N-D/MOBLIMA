@@ -44,37 +44,37 @@ public class FileManager
 		cineplexGroup = (CineplexGroup)deserializeObject("cineplexGroup.ser");
 		if (cineplexGroup==null)
 		{
-			cineplexGroup = CineplexGroup.getInstance();
+			cineplexGroup = new CineplexGroup();
 		}
 		
 		loginManager = (LoginManager)deserializeObject("loginManager.ser");
 		if (loginManager==null)
 		{
-			loginManager = LoginManager.getInstance();
+			loginManager = new LoginManager();
 		}
 		
 		reservationManager = (ReservationManager)deserializeObject("reservationManager.ser");
 		if (reservationManager==null)
 		{
-			reservationManager = ReservationManager.getInstance();
+			reservationManager = new ReservationManager();
 		}
 		
 		priceManager = (PriceManager)deserializeObject("priceManager.ser");
 		if (priceManager==null)
 		{
-			priceManager = PriceManager.getInstance();
+			priceManager = new PriceManager();
 		}
 		
 		movieManager = (MovieManager)deserializeObject("movieManager.ser");
 		if (movieManager==null)
 		{
-			movieManager = MovieManager.getInstance();
+			movieManager = new MovieManager();
 		}
 		
 		adminManager = (AdminManager)deserializeObject("adminManager.ser");
 		if (adminManager==null)
 		{
-			adminManager = AdminManager.getInstance();
+			adminManager = new AdminManager();
 		}
 		System.out.println("----------------");
 	}

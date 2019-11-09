@@ -10,19 +10,14 @@ public class AdminManager extends Manager implements Serializable{
 
 	
 	private static final long serialVersionUID = -610865519713835384L;
-	private static AdminManager adminManager = null;
-	private ArrayList<EmployeeUser> employeeRecord = new ArrayList<EmployeeUser>();
+	private ArrayList<EmployeeUser> employeeRecord; 
 	
 	
-	private AdminManager() {
+	public AdminManager() 
+	{
+		employeeRecord = new ArrayList<EmployeeUser>();
 	}
 	
-	public static AdminManager getInstance() {
-        if (adminManager == null) {
-            adminManager = new AdminManager();
-        }
-        return adminManager;
-    }
 	
 	public EmployeeUser verifyExistingEmployee(int ID, String pw) {
 		int i;

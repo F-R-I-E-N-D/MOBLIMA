@@ -10,18 +10,11 @@ public class ReservationManager extends Manager implements Serializable{
 
 
 	private static final long serialVersionUID = 6007327308684037885L;
-	private static ReservationManager reservationManager = null;
 	private ArrayList<CustomerUser> customerRecord = new ArrayList<CustomerUser>();
 	
-	private ReservationManager() {
+	public ReservationManager() {
 	}
 	
-	public static ReservationManager getInstance() {
-        if (reservationManager == null) {
-            reservationManager = new ReservationManager();
-        }
-        return reservationManager;
-    }
 	
 	public CustomerUser verifyExistingCustomer(int ID, String pw) {
 		int i; // should work

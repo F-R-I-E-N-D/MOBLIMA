@@ -177,8 +177,4 @@ public class PriceManager implements Serializable{
         this.maxClassMarkup = maxClassMarkup;
     }
 
-	public static PriceManager getInstance() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

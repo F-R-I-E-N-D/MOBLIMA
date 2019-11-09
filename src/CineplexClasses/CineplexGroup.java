@@ -13,19 +13,10 @@ public class CineplexGroup implements java.io.Serializable
 	private ArrayList<Cineplex> cineplexList;
     private ArrayList<Movie> movieList;
     
-    private static CineplexGroup cineplex_group = null;
-    
-    private CineplexGroup()
+    public CineplexGroup()
     {
         cineplexList = new ArrayList<Cineplex>();
         movieList = new ArrayList<Movie>();
-    }
-
-    public static CineplexGroup getInstance() {
-        if (cineplex_group == null)
-        	cineplex_group = new CineplexGroup();
-
-        return cineplex_group;
     }
     
     // Cinema Hall
