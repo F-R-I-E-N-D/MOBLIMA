@@ -24,7 +24,7 @@ public class ReservationManager extends Manager implements Serializable{
     }
 	
 	public CustomerUser verifyExistingCustomer(int ID, String pw) {
-		int i;
+		int i; // should work
 		CustomerUser current;
 		System.out.println(customerRecord);
 		
