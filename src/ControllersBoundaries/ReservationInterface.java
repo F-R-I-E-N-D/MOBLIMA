@@ -1,17 +1,19 @@
 package ControllersBoundaries;
 
-public class ReservationInterface extends UserInterface{
 
-	private static ReservationInterface resInt = null;
+public class ReservationInterface extends UserInterface{
+	//singleton class to facilitate access to one instance from any class
+
+	private static ReservationInterface reservationInterface = null;
 	
 	private ReservationInterface() {
 	}
 	
 	public static ReservationInterface getInstance() {
-        if (resInt == null) {
-            resInt = new ReservationInterface();
+        if (reservationInterface == null) {
+            reservationInterface = new ReservationInterface();
         }
-        return resInt;
+        return reservationInterface;
     }
 
 	@Override
