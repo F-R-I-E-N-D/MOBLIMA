@@ -2,18 +2,12 @@ package ControllersBoundaries;
 
 public class LoginInterface extends UserInterface{
 	
-	enum UserType{
-		Customer, Employee
-	}
+	enum UserType{Customer, Employee}
 	
 	private UserType userType;
 	
-//System.out.println("Choose to: \n1. Add new account\n2. Sign in with existing account\n3. Exit");
-	public LoginInterface() {
-		super();
-		
-	}
-	
+	//System.out.println("Choose to: \n1. Add new account\n2. Sign in with existing account\n3. Exit");
+
 	public UserType getUserType() {
 		return userType;
 	}
@@ -27,7 +21,7 @@ public class LoginInterface extends UserInterface{
 		int option;
 		boolean invalid = true;
 		while(invalid) {
-			option = onlyInteger("Please choose an option from 1-3.");
+			option = getOnlyInteger("Please choose an option from 1-3.");
 			switch(option) {
 				case 1:
 					userType = UserType.Customer;
