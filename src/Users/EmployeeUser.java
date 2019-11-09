@@ -4,13 +4,14 @@ import java.io.Serializable;
 
 public class EmployeeUser extends User implements Serializable {
 
-	
+	private String loginID;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public EmployeeUser(int loginID, String password) {
+	public EmployeeUser(int loginID, String password) 
+	{
 		super(loginID, password);
 	}
 	
