@@ -370,16 +370,4 @@ public class EmployeeInterface extends UserInterface
 		}
 	}
 	
-	
-	// Test
-	public static void main (String [] args)
-	{
-		Scanner sc = new Scanner(System.in);
-		
-		CineplexGroup goldenVillage = new CineplexGroup();
-		
-		EmployeeInterface testInterface = EmployeeInterface.getInstance();
-		testInterface.startInterface(goldenVillage);
-		sc.close();
-	}
 }

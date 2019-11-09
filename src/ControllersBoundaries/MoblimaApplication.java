@@ -22,9 +22,6 @@ public class MoblimaApplication
 		AdminManager adminManager = fileManager.getAdminManager();
 		
 		LoginInterface loginInterface = new LoginInterface();
-		CustomerInterface customerInterface = new CustomerInterface();
-		EmployeeInterface employeeInterface = new EmployeeInterface();
-		
 		
 //		cineplexGroup.addMovieToList("Title1", "fbhdbd", null, "djhghs", null, null);
 //		System.out.println("X---------X");
@@ -40,10 +37,12 @@ public class MoblimaApplication
 		
 		if (userRecord instanceof CustomerUser)
 		{
+			CustomerInterface customerInterface = new CustomerInterface();
 			customerInterface.startInterface(cineplexGroup, (CustomerUser)userRecord);
 		}
 		else if (userRecord instanceof EmployeeUser)
 		{
+			EmployeeInterface employeeInterface = new EmployeeInterface();
 			employeeInterface.startInterface(cineplexGroup);
 		}
 		
