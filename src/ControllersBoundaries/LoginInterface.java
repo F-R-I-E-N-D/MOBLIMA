@@ -23,12 +23,14 @@ public class LoginInterface extends UserInterface{
 		int option=0;
 		String c;
 	
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Choose to: \n1. Add new account\n2. Sign in with existing account\n3. Exit");
-		try {
-			do {
+		try 
+		{
+			do 
+			{
 				option = sc.nextInt();
-			}while(option!= 1 && option !=2 && option !=3);
+			}
+			while(option!= 1 && option !=2 && option !=3);
 			
 			c=sc.nextLine();
 			
@@ -111,8 +113,7 @@ public class LoginInterface extends UserInterface{
 		int ID = 0;
 		String password = null;
 		String c;
-		
-		Scanner sc = new Scanner(System.in);
+	
 		System.out.println("Add account as: \n1. Customer\n2. Employee");
 		try {
 			do {

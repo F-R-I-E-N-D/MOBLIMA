@@ -18,8 +18,6 @@ public abstract class UserInterface implements Serializable{
 		
 	}
 	
-	public void startInterface(Scanner sc, CineplexGroup cplex_grp) {}
-	
 	public int [] getIntegerArray(String message)
 	{
 		System.out.println(message);

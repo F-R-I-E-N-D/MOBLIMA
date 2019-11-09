@@ -9,24 +9,12 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class EmployeeInterface extends UserInterface implements Serializable
-{
+public class EmployeeInterface extends UserInterface
+{	
 	private static final long serialVersionUID = 1L;
-	
-	private static EmployeeInterface employeeBoundary = null; 
 	private CineplexGroup cineplex_group ;
-	  
-	private EmployeeInterface() {}
 	
-	public static EmployeeInterface getInstance()
-	{
-		if (employeeBoundary == null) 
-			employeeBoundary = new EmployeeInterface(); 
-  
-        return employeeBoundary; 
-	}
-	
-	public void startInterface(Scanner sc, CineplexGroup cineplex_group) 
+	public void startInterface(CineplexGroup cineplex_group) 
 	{	
 		this.cineplex_group = cineplex_group;
 		
@@ -46,13 +34,13 @@ public class EmployeeInterface extends UserInterface implements Serializable
 			switch (option)
 			{
 				case 1:
-					cineplexOptions(sc);
+					cineplexOptions();
 					break;
 				case 2:
-					showOptions(sc);
+					showOptions();
 					break;
 				case 3:
-					movieOptions(sc);
+					movieOptions();
 					break;
 			}
 		}
@@ -61,7 +49,7 @@ public class EmployeeInterface extends UserInterface implements Serializable
 		
 	}
 
-	private void cineplexOptions(Scanner sc) 
+	private void cineplexOptions() 
 	{
 		int option = -1;
 		
@@ -123,7 +111,7 @@ public class EmployeeInterface extends UserInterface implements Serializable
 		
 	}
 	
-	private void showOptions(Scanner sc) 
+	private void showOptions() 
 	{	
 		int option = -1;
 		
@@ -254,7 +242,7 @@ public class EmployeeInterface extends UserInterface implements Serializable
 		}
 	}
 	
-	private void movieOptions(Scanner sc) 
+	private void movieOptions() 
 	{
 		int option = -1;
 		
@@ -388,10 +376,10 @@ public class EmployeeInterface extends UserInterface implements Serializable
 	{
 		Scanner sc = new Scanner(System.in);
 		
-		CineplexGroup goldenVillage = CineplexGroup.getInstance();
+		CineplexGroup goldenVillage = new CineplexGroup();
 		
 		EmployeeInterface testInterface = EmployeeInterface.getInstance();
-		testInterface.startInterface(sc , goldenVillage);
+		testInterface.startInterface(goldenVillage);
 		sc.close();
 	}
 }

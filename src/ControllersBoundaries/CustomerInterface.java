@@ -13,23 +13,12 @@ import CineplexClasses.Reservation;
 import CineplexClasses.Show;
 import Users.CustomerUser;
 
-public class CustomerInterface extends UserInterface implements Serializable{
+public class CustomerInterface extends UserInterface {
 
 	private static final long serialVersionUID = 1L;
-	
-	private static CustomerInterface customerInterface = null;
-    private CineplexGroup cineplex_group;
-
-    private CustomerInterface() {}
-
-    public static CustomerInterface getInstance() {
-        if (customerInterface == null)
-            customerInterface = new CustomerInterface();
-
-        return customerInterface;
-    }
+	private CineplexGroup cineplex_group;
     
-    public void startInterface(Scanner sc, CineplexGroup cineplex_group, CustomerUser customer) 
+    public void startInterface(CineplexGroup cineplex_group, CustomerUser customer) 
     {    	
     	this.cineplex_group = cineplex_group;
 
@@ -84,7 +73,7 @@ public class CustomerInterface extends UserInterface implements Serializable{
     public void viewMovies() 
     {
         int option2 = -1;
-        System.out.println("we are in "+ cineplex_group.getCineplexList().get(0).getCineplexName());
+//        System.out.println("we are in "+ cineplex_group.getCineplexList().get(0).getCineplexName());
         while (option2 != 4) {
             System.out.println("------------------------------------------------");
             System.out.println("1.\tView All Movies");
@@ -216,9 +205,9 @@ public class CustomerInterface extends UserInterface implements Serializable{
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        CineplexGroup goldenVillage =  CineplexGroup.getInstance();
+        CineplexGroup goldenVillage =   new CineplexGroup();
 
-        CustomerInterface testInterface = CustomerInterface.getInstance();
+        CustomerInterface testInterface = new CustomerInterface();
         CustomerUser customer = new CustomerUser(0, "hello");
         testInterface.startInterface(sc, goldenVillage, customer);
         sc.close();

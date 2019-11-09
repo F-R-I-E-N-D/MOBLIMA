@@ -124,16 +124,27 @@ public class FileManager
 		}
 	}
 	
+	public void resetAllFiles()
+	{
+		cineplexGroup = new CineplexGroup();
+		loginManager = new LoginManager();
+		reservationManager = new ReservationManager();
+		priceManager = new PriceManager();
+		movieManager = new MovieManager();
+		adminManager = new AdminManager();
+		saveAllFiles();
+	}
+	
+	/*
+	 * 
 	public static void main(String[] args) 
 	{
 		FileManager fileManager = new FileManager();		
 		fileManager.saveAllFiles();
 		fileManager.loadAllFiles();
 		System.out.println("We got here; Movie 1: " + fileManager.cineplexGroup.getMovieList().get(0).getTitle());
-
 	}
 	
-	/*
 	public void start() 
 	{
 		Scanner sc = new Scanner(System.in);
