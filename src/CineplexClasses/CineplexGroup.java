@@ -6,9 +6,7 @@ import java.io.*;
 
 public class CineplexGroup implements java.io.Serializable
 {
-    /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 6771695211220580754L;
 	private ArrayList<Cineplex> cineplexList;
     private ArrayList<Movie> movieList;
@@ -96,6 +94,7 @@ public class CineplexGroup implements java.io.Serializable
     	movieList.get(movieID).deleteReview(reviewID);
     }
     
+    // Can be moved out
     public void printAvgRating (int movieID)
     {
     	double avg = movieList.get(movieID).getAvgRating();
