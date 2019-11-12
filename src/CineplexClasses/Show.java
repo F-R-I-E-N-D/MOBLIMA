@@ -1,6 +1,6 @@
 package CineplexClasses;
 
-public class Show {
+public class Show implements java.io.Serializable{
     
 	public enum DayType {WEEKDAY, WEEKEND, PUBLIC_HOLIDAY}
 	

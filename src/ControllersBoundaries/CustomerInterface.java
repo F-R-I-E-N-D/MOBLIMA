@@ -16,11 +16,9 @@ import Users.CustomerUser;
 public class CustomerInterface extends UserInterface {
 
 	private static final long serialVersionUID = 1L;
-	private CineplexGroup cineplex_group;
-    
+	
     public void startInterface(CineplexGroup cineplex_group, CustomerUser customer) 
-    {    	
-    	this.cineplex_group = cineplex_group;
+    {  
 
         int option = -1;
 
@@ -35,24 +33,24 @@ public class CustomerInterface extends UserInterface {
             option = sc.nextInt();
             switch (option) {
                 case 1: {
-                    viewMovies();
+                    viewMovies(cineplex_group);
                     break;
                 }
 
                 case 2: {
-                    buyTicket(customer);
+                    buyTicket(cineplex_group, customer);
                     break;
                 }
 
                 case 3: {
-                    printBookingHistory(customer);
+                    printBookingHistory(cineplex_group, customer);
                     break;
                 }
             }
         }
     }
 
-    private void printBookingHistory(CustomerUser customer) 
+    private void printBookingHistory(CineplexGroup cineplex_group, CustomerUser customer) 
     {
     	for (Cineplex cplex : cineplex_group.getCineplexList())
     	{
@@ -70,7 +68,7 @@ public class CustomerInterface extends UserInterface {
 	}
 
 	// viewMovies method
-    public void viewMovies() 
+    public void viewMovies(CineplexGroup cineplex_group) 
     {
         int option2 = -1;
 //        System.out.println("we are in "+ cineplex_group.getCineplexList().get(0).getCineplexName());
@@ -143,7 +141,7 @@ public class CustomerInterface extends UserInterface {
     }
 
     //buyTicket method
-    public void buyTicket(CustomerUser customer) 
+    public void buyTicket(CineplexGroup cineplex_group, CustomerUser customer) 
     {
         ArrayList<Cineplex> cineplexList = cineplex_group.getCineplexList();
         System.out.println("------------------------------------------------");
@@ -198,19 +196,6 @@ public class CustomerInterface extends UserInterface {
 //            cineplex_group.createReservation(cineplexID, userID, showID, row, lane, seat);
             cineplex_group.createReservation(cineplexID, customer.getLoginID() ,showID,row,lane, seat);
         }
-    }
-
-
-    // Test
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        CineplexGroup goldenVillage =   new CineplexGroup();
-
-        CustomerInterface testInterface = new CustomerInterface();
-        CustomerUser customer = new CustomerUser(0, "hello");
-        testInterface.startInterface(sc, goldenVillage, customer);
-        sc.close();
     }
 }
 

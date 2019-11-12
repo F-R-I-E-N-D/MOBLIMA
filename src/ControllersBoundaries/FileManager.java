@@ -14,17 +14,9 @@ public class FileManager
 	{
 		return (LoginManager)deserializeObject("loginManager.ser");
 	}
-//	public ReservationReviewManager loadReservationReviewManager ()
-//	{
-//		(ReservationReviewManager)deserializeObject("reservationReviewManager.ser");
-//	}
 	public PriceManager loadPriceManager ()
 	{
 		return (PriceManager)deserializeObject("priceManager.ser");
-	}
-	public AdminManager loadAdminManager ()
-	{
-		return (AdminManager)deserializeObject("adminManager.ser");
 	}
 	
 	public void serializeObject(Object objectToBeSaved, String filename) 
@@ -37,7 +29,8 @@ public class FileManager
 		} 
 		catch (Exception ex) 
 		{
-//			ex.printStackTrace();
+			System.out.println();
+			ex.printStackTrace();
 			System.out.println("Failure to Save: " + filename);
 		}
 	}
@@ -54,7 +47,8 @@ public class FileManager
 		} 
 		catch (Exception ex) 
 		{
-//			ex.printStackTrace();
+			System.out.println();
+			ex.printStackTrace();
 			System.out.println("Failure to Load: " + filename);
 			return null; 
 		}

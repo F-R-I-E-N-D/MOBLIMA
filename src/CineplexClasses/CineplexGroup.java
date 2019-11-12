@@ -17,6 +17,7 @@ public class CineplexGroup implements java.io.Serializable
         movieList = new ArrayList<Movie>();
     }
     
+    /*
     // Cinema Hall
     
     public void createCinema (int cineplexID, String name, int num_rows, int [] column, Cinema.ClassType classtype)
@@ -30,9 +31,8 @@ public class CineplexGroup implements java.io.Serializable
     		cineplexList.get(cineplexID).removeCinemaFromlist(cinemaID);
         else
         	System.out.println("CineplexGroup -- removeCinema -- " + cineplexID + cinemaID);
-    	
     }
-    
+    */
     public ArrayList<Cinema> getCinemaList(int ciniplexID)
     {
     	return cineplexList.get(ciniplexID).getCinemaList();
@@ -45,6 +45,7 @@ public class CineplexGroup implements java.io.Serializable
     	return cineplexList;
     }
     
+    /*
     public void addCineplexToList(String newCineplexName) 
     {
     	cineplexList.add(new Cineplex(cineplexList.size(), newCineplexName));
@@ -57,6 +58,7 @@ public class CineplexGroup implements java.io.Serializable
         else
         	System.out.println("Invalid CineplexID");
     }
+    */
     
     // Movie
     
@@ -65,6 +67,7 @@ public class CineplexGroup implements java.io.Serializable
     	return movieList;
     }
     
+    /*
     public void addMovieToList(String title, String synopsis, String[]cast, String director, Movie.Genre genre, Movie.Type type) 
     {
 //    	new MovieID(MovieId, title, synopsis, cast, director, genre, type)
@@ -77,10 +80,11 @@ public class CineplexGroup implements java.io.Serializable
         	movieList.remove(movieID);
         else
         	System.out.println("Invalid MovieID");
-    }    
+    }
+    */    
     
     // Movie Review
-    
+    /*
     public void createReview(int movieID, String review, int rating, int userID)
     {
     	if (rating<=5 && rating>=1)
@@ -107,11 +111,12 @@ public class CineplexGroup implements java.io.Serializable
     		System.out.println("Average rating for \"" + movieList.get(movieID).getTitle() + "\" = " + avg);
     	}
     }
-    
+    */
     public ArrayList<MovieReview> getReviews(int movieID)
     {
     	return movieList.get(movieID).getMovieReviewAndRatingList();
     }
+ 		
     
     // Shows
     
@@ -120,6 +125,7 @@ public class CineplexGroup implements java.io.Serializable
     	return cineplexList.get(cineplexID).getShowList();
     }
     
+    /*
     public void createShow (int cineplexID, int cinemaID, int movieID, int time_start, int time_end, Show.DayType daytype)
     {
     	if (time_start>=time_end || 0>time_start || time_start>2400 || 0>time_end || time_end>2400)
@@ -153,6 +159,7 @@ public class CineplexGroup implements java.io.Serializable
     {
     	cineplexList.get(cineplexID).getShowList().get(showID).getLayout().printSeats();
     }
+    */
     
     // Reservation
     
@@ -161,6 +168,7 @@ public class CineplexGroup implements java.io.Serializable
     	return cineplexList.get(cineplexID).getReservationList();
     }
     
+    /*
     public void createReservation(int cineplexID, int userID, int showID, char row, int lane, int seat)
     {
     	if (cineplexList.get(cineplexID).addReservationToList(userID, showID, row, lane, seat))
@@ -194,6 +202,6 @@ public class CineplexGroup implements java.io.Serializable
     	}
     	return count;
     }
-    
+    */
         
 }

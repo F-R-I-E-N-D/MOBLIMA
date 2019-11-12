@@ -12,20 +12,14 @@ import CineplexClasses.Show;
 public class AdminManager extends Manager implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private CineplexGroup cineplexGroup; 
 		
-	public AdminManager (CineplexGroup cineplexGroup)
-	{
-		this.cineplexGroup = cineplexGroup;
-	}
-    
 	// Cinema Hall
-    public void createCinema (int cineplexID, String name, int num_rows, int [] column, Cinema.ClassType classtype)
+    public void createCinema (CineplexGroup cineplexGroup, int cineplexID, String name, int num_rows, int [] column, Cinema.ClassType classtype)
     {
     	cineplexGroup.getCineplexList().get(cineplexID).addCinemaToList(name, num_rows, column, classtype);   
     }
     
-    public void removeCinema (int cineplexID, int cinemaID)
+    public void removeCinema (CineplexGroup cineplexGroup, int cineplexID, int cinemaID)
     {
     	if (cineplexID>=0 && cineplexID<cineplexGroup.getCineplexList().size() && cinemaID>=0 && cinemaID<cineplexGroup.getCineplexList().get(cineplexID).getCinemaList().size())
     		cineplexGroup.getCineplexList().get(cineplexID).removeCinemaFromlist(cinemaID);
@@ -34,12 +28,12 @@ public class AdminManager extends Manager implements Serializable
     }
     
     // Cineplex
-    public void addCineplexToList(String newCineplexName) 
+    public void addCineplexToList(CineplexGroup cineplexGroup, String newCineplexName) 
     {
     	cineplexGroup.getCineplexList().add(new Cineplex(cineplexGroup.getCineplexList().size(), newCineplexName));
     }
     
-    public void removeCineplexFromlist(int cineplexID) 
+    public void removeCineplexFromlist(CineplexGroup cineplexGroup, int cineplexID) 
     {
         if (cineplexID>=0 && cineplexID<cineplexGroup.getCineplexList().size())
         	cineplexGroup.getCineplexList().remove(cineplexID);
@@ -49,7 +43,7 @@ public class AdminManager extends Manager implements Serializable
     
     // Shows
     
-    public void createShow (int cineplexID, int cinemaID, int movieID, int time_start, int time_end, Show.DayType daytype)
+    public void createShow (CineplexGroup cineplexGroup, int cineplexID, int cinemaID, int movieID, int time_start, int time_end, Show.DayType daytype)
     {
     	if (time_start>=time_end || 0>time_start || time_start>2400 || 0>time_end || time_end>2400)
     	{
@@ -73,25 +67,26 @@ public class AdminManager extends Manager implements Serializable
     	cineplexGroup.getCineplexList().get(cineplexID).addShowToList(cineplexGroup.getMovieList().get(movieID), cinemaID, time_start, time_end, daytype);
     }
     
-    public void deleteShow (int cineplexID, int showID)
+    public void deleteShow (CineplexGroup cineplexGroup, int cineplexID, int showID)
     {
     	cineplexGroup.getCineplexList().get(cineplexID).removeShowFromlist(showID);
     }
     
-    public void printShowLayout (int cineplexID, int showID)
+    public void printShowLayout (CineplexGroup cineplexGroup, int cineplexID, int showID)
     {
     	cineplexGroup.getCineplexList().get(cineplexID).getShowList().get(showID).getLayout().printSeats();
     }
     
     // Movie
     
-    public void addMovieToList(String title, String synopsis, String[]cast, String director, Movie.Genre genre, Movie.Type type) 
+    public void addMovieToList(CineplexGroup cineplexGroup, String title, String synopsis, String[]cast, String director, Movie.Genre genre, Movie.Type type) 
     {    	
-    	cineplexGroup.addMovieToList(title, synopsis, cast, director, genre, type);
+    	cineplexGroup.getMovieList().add(new Movie(cineplexGroup.getMovieList().size(), title, synopsis, cast, director, genre, type));
+//    	cineplexGroup.addMovieToList(title, synopsis, cast, director, genre, type);
 //    	System.out.println(title + "|" +cineplexGroup.getMovieList().size());
     }
     
-    public void removeMovieFromlist(int movieID) 
+    public void removeMovieFromlist(CineplexGroup cineplexGroup, int movieID) 
     {
         if (movieID>=0 && movieID<cineplexGroup.getMovieList().size())
         	cineplexGroup.getMovieList().remove(movieID);
