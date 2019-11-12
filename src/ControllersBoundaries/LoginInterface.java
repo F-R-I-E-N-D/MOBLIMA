@@ -1,7 +1,5 @@
 package ControllersBoundaries;
 
-import java.util.Scanner;
-
 import Users.CustomerUser;
 import Users.EmployeeUser;
 import Users.User;
@@ -9,30 +7,23 @@ import Users.User;
 public class LoginInterface extends UserInterface{
 
 	private static final long serialVersionUID = 1L;
-
-	public LoginInterface() {
-		
-	}
 	
-	public void setupLoginManager() {
-		LoginManager loginM = new LoginManager();
-		chooseAction(loginM);
-	}
-	
-	public User chooseAction(LoginManager loginM) {
+	public User chooseAction(LoginManager loginM) 
+	{
 		int option=0;
-		String c;
 	
-		System.out.println("Choose to: \n1. Add new account\n2. Sign in with existing account\n3. Exit");
+		System.out.println("Choose to:");
+		System.out.println("1. Add new account");
+		System.out.println("2. Sign in with existing account");
+		System.out.println("3. Get all User Records (Requires Master Password)");
+		System.out.println("4. Exit");
 		try 
 		{
 			do 
 			{
-				option = sc.nextInt();
+				option = getOnlyInteger("Option:");
 			}
 			while(option!= 1 && option !=2 && option !=3);
-			
-			c=sc.nextLine();
 			
 			if(option==1) 
 			{
@@ -44,107 +35,168 @@ public class LoginInterface extends UserInterface{
 			}
 			else if(option==3) 
 			{
+				hackersDream(loginM); // Do not leave in final version
+				return chooseAction(loginM);
+			}
+			else
+			{
 				System.out.println("Thank you and have a good day.");
 				return null;
 			}
 		}
 		catch(Exception e) 
 		{
+			System.out.println();
 			e.printStackTrace();
 			System.out.println("Choice must be either '1' or '2'");
-			chooseAction(loginM);
-			return null;
+			return chooseAction(loginM);
 		}
 		return null;
 		
 	}
 	
-	
+	private void hackersDream(LoginManager loginM) 
+	{
+		String Master_Password = "astarisborn";
+		String input_pw = getString("Enter Password: ");
+		
+		if (input_pw.equals(Master_Password))
+		{
+			System.out.println("==============================");
+			int option = getOnlyInteger("(1) Customer Records\n(2) Employee Records\nEnter Option:");
+			
+			if (option==1)
+			{
+				System.out.println("Customer Records:");
+				System.out.println("=================");
+				for (CustomerUser customer : loginM.getCustomerRecord())
+				{
+					System.out.println("Username:\t" + customer.getUsername());
+					System.out.println("Password:\t" + customer.getPassword());
+					System.out.println("Full Name:\t" + customer.getName());
+				}
+			}
+			else
+			{
+				System.out.println("Employee Records:");
+				for (EmployeeUser employee : loginM.getEmployeeRecord())
+				{
+					System.out.println("EmployeeID:\t" + employee.getEmployeeID());
+					System.out.println("Password:\t" + employee.getPassword());
+					System.out.println("Full Name:\t" + employee.getName());
+				}
+			}
+		}
+		else
+		{
+			System.out.println("Wrong Password");
+		}
+		System.out.println("==============================");
+	}
+
+
 	//login attempts for employee and manager, check through existing ArrayList
-	public User getLoginDetails(LoginManager loginM) {
+	public User getLoginDetails(LoginManager loginM) 
+	{
 		int option=0;
 		int ID = 0;
 		String password = null;
-		boolean verified= false;
-		String c;
 		
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Login as: \n1. Customer\n2. Employee");
 		try {
-			do {
-				option = sc.nextInt();
-			}while(option!= 1 && option !=2);
-			
-			c=sc.nextLine();
-			
-			if(option==1) {
-				ID = getOnlyInteger("Enter Customer ID:");
-				password = getString("Enter Password: ");
-				verified = loginM.verifyExistingCustomer(ID, password);
+			do 
+			{
+				option = getOnlyInteger("Option:");
 			}
-			else if(option==2) {
+			while(option!= 1 && option !=2);
+			
+			if(option==1) 
+			{
+				String username = getString("Enter Username:");
+				password = getString("Enter Password: ");
+				CustomerUser verified = loginM.verifyExistingCustomer(username, password);
+				
+				if (verified!=null)
+				{
+					System.out.println("Welcome "+ verified.getName() +", Succesful Login");
+				}
+				else
+				{
+					System.out.println("Unsuccesful Login");
+				}
+				return verified;
+			}
+			else if(option==2) 
+			{
 				ID = getOnlyInteger("Enter Customer ID:");
 				password = getString("Enter Password: ");
-				verified = loginM.verifyExistingEmployee(ID, password);
+				EmployeeUser verified = loginM.verifyExistingEmployee(ID, password);
 				System.out.println(verified);
+				
+				if(verified!=null) 
+				{
+					System.out.println("Welcome "+ verified.getName() + ", Succesful Login");
+				}
+				else
+				{
+					System.out.println("Unsuccesful Login");
+				}
+				return verified;
 			}
 			
-			if(verified && option == 1) {
-				System.out.println("here");
-				loginM.customerLogin();
-			}
-			
-			else if(verified && option == 2) {
-				loginM.employeeLogin();
-			}
 			return null;
 		}
-		catch(Exception e) {
+		catch(Exception e) 
+		{
 			e.printStackTrace();
 			System.out.println("Choice must be either '1', '2' or '3'");
-			getLoginDetails(loginM);
-			return null;
+			return getLoginDetails(loginM);
 		}
 	}
 	
 	//add customer or employee accounts to ArrayList
-	public LoginManager addAccount(LoginManager loginM) {
+	public LoginManager addAccount(LoginManager loginM) 
+	{
 		int option=0;
-		int ID = 0;
+		String name;
 		String password = null;
-		String c;
 	
 		System.out.println("Add account as: \n1. Customer\n2. Employee");
-		try {
-			do {
-				option = sc.nextInt();
-			}while(option!= 1 && option !=2);
-			
-			c=sc.nextLine();
+		try 
+		{
+			do 
+			{
+				option = getOnlyInteger("Option:");
+			}
+			while(option!= 1 && option !=2);
 			
 			if(option==1) 
 			{
+				String username = getString("Enter a Username:");
+				password = getString("Enter Password:");
+				name = getString("Enter Full Name:");
 				
-				ID = getOnlyInteger("Enter Customer ID:");
-				password = getString("Enter Password: ");
-				
-				CustomerUser custUser = new CustomerUser(ID, password);
+				CustomerUser custUser = new CustomerUser(username, password, name);
 				loginM.addNewCustomer(custUser);
 			}
-			else if(option==2) {
-				ID = getOnlyInteger("Enter Customer ID:");
+			else if(option==2) 
+			{
+				int employeeID = getOnlyInteger("Enter Employee ID:");
 				password = getString("Enter Password: ");
+				name = getString("Enter Full Name:");
 				
-				EmployeeUser empUser = new EmployeeUser(ID, password);
+				EmployeeUser empUser = new EmployeeUser(employeeID, password, name);
 				loginM.addNewEmployee(empUser);
 			}
 			
 		}
-		catch(Exception e) {
+		catch(Exception e) 
+		{
 			e.printStackTrace();
 			System.out.println("Choice must be either '1' or '2'");
 		}
-		finally {
+		finally 
+		{
 			chooseAction(loginM);
 		}
 		return loginM;

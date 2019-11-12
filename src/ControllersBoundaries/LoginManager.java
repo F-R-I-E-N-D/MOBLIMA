@@ -17,50 +17,72 @@ public class LoginManager extends Manager{
 		employeeRecord = new ArrayList<EmployeeUser>();
 	}
 	
+	public ArrayList<CustomerUser> getCustomerRecord()
+	{
+		return customerRecord;
+	}
 	
-	public boolean verifyExistingCustomer(int ID, String pw) {
+	public ArrayList<EmployeeUser> getEmployeeRecord()
+	{
+		return employeeRecord;
+	}
+	
+	public CustomerUser verifyExistingCustomer(String ID, String pw) 
+	{
 		int i;
 		CustomerUser current;
-		System.out.println(employeeRecord);
-		for(i=0; i<employeeRecord.size(); i++) {
+		System.out.println(customerRecord);
+		for(i=0; i<customerRecord.size(); i++) 
+		{
 			current = customerRecord.get(i);
-			System.out.println(current.getLoginID() + current.getPassword());
-			if(current.getLoginID() == ID && current.getPassword().equals(pw)) {
-				return true;
+			
+//			System.out.println(current.getUsername() + current.getPassword());
+			
+			if(current.getUsername().contentEquals(ID) && current.getPassword().equals(pw)) 
+			{
+				return current;
 			}
 		}
-		return false;
+		return null;
 	}
 	
-	public void addNewCustomer(CustomerUser customerUser) {
+	public void addNewCustomer(CustomerUser customerUser) 
+	{
 		customerRecord.add(customerUser);
-		System.out.println(customerRecord);
+		System.out.println("Successfully added: " + customerUser.getUsername());
 	}
 	
-	public boolean verifyExistingEmployee(int ID, String pw) {
+	public EmployeeUser verifyExistingEmployee(int ID, String pw) 
+	{
 		int i;
 		EmployeeUser current;
 		System.out.println(employeeRecord);
-		for(i=0; i<employeeRecord.size(); i++) {
+		for(i=0; i<employeeRecord.size(); i++) 
+		{
 			current = employeeRecord.get(i);
-			System.out.println(current.getLoginID() + current.getPassword());
-			if(current.getLoginID() == ID && current.getPassword().equals(pw)) {
-				return true;
+//			System.out.println(current.getEmployeeID() + current.getPassword());
+			
+			if(current.getEmployeeID() == ID && current.getPassword().equals(pw)) 
+			{
+				return current;
 			}
 		}
-		return false;
+		return null;
 	}
 	
-	public void addNewEmployee(EmployeeUser employeeUser) {
+	public void addNewEmployee(EmployeeUser employeeUser) 
+	{
 		employeeRecord.add(employeeUser);
-		System.out.println(employeeRecord);
+		System.out.println("Successfully added: " + employeeUser.getName() + "|ID: " + employeeUser.getEmployeeID());
 	}
 	
-	public void customerLogin() {
+	public void customerLogin() 
+	{
 		System.out.println("Logged in as Customer");
 	}
 	
-	public void employeeLogin() {
+	public void employeeLogin() 
+	{
 		System.out.println("Logged in as Employee");
 	}
 }
