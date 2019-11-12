@@ -57,10 +57,10 @@ public class CustomerInterface extends UserInterface {
     	{
     		for (Reservation r : cplex.getReservationList())
     		{
-    			if (r.getUserID() == customer.getLoginID())
+    			if (r.getUsername() == customer.getUsername())
     			{
     				System.out.println("Reservation ID:\t" + r.getReservationID());
-    				System.out.println("Date:\t" + r.getDate());
+//    				System.out.println("Date:\t" + r.getDate());
     				System.out.println("Movie Name:\t" + cplex.getShowList().get(r.getShowID()).getMovie().getTitle());
     				System.out.println("Seat:\t" + r.getRow() +"-"+ r.getLane() + "-" + r.getSeat());
     			}
@@ -194,7 +194,7 @@ public class CustomerInterface extends UserInterface {
             int lane = sc.nextInt();
             System.out.println("Please enter seat:");
             int seat = sc.nextInt();
-            reservationReviewManager.createReservation(cineplex_group, cineplexID, customer.getLoginID(), showID, row, lane, seat);
+            reservationReviewManager.createReservation(cineplex_group, cineplexID, customer.getUsername(), showID, row, lane, seat);
         }
     }
 }

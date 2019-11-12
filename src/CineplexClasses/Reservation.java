@@ -9,27 +9,27 @@ public class Reservation implements Serializable  {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int reservationID;
-	private int userID;
+	private String username;
 	private int showID;
 	private char row;
 	private int lane;
 	private int seat;
-	private Date date;
+	private Date reservationDate;
 	
-	public Reservation(int reservationID, int userID, int showID, char row, int lane, int seat)
+	public Reservation(int reservationID, String username, int showID, char row, int lane, int seat)
 	{
 		this.setReservationID(reservationID);
-		this.userID = userID;
+		this.username = username;
 		this.showID = showID;
 		this.setRow(row);
 		this.setLane(lane);
 		this.setSeat(seat);
-		setDate(new Date()); // Initialised with current date
+		setReservationDate(new Date()); // Initialised with current date
 	}
 
-	public int getUserID() 
+	public String getUsername() 
 	{
-		return userID;
+		return username;
 	}
 
 	public int getShowID() {
@@ -67,13 +67,13 @@ public class Reservation implements Serializable  {
 	public void setSeat(int seat) {
 		this.seat = seat;
 	}
-
-	public Date getDate() {
-		return date;
+	
+	public Date getReservationDate() {
+		return reservationDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setReservationDate(Date date) {
+		this.reservationDate = date;
 	}
 	
 }

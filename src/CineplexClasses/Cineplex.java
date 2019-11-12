@@ -82,7 +82,7 @@ public class Cineplex implements Serializable
 		return reservationList;
 	}
     
-    public boolean addReservationToList(int userID, int showID, char row, int lane, int seat)
+    public boolean addReservationToList(String userID, int showID, char row, int lane, int seat)
     {
     	try
     	{

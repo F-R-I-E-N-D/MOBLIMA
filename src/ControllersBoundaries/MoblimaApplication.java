@@ -34,8 +34,8 @@ public class MoblimaApplication
 		
 		LoginInterface loginInterface = new LoginInterface();
 		User userRecord = loginInterface.chooseAction(loginManager);
-		userRecord = new CustomerUser(0, "ali");
-//		userRecord = new EmployeeUser(0, "ali");
+		userRecord = new CustomerUser("adi1", "lokeYuanRenMyBae", "Adithya");
+//		userRecord = new EmployeeUser(1234, "hellothere", "James");
 		
 		if (userRecord instanceof CustomerUser)
 		{

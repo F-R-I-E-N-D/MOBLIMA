@@ -15,7 +15,6 @@ public abstract class User implements Serializable {
 		this.password = password;
 	}
 	
-	
 	public void changePassword(String password) 
 	{
 		this.password = password;
