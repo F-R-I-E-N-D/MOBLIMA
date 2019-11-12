@@ -17,7 +17,7 @@ public class CustomerInterface extends UserInterface {
 
 	private static final long serialVersionUID = 1L;
 	
-    public void startInterface(CineplexGroup cineplex_group, CustomerUser customer) 
+    public void startInterface(CineplexGroup cineplex_group, ReservationReviewManager reservationReviewManager, CustomerUser customer) 
     {  
 
         int option = -1;
@@ -38,7 +38,7 @@ public class CustomerInterface extends UserInterface {
                 }
 
                 case 2: {
-                    buyTicket(cineplex_group, customer);
+                    buyTicket(cineplex_group, reservationReviewManager, customer);
                     break;
                 }
 
@@ -141,12 +141,11 @@ public class CustomerInterface extends UserInterface {
     }
 
     //buyTicket method
-    public void buyTicket(CineplexGroup cineplex_group, CustomerUser customer) 
+    public void buyTicket(CineplexGroup cineplex_group, ReservationReviewManager reservationReviewManager, CustomerUser customer) 
     {
-        ArrayList<Cineplex> cineplexList = cineplex_group.getCineplexList();
         System.out.println("------------------------------------------------");
         System.out.println("Cineplexes:");
-        for (Cineplex cineplex : cineplexList) {
+        for (Cineplex cineplex : cineplex_group.getCineplexList()) {
             System.out.println("Cineplex ID: " + cineplex.getCineplexId());
             System.out.println("Cineplex Name: " + cineplex.getCineplexName());
 
@@ -154,7 +153,8 @@ public class CustomerInterface extends UserInterface {
         System.out.println("Please enter Cineplex ID:");
         int cineplexID = sc.nextInt();
         Cineplex cineplexChoice = null;
-        for (Cineplex cineplex : cineplexList) {
+        for (Cineplex cineplex : cineplex_group.getCineplexList()) 
+        {
             if (cineplex.getCineplexId() == cineplexID)
                 cineplexChoice = cineplex;
         }
@@ -193,8 +193,7 @@ public class CustomerInterface extends UserInterface {
             int lane = sc.nextInt();
             System.out.println("Please enter seat:");
             int seat = sc.nextInt();
-//            cineplex_group.createReservation(cineplexID, userID, showID, row, lane, seat);
-            cineplex_group.createReservation(cineplexID, customer.getLoginID() ,showID,row,lane, seat);
+            reservationReviewManager.createReservation(cineplex_group, cineplexID, customer.getLoginID(), showID, row, lane, seat);
         }
     }
 }
