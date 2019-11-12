@@ -4,23 +4,22 @@ import java.io.Serializable;
 
 public class EmployeeUser extends User implements Serializable {
 
-	private String loginID;
-	/**
-	 * 
-	 */
+	private int employeeID;
 	private static final long serialVersionUID = 1L;
 
-	public EmployeeUser(int loginID, String password) 
+	public EmployeeUser(int employeeID, String password, String full_name) 
 	{
-		super(loginID, password);
+		super(password, full_name);
+		this.setEmployeeID(employeeID);
 	}
-	
-	public void updateDetails() {
-		//update details for movies
+
+	public int getEmployeeID() 
+	{
+		return employeeID;
 	}
-	
-	public void configureSystem() {
-		//configures system settings
+
+	public void setEmployeeID(int employeeID) 
+	{
+		this.employeeID = employeeID;
 	}
-	
 }

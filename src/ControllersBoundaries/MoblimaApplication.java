@@ -1,8 +1,6 @@
 package ControllersBoundaries;
 
 import CineplexClasses.CineplexGroup;
-import CineplexClasses.Movie;
-//import CineplexClasses.Movie;
 import Users.CustomerUser;
 import Users.EmployeeUser;
 import Users.User;
@@ -34,32 +32,15 @@ public class MoblimaApplication
 		AdminManager adminManager = new AdminManager();
 		ReservationReviewManager reservationReviewManager = new ReservationReviewManager();
 		
-		/*
-		 * The 2 below statements ought to do exactly the same thing, but the first does nothing
-		 */
-		String[] cast = {"gkjfh", "sfds"};
-		adminManager.addMovieToList(cineplexGroup, "Title1", "fbhdbd", cast, "djhghs", null, null);
-		
-		System.out.println("X---------X");
-		for (Movie m: cineplexGroup.getMovieList())
-		{
-			System.out.println(m.getMovieId());
-			System.out.println(m.getTitle());
-			System.out.println(cineplexGroup.getMovieList().size());
-		}
-		System.out.println("X---------X");
-		
-		
-		
 		LoginInterface loginInterface = new LoginInterface();
 		User userRecord = loginInterface.chooseAction(loginManager);
-//		userRecord = new CustomerUser(0, "ali");
-		userRecord = new EmployeeUser(0, "ali");
+		userRecord = new CustomerUser(0, "ali");
+//		userRecord = new EmployeeUser(0, "ali");
 		
 		if (userRecord instanceof CustomerUser)
 		{
 			CustomerInterface customerInterface = new CustomerInterface();
-			customerInterface.startInterface(cineplexGroup, (CustomerUser)userRecord);
+			customerInterface.startInterface(cineplexGroup, reservationReviewManager, (CustomerUser)userRecord);
 		}
 		else if (userRecord instanceof EmployeeUser)
 		{

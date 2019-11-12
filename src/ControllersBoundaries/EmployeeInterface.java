@@ -174,7 +174,6 @@ public class EmployeeInterface extends UserInterface
 						break;
 					}
 					
-//					cineplex_group.createShow(cineplexID, cinemaID, movieID, time_start, time_end, daytype);
 					adminManager.createShow(cineplex_group, cineplexID, cinemaID, movieID, time_start, time_end, daytype);
 					break;
 				case 2:
@@ -196,7 +195,6 @@ public class EmployeeInterface extends UserInterface
 					cineplexID = getOnlyInteger("Enter Cineplex ID to delete from:");
 					showID = getOnlyInteger("Enter show ID to delete:");
 					
-//					cineplex_group.deleteShow(cineplexID, showID);	
 					adminManager.deleteShow(cineplex_group, cineplexID, showID);
 					break;
 				case 3:
@@ -237,7 +235,6 @@ public class EmployeeInterface extends UserInterface
 					
 					cineplexID = getOnlyInteger("Enter Cineplex ID to view from:");
 					showID = getOnlyInteger("Enter show ID to view:");
-//					cineplex_group.printShowLayout(cineplexID, showID);
 					adminManager.printShowLayout(cineplex_group, cineplexID, showID);
 					break;
 			}

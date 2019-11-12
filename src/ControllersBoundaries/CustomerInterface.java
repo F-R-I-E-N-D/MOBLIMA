@@ -1,14 +1,11 @@
 package ControllersBoundaries;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Scanner;
 
 import CineplexClasses.Cineplex;
 import CineplexClasses.CineplexGroup;
 import CineplexClasses.Movie;
-import CineplexClasses.Movie.ShowingStatus;
 import CineplexClasses.Reservation;
 import CineplexClasses.Show;
 import Users.CustomerUser;
@@ -31,18 +28,22 @@ public class CustomerInterface extends UserInterface {
             System.out.println("4.\tQuit"); // Add view reservations
 
             option = sc.nextInt();
-            switch (option) {
-                case 1: {
+            switch (option) 
+            {
+                case 1: 
+                {
                     viewMovies(cineplex_group);
                     break;
                 }
 
-                case 2: {
+                case 2: 
+                {
                     buyTicket(cineplex_group, reservationReviewManager, customer);
                     break;
                 }
 
-                case 3: {
+                case 3: 
+                {
                     printBookingHistory(cineplex_group, customer);
                     break;
                 }
