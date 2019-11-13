@@ -1,7 +1,10 @@
 package ControllersBoundaries;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 
 import CineplexClasses.Cineplex;
 import CineplexClasses.CineplexGroup;
@@ -9,12 +12,13 @@ import CineplexClasses.Movie;
 import CineplexClasses.Reservation;
 import CineplexClasses.Show;
 import Users.CustomerUser;
+import Users.CustomerUser.CustomerType;
 
 public class CustomerInterface extends UserInterface {
 
 	private static final long serialVersionUID = 1L;
 	
-    public void startInterface(CineplexGroup cineplex_group, ReservationReviewManager reservationReviewManager, CustomerUser customer) 
+    public void startInterface(CineplexGroup cineplex_group, ReservationReviewManager reservationReviewManager, PriceManager priceManager, CustomerUser customer) throws ParseException 
     {  
 
         int option = -1;
@@ -38,7 +42,7 @@ public class CustomerInterface extends UserInterface {
 
                 case 2: 
                 {
-                    buyTicket(cineplex_group, reservationReviewManager, customer);
+                    buyTicket(cineplex_group, reservationReviewManager, priceManager, customer);
                     break;
                 }
 
@@ -142,7 +146,7 @@ public class CustomerInterface extends UserInterface {
     }
 
     //buyTicket method
-    public void buyTicket(CineplexGroup cineplex_group, ReservationReviewManager reservationReviewManager, CustomerUser customer) 
+    public void buyTicket(CineplexGroup cineplex_group, ReservationReviewManager reservationReviewManager, PriceManager priceManager, CustomerUser customer) throws ParseException 
     {
         System.out.println("------------------------------------------------");
         System.out.println("Cineplexes:");
@@ -194,7 +198,15 @@ public class CustomerInterface extends UserInterface {
             int lane = sc.nextInt();
             System.out.println("Please enter seat:");
             int seat = sc.nextInt();
-            reservationReviewManager.createReservation(cineplex_group, cineplexID, customer.getUsername(), showID, row, lane, seat);
+
+            double price = priceManager.getPrice(cineplex_group.getShowList(cineplexID).get(showID).getDaytype(), 
+            		cineplex_group.getShowList(cineplexID).get(showID).getTime_start(), customer.getCustomerType(), 
+            		cineplex_group.getShowList(cineplexID).get(showID).getHall().getClasstype(), 
+            		cineplex_group.getShowList(cineplexID).get(showID).getMovie().getType());
+            
+            System.out.println("Price Charged:\t$" + (price));
+            
+            reservationReviewManager.createReservation(cineplex_group, cineplexID, customer.getUsername(), showID, row, lane, seat, price);
         }
     }
 }

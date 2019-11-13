@@ -1,6 +1,7 @@
 package CineplexClasses;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.io.*;
 
 public class Cineplex implements Serializable 
@@ -39,9 +40,9 @@ public class Cineplex implements Serializable
     }
     
     // Show
-    public void addShowToList(Movie movie, int hall_id, int time_start, int time_end, Show.DayType daytype) 
+    public void addShowToList(Movie movie, int hall_id, int time_start, int time_end, Show.DayType daytype, Date show_date) 
     {
-        showList.add(new Show(showList.size(), movie, cinemaList.get(hall_id), time_start, time_end, daytype));
+        showList.add(new Show(showList.size(), movie, cinemaList.get(hall_id), time_start, time_end, daytype, show_date));
     }
     
     public void removeShowFromlist(int showID) 
@@ -82,11 +83,11 @@ public class Cineplex implements Serializable
 		return reservationList;
 	}
     
-    public boolean addReservationToList(String userID, int showID, char row, int lane, int seat)
+    public boolean addReservationToList(String userID, int showID, char row, int lane, int seat, double price)
     {
     	try
     	{
-	    	reservationList.add(new Reservation(reservationList.size(), userID, showID, row, lane, seat));
+	    	reservationList.add(new Reservation(reservationList.size(), userID, showID, row, lane, seat, price));
 	    	return true;
     	}
     	catch (Exception e)

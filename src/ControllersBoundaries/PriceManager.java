@@ -5,6 +5,7 @@ import java.io.Serializable;
 import CineplexClasses.Cinema;
 import CineplexClasses.Movie;
 import CineplexClasses.Show;
+import Users.CustomerUser;
 
 public class PriceManager implements Serializable{
 
@@ -22,9 +23,10 @@ public class PriceManager implements Serializable{
     private double deluxeClassMarkup;
     private double geminiClassMarkup;
     private double maxClassMarkup;
-
-    public double getPrice(Show.DayType day, int time,
-    			boolean student, boolean elderly, Cinema.ClassType classType, Movie.Type movieType) 
+    
+    public double getPrice(Show.DayType day, int time_start,
+    		CustomerUser.CustomerType customerType, Cinema.ClassType classType, 
+    			Movie.Type movieType) 
     {
         double calculatePrice = standardPrice;
         switch (day) 
@@ -43,10 +45,10 @@ public class PriceManager implements Serializable{
         switch (classType) 
         {
             case STANDARD:
-                if (time < 1800) {
-                    if (student)
+                if (time_start < 1800) {
+                    if (customerType == CustomerUser.CustomerType.STUDENT)
                         calculatePrice -= studentMarkdown;
-                    else if (elderly)
+                    else if (customerType == CustomerUser.CustomerType.SENIOR_CITIZEN)
                         calculatePrice -= elderlyMarkdown;
                 }
                 break;

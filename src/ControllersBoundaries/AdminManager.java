@@ -1,6 +1,7 @@
 package ControllersBoundaries;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import CineplexClasses.Cinema;
 import CineplexClasses.Cineplex;
@@ -43,7 +44,7 @@ public class AdminManager extends Manager implements Serializable
     
     // Shows
     
-    public void createShow (CineplexGroup cineplexGroup, int cineplexID, int cinemaID, int movieID, int time_start, int time_end, Show.DayType daytype)
+    public void createShow (CineplexGroup cineplexGroup, int cineplexID, int cinemaID, int movieID, int time_start, int time_end, Show.DayType daytype, Date show_date)
     {
     	if (time_start>=time_end || 0>time_start || time_start>2400 || 0>time_end || time_end>2400)
     	{
@@ -64,7 +65,7 @@ public class AdminManager extends Manager implements Serializable
     		}
     	}
     	
-    	cineplexGroup.getCineplexList().get(cineplexID).addShowToList(cineplexGroup.getMovieList().get(movieID), cinemaID, time_start, time_end, daytype);
+    	cineplexGroup.getCineplexList().get(cineplexID).addShowToList(cineplexGroup.getMovieList().get(movieID), cinemaID, time_start, time_end, daytype, show_date);
     }
     
     public void deleteShow (CineplexGroup cineplexGroup, int cineplexID, int showID)

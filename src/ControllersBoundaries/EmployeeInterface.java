@@ -4,13 +4,17 @@ import CineplexClasses.*;
 import CineplexClasses.Cinema.ClassType;
 import CineplexClasses.Movie.Genre;
 import CineplexClasses.Show.DayType;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 public class EmployeeInterface extends UserInterface
 {	
 	private static final long serialVersionUID = 1L;
 	
-	public void startInterface(CineplexGroup cineplex_group, AdminManager adminManager, ReservationReviewManager reservationReviewManager) 
+	public void startInterface(CineplexGroup cineplex_group, AdminManager adminManager, ReservationReviewManager reservationReviewManager) throws ParseException 
 	{
 		
 		int option = -1;
@@ -110,7 +114,7 @@ public class EmployeeInterface extends UserInterface
 		
 	}
 	
-	private void showOptions(CineplexGroup cineplex_group, AdminManager adminManager) 
+	private void showOptions(CineplexGroup cineplex_group, AdminManager adminManager) throws ParseException 
 	{	
 		int option = -1;
 		
@@ -174,7 +178,11 @@ public class EmployeeInterface extends UserInterface
 						break;
 					}
 					
-					adminManager.createShow(cineplex_group, cineplexID, cinemaID, movieID, time_start, time_end, daytype);
+					Date date =  new Date();
+		    		date = new SimpleDateFormat("dd/MM/yyyy").parse(getString("Enter date DD/MM/YYYY"));  
+//		    		System.out.println(date);
+					
+					adminManager.createShow(cineplex_group, cineplexID, cinemaID, movieID, time_start, time_end, daytype, date);
 					break;
 				case 2:
 					for (Cineplex cplex : cineplex_group.getCineplexList())

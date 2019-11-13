@@ -23,15 +23,25 @@ public class LoginInterface extends UserInterface{
 			{
 				option = getOnlyInteger("Option:");
 			}
-			while(option!= 1 && option !=2 && option !=3);
+			while(option!= 1 && option !=2 && option !=3 && option !=4);
 			
 			if(option==1) 
 			{
 				addAccount(loginM);
+				return chooseAction(loginM);
+				
 			}
 			else if(option==2) 
 			{
-				return getLoginDetails(loginM);
+				User user_returned = getLoginDetails(loginM);
+				if (user_returned==null)
+				{
+					return chooseAction(loginM);
+				}
+				else
+				{
+					return user_returned;
+				}
 			}
 			else if(option==3) 
 			{
@@ -51,8 +61,6 @@ public class LoginInterface extends UserInterface{
 			System.out.println("Choice must be either '1' or '2'");
 			return chooseAction(loginM);
 		}
-		return null;
-		
 	}
 	
 	private void hackersDream(LoginManager loginM) 
@@ -74,6 +82,8 @@ public class LoginInterface extends UserInterface{
 					System.out.println("Username:\t" + customer.getUsername());
 					System.out.println("Password:\t" + customer.getPassword());
 					System.out.println("Full Name:\t" + customer.getName());
+					System.out.println("Customer Type:\t" + customer.getCustomerType());
+					System.out.println("=================");
 				}
 			}
 			else
@@ -128,7 +138,7 @@ public class LoginInterface extends UserInterface{
 			}
 			else if(option==2) 
 			{
-				ID = getOnlyInteger("Enter Customer ID:");
+				ID = getOnlyInteger("Enter Employee ID:");
 				password = getString("Enter Password: ");
 				EmployeeUser verified = loginM.verifyExistingEmployee(ID, password);
 				System.out.println(verified);
@@ -155,7 +165,7 @@ public class LoginInterface extends UserInterface{
 	}
 	
 	//add customer or employee accounts to ArrayList
-	public LoginManager addAccount(LoginManager loginM) 
+	public void addAccount(LoginManager loginM) 
 	{
 		int option=0;
 		String name;
@@ -176,7 +186,19 @@ public class LoginInterface extends UserInterface{
 				password = getString("Enter Password:");
 				name = getString("Enter Full Name:");
 				
-				CustomerUser custUser = new CustomerUser(username, password, name);
+				
+				int i = 1;
+				for (CustomerUser.CustomerType customerType : CustomerUser.CustomerType.values())
+				{
+					System.out.println("("+(i++)+")"+customerType);
+				}
+				int sel_type = 0;
+				while (sel_type<1 || sel_type>CustomerUser.CustomerType.values().length)
+				{
+					sel_type = getOnlyInteger("Option: ");
+				}
+				
+				CustomerUser custUser = new CustomerUser(username, password, name, CustomerUser.CustomerType.values()[sel_type-1]);
 				loginM.addNewCustomer(custUser);
 			}
 			else if(option==2) 
@@ -195,11 +217,10 @@ public class LoginInterface extends UserInterface{
 			e.printStackTrace();
 			System.out.println("Choice must be either '1' or '2'");
 		}
-		finally 
-		{
-			chooseAction(loginM);
-		}
-		return loginM;
+//		finally 
+//		{
+//			chooseAction(loginM);
+//		}
 	}
 	
 }

@@ -1,7 +1,12 @@
 package CineplexClasses;
 
-public class Show implements java.io.Serializable{
-    
+import java.util.Date;
+
+public class Show implements java.io.Serializable
+{
+
+	private static final long serialVersionUID = -3315757482151658013L;
+
 	public enum DayType {WEEKDAY, WEEKEND, PUBLIC_HOLIDAY}
 	
     private Movie movie;
@@ -9,9 +14,10 @@ public class Show implements java.io.Serializable{
     private Cinema hall;
     private Layout hallLayout;
     private int time_start, time_end;
+    private Date show_date;
     private DayType daytype;
     
-    public Show (int showID, Movie movie, Cinema hall, int time_start, int time_end, DayType daytype)
+    public Show (int showID, Movie movie, Cinema hall, int time_start, int time_end, DayType daytype, Date show_date)
     {
         this.setShowID(showID);
     	this.hall = hall;
@@ -20,6 +26,7 @@ public class Show implements java.io.Serializable{
         setTime_end(time_end);
         setTime_start(time_start);
         this.setDaytype(daytype);
+        this.setShow_date(show_date);
     }
     
     private void setShowID(int showID) {
@@ -111,11 +118,23 @@ public class Show implements java.io.Serializable{
 		return showID;
 	}
 
-	public DayType getDaytype() {
+	public DayType getDaytype() 
+	{
 		return daytype;
 	}
 
-	public void setDaytype(DayType daytype) {
+	public void setDaytype(DayType daytype) 
+	{
 		this.daytype = daytype;
+	}
+
+	public Date getShow_date() 
+	{
+		return show_date;
+	}
+
+	public void setShow_date(Date show_date) 
+	{
+		this.show_date = show_date;
 	}
 }

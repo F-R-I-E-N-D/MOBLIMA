@@ -10,9 +10,9 @@ public class ReservationReviewManager extends Manager
 	
 	// Reservation
     
-    public void createReservation(CineplexGroup cineplexGroup, int cineplexID, String userID, int showID, char row, int lane, int seat)
+    public void createReservation(CineplexGroup cineplexGroup, int cineplexID, String userID, int showID, char row, int lane, int seat, double price)
     {
-    	if (cineplexGroup.getCineplexList().get(cineplexID).addReservationToList(userID, showID, row, lane, seat))
+    	if (cineplexGroup.getCineplexList().get(cineplexID).addReservationToList(userID, showID, row, lane, seat, price))
     		cineplexGroup.getCineplexList().get(cineplexID).getShowList().get(showID).assignSeat(row, lane, seat);
     }
     

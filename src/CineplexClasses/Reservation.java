@@ -15,8 +15,9 @@ public class Reservation implements Serializable  {
 	private int lane;
 	private int seat;
 	private Date reservationDate;
+	private double price;
 	
-	public Reservation(int reservationID, String username, int showID, char row, int lane, int seat)
+	public Reservation(int reservationID, String username, int showID, char row, int lane, int seat, double price)
 	{
 		this.setReservationID(reservationID);
 		this.username = username;
@@ -25,6 +26,8 @@ public class Reservation implements Serializable  {
 		this.setLane(lane);
 		this.setSeat(seat);
 		setReservationDate(new Date()); // Initialised with current date
+		setPrice(price);
+		
 	}
 
 	public String getUsername() 
@@ -74,6 +77,14 @@ public class Reservation implements Serializable  {
 
 	public void setReservationDate(Date date) {
 		this.reservationDate = date;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	
 }

@@ -2,6 +2,11 @@ package CineplexClasses;
 import java.io.*;
 public class Cinema implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public enum ClassType {GOLD, DELUXE, GEMINI, MAX, STANDARD}
 	
 	private ClassType classtype;

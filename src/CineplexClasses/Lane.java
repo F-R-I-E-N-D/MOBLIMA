@@ -2,6 +2,10 @@ package CineplexClasses;
 import java.io.*;
 
 public class Lane implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean [] seats;
 	private int num_seats;
 	

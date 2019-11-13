@@ -1,5 +1,7 @@
 package ControllersBoundaries;
 
+import java.text.ParseException;
+
 import CineplexClasses.CineplexGroup;
 import Users.CustomerUser;
 import Users.EmployeeUser;
@@ -7,7 +9,7 @@ import Users.User;
 
 public class MoblimaApplication 
 {	
-	public static void main(String []args)
+	public static void main(String []args) throws ParseException
 	{
 		FileManager fileManager = new FileManager(); 
 		boolean reset = false;
@@ -34,13 +36,11 @@ public class MoblimaApplication
 		
 		LoginInterface loginInterface = new LoginInterface();
 		User userRecord = loginInterface.chooseAction(loginManager);
-//		userRecord = new CustomerUser("adi1", "lokeYuanRenMyBae", "Adithya");
-//		userRecord = new EmployeeUser(1234, "hellothere", "James");
 		
 		if (userRecord instanceof CustomerUser)
 		{
 			CustomerInterface customerInterface = new CustomerInterface();
-			customerInterface.startInterface(cineplexGroup, reservationReviewManager, (CustomerUser)userRecord);
+			customerInterface.startInterface(cineplexGroup, reservationReviewManager, priceManager, (CustomerUser)userRecord);
 		}
 		else if (userRecord instanceof EmployeeUser)
 		{
