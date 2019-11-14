@@ -26,7 +26,7 @@ public class CustomerInterface extends UserInterface {
         while (option != 4) {
             System.out.println("------------------------------------------------");
             System.out.println("Welcome to Golden Village!\nWhat would you like to do?\n");
-            System.out.println("1.\tView Movies");
+            System.out.println("1.\tView Movies / Add Review");
             System.out.println("2.\tBuy Movie Ticket");
             System.out.println("3.\tView Booking History");
             System.out.println("4.\tQuit"); // Add view reservations
@@ -36,7 +36,7 @@ public class CustomerInterface extends UserInterface {
             {
                 case 1: 
                 {
-                    viewMovies(cineplex_group);
+                    viewMovies(cineplex_group, reservationReviewManager, customer);
                     break;
                 }
 
@@ -73,13 +73,13 @@ public class CustomerInterface extends UserInterface {
 	}
 
 	// viewMovies method
-    public void viewMovies(CineplexGroup cineplex_group) 
+    public void viewMovies(CineplexGroup cineplex_group, ReservationReviewManager reservationReviewManager, CustomerUser customer) 
     {
         int option2 = -1;
 //        System.out.println("we are in "+ cineplex_group.getCineplexList().get(0).getCineplexName());
         while (option2 != 4) {
             System.out.println("------------------------------------------------");
-            System.out.println("1.\tView All Movies");
+            System.out.println("1.\tView All Movies / Add Review");
             System.out.println("2.\tView Top 5 Movies by overall reviewers' rating");
             System.out.println("3.\tView Top 5 Movies by ticket sales");
             System.out.println("4.\tBack to Main Menu");
@@ -115,9 +115,11 @@ public class CustomerInterface extends UserInterface {
             while (option3 != 2) {
                 System.out.println("------------------------------------------------");
                 System.out.println("1.\tView More Details about a Movie");
-                System.out.println("2.\tBack to Viewing Menu");
-                option3 = sc.nextInt();
-                if (option3 == 1) {
+                System.out.println("2.\tAdd Review");
+                System.out.println("3.\tBack to Viewing Menu");
+                option3 = getOnlyInteger("Option: ");
+                if (option3 == 1) 
+                {
                     System.out.println("------------------------------------------------");
                     System.out.println("\tEnter Movie Name:");
                     String movieName = sc.next();
@@ -140,6 +142,25 @@ public class CustomerInterface extends UserInterface {
                     }
                     if (found == 0)
                         System.out.println("Movie not found");
+                }
+                else if (option3==2)
+                {
+                	System.out.println("------------------------------------------------");
+                    System.out.println("\tEnter Movie Name:");
+                    for (Movie movie : movieList) 
+                    {
+                    	System.out.println("Movie ID: " + movie.getMovieId());
+                    	System.out.println("Title: " + movie.getTitle());
+                    }
+                    int movieID = getOnlyInteger("Movie ID to add review: ");
+                    
+                    int rating  = getOnlyInteger("Enter rating from 1 to 5");
+                    while (rating>5 || rating <1)
+                    {
+                    	rating  = getOnlyInteger("Enter rating from 1 to 5");
+                    }
+                    reservationReviewManager.createReview(cineplex_group, movieID, getString("Enter Review: "), rating, customer.getUsername());
+                    
                 }
             }
         }

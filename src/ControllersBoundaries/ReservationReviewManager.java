@@ -46,7 +46,7 @@ public class ReservationReviewManager extends Manager
 	
 	// Review
 
-	public void createReview(CineplexGroup cineplexGroup, int movieID, String review, int rating, int userID)
+	public void createReview(CineplexGroup cineplexGroup, int movieID, String review, int rating, String userID)
     {
     	if (rating<=5 && rating>=1)
     	{

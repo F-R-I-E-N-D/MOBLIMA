@@ -109,7 +109,7 @@ public class Movie implements Serializable {
         MovieReviewAndRatingList = movieReviewAndRatingList;
     }
 
-    public void addReview(String review, int rating, int userId) {
+    public void addReview(String review, int rating, String userId) {
         if (rating < 0 || rating > 5) {
             System.out.println("Error! Rating is not between 1 and 5 inclusive!");
             return;
@@ -131,7 +131,7 @@ public class Movie implements Serializable {
 
     public double getAvgRating() 
     {
-    	if (MovieReviewAndRatingList.size()<=1)
+    	if (MovieReviewAndRatingList.size()<1)
     		return -1;
     	
     	double avg =0;

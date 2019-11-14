@@ -9,9 +9,9 @@ public class MovieReview implements Serializable {
 	private int reviewID;
 	private String review;
 	private int rating;
-	private int userID;
+	private String userID;
 
-    public MovieReview(int reviewID, int userID, String review, int rating)
+    public MovieReview(int reviewID, String userID, String review, int rating)
     {
         this.reviewID = reviewID;
         this.review = review;
@@ -49,11 +49,11 @@ public class MovieReview implements Serializable {
 		this.reviewID = reviewID;
 	}
 
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
 
-	public void setUserID(int userID) {
+	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 }
