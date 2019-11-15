@@ -152,7 +152,19 @@ public class LoginInterface extends UserInterface{
 			
 		if(option==1) 
 		{
-			String username = getString("Enter a Username:");
+			String username;
+			while (true)
+			{
+				username = getString("Enter a Username:");
+				if (!loginM.usernameTaken(username))
+				{
+//					System.out.println("Username ok.");
+					break;
+				}
+				else
+					System.out.println("Username taken. Try again");
+			}
+			
 			password = getString("Enter Password:");
 			name = getString("Enter Full Name:");
 			
@@ -173,7 +185,15 @@ public class LoginInterface extends UserInterface{
 		}
 		else if(option==2) 
 		{
-			int employeeID = getOnlyInteger("Enter Employee ID:");
+			int employeeID;
+			while (true)
+			{
+				employeeID = getOnlyInteger("Enter Employee ID:");
+				if (!loginM.employeeIDTaken(employeeID))
+					break;
+				else
+					System.out.println("ID taken. Try again");
+			}
 			password = getString("Enter Password: ");
 			name = getString("Enter Full Name:");
 			

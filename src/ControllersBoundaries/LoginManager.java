@@ -27,6 +27,16 @@ public class LoginManager extends Manager{
 		return employeeRecord;
 	}
 	
+	public boolean usernameTaken(String username) 
+	{
+		for (CustomerUser customer :customerRecord)
+		{
+			if (customer.getUsername().equals(username))
+				return true;
+		}
+		return false;
+	}
+	
 	public CustomerUser verifyExistingCustomer(String ID, String pw) 
 	{
 		int i;
@@ -68,6 +78,16 @@ public class LoginManager extends Manager{
 			}
 		}
 		return null;
+	}
+	
+	public boolean employeeIDTaken(int ID) 
+	{
+		for (EmployeeUser employee :employeeRecord)
+		{
+			if (employee.getEmployeeID() == ID)
+				return true;
+		}
+		return false;
 	}
 	
 	public void addNewEmployee(EmployeeUser employeeUser) 
