@@ -16,6 +16,7 @@ public class Show implements java.io.Serializable
     private int time_start, time_end;
     private Date show_date;
     private DayType daytype;
+    private int ticketsSold;
     
     public Show (int showID, Movie movie, Cinema hall, int time_start, int time_end, DayType daytype, Date show_date)
     {
@@ -27,6 +28,7 @@ public class Show implements java.io.Serializable
         setTime_start(time_start);
         this.setDaytype(daytype);
         this.setShow_date(show_date);
+        ticketsSold = 0;
     }
     
     private void setShowID(int showID) {
@@ -136,5 +138,22 @@ public class Show implements java.io.Serializable
 	public void setShow_date(Date show_date) 
 	{
 		this.show_date = show_date;
+	}
+	
+	//tickets sold
+	public int getTicketsSold() 
+	{
+		return ticketsSold;
+	}
+
+	public void setTicketsSold(int sold) 
+	{
+		ticketsSold = sold;
+	}
+	
+	public void addTicketsSold(int newTickets) 
+	{
+		ticketsSold = ticketsSold + newTickets;
+		movie.addMovieSales(newTickets);
 	}
 }

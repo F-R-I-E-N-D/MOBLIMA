@@ -30,7 +30,6 @@ public class MoblimaApplication
 		}
 		// ---------Loading---------//
 		
-		
 		AdminManager adminManager = new AdminManager();
 		ReservationReviewManager reservationReviewManager = new ReservationReviewManager();
 		
@@ -45,7 +44,7 @@ public class MoblimaApplication
 		else if (userRecord instanceof EmployeeUser)
 		{
 			EmployeeInterface employeeInterface = new EmployeeInterface();
-			employeeInterface.startInterface(cineplexGroup, adminManager, reservationReviewManager);
+			employeeInterface.startInterface(cineplexGroup, adminManager, reservationReviewManager, priceManager);
 		}
 		
 		

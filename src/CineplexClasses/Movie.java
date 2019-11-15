@@ -23,6 +23,7 @@ public class Movie implements Serializable {
     private Genre genre;
     private int MovieId;
     private ArrayList<MovieReview> MovieReviewAndRatingList;
+    private int movieSales;
 
     public Movie(int MovieId, String title, String synopsis, String[] cast, String director, Genre genre, Type type) {
         
@@ -35,6 +36,7 @@ public class Movie implements Serializable {
         showingStatus = ShowingStatus.COMING_SOON; // Assume movie added when it is 'coming soon'
         this.genre = genre;
         this.type = type;
+        this.setMovieSales(0);
     }
 
     public String getTitle() {
@@ -156,6 +158,22 @@ public class Movie implements Serializable {
             System.out.println("Review " + i + ": " + MovieReviewAndRatingList.get(i).getReview());
         }
     }
+
+	public int getMovieSales() 
+	{
+		return movieSales;
+	}
+
+	public void setMovieSales(int movieSales) 
+	{
+		this.movieSales = movieSales;
+	}
+	
+	public void addMovieSales(int numTickets)
+	{
+		this.movieSales+=numTickets;
+		
+	}
 }
 
 

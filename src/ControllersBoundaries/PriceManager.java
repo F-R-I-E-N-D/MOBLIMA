@@ -18,7 +18,7 @@ public class PriceManager implements Serializable{
     private double publicHolidayMarkup;
     private double threeDMarkup;
     private double blockbusterMarkup;
-    private double standardPrice;
+    private double standardPrice ;
     private double goldClassMarkup;
     private double deluxeClassMarkup;
     private double geminiClassMarkup;

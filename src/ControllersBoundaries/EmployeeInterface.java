@@ -14,21 +14,20 @@ public class EmployeeInterface extends UserInterface
 {	
 	private static final long serialVersionUID = 1L;
 	
-	public void startInterface(CineplexGroup cineplex_group, AdminManager adminManager, ReservationReviewManager reservationReviewManager) throws ParseException 
+	public void startInterface(CineplexGroup cineplex_group, AdminManager adminManager, ReservationReviewManager reservationReviewManager, PriceManager priceManager) throws ParseException 
 	{
-		
 		int option = -1;
-		
-		while (option!=4)
+		while (option!=5)
 		{
 			System.out.println("------------------------------------------------");
 			System.out.println("Welcome, Administrator\nWhat would you like to do?\n");
 			System.out.println("1.\tCineplex Options");
 			System.out.println("2.\tMovie-Show Options");
 			System.out.println("3.\tMovie Options");
-			System.out.println("4.\tQuit"); // Add view reservations
+			System.out.println("4.\tConfigure Price Settings");
+			System.out.println("5.\tQuit");
 			
-			option = getOnlyInteger("Option: ");
+			option = getOnlyInteger("Option: ", 1, 5);
 
 			switch (option)
 			{
@@ -40,6 +39,9 @@ public class EmployeeInterface extends UserInterface
 					break;
 				case 3:
 					movieOptions(cineplex_group, adminManager, reservationReviewManager);
+					break;
+				case 4:
+					priceOptions(priceManager);
 					break;
 			}
 		}
@@ -88,16 +90,24 @@ public class EmployeeInterface extends UserInterface
 					viewCineplexes(cineplex_group);
 					break;
 					
-				case 4: //NOT PROPERLY DONE
+				case 4: 
 					System.out.println("Cineplexes & Cinemas:\n");
 					viewCineplexes(cineplex_group);
 					int cplexID = getOnlyInteger("Enter Cineplex Id:\t");
 					String cinemaName = getString("Enter New Cinema Name:");
 					int num_rows = getOnlyInteger("Enter number of rows:\t");
 					int[] column = getIntegerArray("Enter Seats Per Lane");
-				
+					
+					int i = 1;
+					for (ClassType classtype : ClassType.values())
+					{
+						System.out.println("("+(i++)+")" + classtype.name());
+					}
+					int option2 = getOnlyInteger("Class Type:\t", 1, ClassType.values().length);
+					
+					
 //					cineplex_group.createCinema(cplexID, cinemaName, num_rows, column, ClassType.GOLD);	
-					adminManager.createCinema(cineplex_group, cplexID, cinemaName, num_rows, column, ClassType.GOLD);
+					adminManager.createCinema(cineplex_group, cplexID, cinemaName, num_rows, column, ClassType.values()[option2-1]);
 					break;
 					
 				case 5:
@@ -194,6 +204,7 @@ public class EmployeeInterface extends UserInterface
 							System.out.println("Show ID: " + show.getShowID());
 							System.out.println("Movie Name: " + show.getMovie().getTitle());
 							System.out.println("Cinema Name: " + show.getHall().getName());
+							System.out.println("Tickets Sold: " + show.getTicketsSold());
 							System.out.println("Start Timing" + show.getTime_start());
 							System.out.println("End Timing" + show.getTime_end());
 						}
@@ -324,6 +335,7 @@ public class EmployeeInterface extends UserInterface
 						System.out.println("Movie Name:\t"+ m.getTitle());
 						System.out.println("Movie Director:\t" + m.getDirector());
 						System.out.println("Movie Genre:\t"+ m.getGenre());
+						System.out.println("Tickets Sold:t" + m.getMovieSales());
 						System.out.println("Movie Type:\t"+ m.getType());
 						System.out.println("Movie Synopsis:\t" + m.getSynopsis());
 						printStringArray("Movie Cast:", m.getCast());
@@ -362,6 +374,80 @@ public class EmployeeInterface extends UserInterface
 		}
 	}
 	
+	private void priceOptions(PriceManager priceManager) 
+	{		
+		System.out.println("1.View Price Settings");
+	    System.out.println("2.Change Price Settings");
+	    System.out.println("3.Exit");
+	    
+	    int option = 0;
+		option = getOnlyInteger("Option (1-3): ", 1, 3);
+		    
+	    switch (option)
+	    {
+		    case 1:
+		    	printPrices(priceManager);
+		    	priceOptions(priceManager);
+		    	break;
+		    case 2:
+		    	setPrices(priceManager);
+		    	break;
+		    case 3:
+		    	return;
+	    }
+	}
+	
+	private void setPrices(PriceManager priceManager)
+	{
+		printPrices(priceManager);
+	    
+	    int option = getOnlyInteger("Price to change: ", 1, 12);
+	    double price_set = getOnlyDouble("Price set: ", 1, 12);
+	    switch (option)
+	    {
+		    case 1: priceManager.setStudentMarkdown(price_set); break;
+		    case 2: priceManager.setElderlyMarkdown(price_set); break;
+		    case 3: priceManager.setWeekdayMarkup(price_set); break;
+		    case 4: priceManager.setWeekendMarkup(price_set); break;
+		    case 5: priceManager.setPublicHolidayMarkup(price_set); break;
+		    case 6: priceManager.setThreeDMarkup(price_set); break;
+		    case 7: priceManager.setBlockbusterMarkup(price_set); break;
+		    case 8: priceManager.setStandardPrice(price_set); break;
+		    case 9: priceManager.setGoldClassMarkup(price_set); break;
+		    case 10: priceManager.setDeluxeClassMarkup(price_set); break;
+		    case 11: priceManager.setGeminiClassMarkup(price_set); break;
+		    case 12: priceManager.setMaxClassMarkup(price_set); break;
+	    }
+	    
+	    printPrices(priceManager);
+	    option = getOnlyInteger("(1) Reset Another Price (2) Exit: ", 1, 2);
+	    
+	    if (option==1)
+	    {
+	    	setPrices(priceManager);
+	    }
+	    
+	}
+	
+	private void printPrices(PriceManager priceManager)
+	{
+		System.out.println("New Prices:");
+	    System.out.println("1\tstudentMarkdown:\t" + priceManager.getStudentMarkdown());
+	    System.out.println("2\telderlyMarkdown:\t" + priceManager.getElderlyMarkdown());
+	    System.out.println("3\tweekdayMarkup:\t\t" + priceManager.getWeekdayMarkup());
+	    System.out.println("4\tweekendMarkup:\t\t" + priceManager.getWeekendMarkup());
+	    System.out.println("5\tpublicHolidayMarkup:\t"+priceManager.getPublicHolidayMarkup());
+	    System.out.println("6\tthreeDMarkup:\t\t" + priceManager.getThreeDMarkup());
+	    System.out.println("7\tblockbusterMarkup:\t"+priceManager.getBlockbusterMarkup());
+	    System.out.println("8\tstandardPrice:\t\t"+priceManager.getStandardPrice());
+	    System.out.println("9\tgoldClassMarkup:\t"+priceManager.getGoldClassMarkup());
+	    System.out.println("10\tdeluxeClassMarkup:\t"+priceManager.getDeluxeClassMarkup());
+	    System.out.println("11\tgeminiClassMarkup:\t"+priceManager.getGeminiClassMarkup());
+	    System.out.println("12\tmaxClassMarkup:\t" + priceManager.getMaxClassMarkup());
+	    
+	    
+	}
+	
 	private void viewCineplexes (CineplexGroup cineplex_group)
 	{
 		for (Cineplex cplex : cineplex_group.getCineplexList())
@@ -373,6 +459,7 @@ public class EmployeeInterface extends UserInterface
 			{
 				System.out.println("\nCinema Id=\t" + cinema.getHallId());
 				System.out.println("Cinema Name=\t" + cinema.getName());
+				System.out.println("Cinema Class=\t" + cinema.getClasstype());
 				System.out.println("Cinema Rows=\t" + cinema.getNumRows());
 				System.out.println("Cinema Lanes=\t" + Arrays.toString(cinema.getColumn()));
 			}
