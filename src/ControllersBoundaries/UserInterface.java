@@ -3,7 +3,14 @@ package ControllersBoundaries;
 import java.util.Scanner;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import CineplexClasses.Cinema;
+import CineplexClasses.Cineplex;
 import CineplexClasses.CineplexGroup;
+import CineplexClasses.Movie;
+import CineplexClasses.MovieReview;
+import CineplexClasses.Show;
 
 public abstract class UserInterface implements Serializable{
 	
@@ -122,5 +129,126 @@ public abstract class UserInterface implements Serializable{
 		System.out.println();
 	}
 	
+	public void printPrices(PriceManager priceManager)
+	{
+		System.out.println("New Prices:");
+	    System.out.println("1\tstudentMarkdown:\t" + priceManager.getStudentMarkdown());
+	    System.out.println("2\telderlyMarkdown:\t" + priceManager.getElderlyMarkdown());
+	    System.out.println("3\tweekdayMarkup:\t\t" + priceManager.getWeekdayMarkup());
+	    System.out.println("4\tweekendMarkup:\t\t" + priceManager.getWeekendMarkup());
+	    System.out.println("5\tpublicHolidayMarkup:\t"+priceManager.getPublicHolidayMarkup());
+	    System.out.println("6\tthreeDMarkup:\t\t" + priceManager.getThreeDMarkup());
+	    System.out.println("7\tblockbusterMarkup:\t"+priceManager.getBlockbusterMarkup());
+	    System.out.println("8\tstandardPrice:\t\t"+priceManager.getStandardPrice());
+	    System.out.println("9\tgoldClassMarkup:\t"+priceManager.getGoldClassMarkup());
+	    System.out.println("10\tdeluxeClassMarkup:\t"+priceManager.getDeluxeClassMarkup());
+	    System.out.println("11\tgeminiClassMarkup:\t"+priceManager.getGeminiClassMarkup());
+	    System.out.println("12\tmaxClassMarkup:\t" + priceManager.getMaxClassMarkup());
+	    
+	    
+	}
+	
+	public void printCineplex (CineplexGroup cineplex_group)
+	{
+		for (Cineplex cplex : cineplex_group.getCineplexList())
+		{
+			System.out.println("Cineplex Id=\t" + cplex.getCineplexId());
+			System.out.println("Cineplex Name=\t" + cplex.getCineplexName());
+		}
+	}
+	
+	public void printCinema(CineplexGroup cineplex_group) {
+		for (Cineplex cplex : cineplex_group.getCineplexList())
+		{
+			System.out.println("Cineplex Id=\t" + cplex.getCineplexId());
+			System.out.println("Cineplex Name=\t" + cplex.getCineplexName());
+			
+			for (Cinema cinema: cplex.getCinemaList())
+			{
+				System.out.println("\n\tCinema Id=\t" + cinema.getHallId());
+				System.out.println("\tCinema Name=\t" + cinema.getName());
+				System.out.println("\tCinema Class:\t" + cinema.getClasstype());
+				System.out.println("\tCinema Rows=\t" + cinema.getNumRows());
+				System.out.println("\tCinema Lanes=\t" + Arrays.toString(cinema.getColumn()));
+				
+				System.out.println(".........................................");
+			}
+			System.out.println("\n-----------------------------------------------------------------\n");
+		}
+	}
+	
+	public void printShow(CineplexGroup cineplex_group) {
+		for (Cineplex cplex : cineplex_group.getCineplexList())
+		{
+			System.out.println("\nCineplex ID:\t"+ cplex.getCineplexId());
+			System.out.println("Cineplex Name:\t"+ cplex.getCineplexName());
+			for (Show show : cplex.getShowList())
+			{
+				System.out.println("\n\tShow ID:\t" + show.getShowID());
+				System.out.println("\tMovie Name:\t" + show.getMovie().getTitle());
+				System.out.println("\tCinema Name:\t" + show.getHall().getName());
+				System.out.println("\tCinema Class:\t" + show.getHall().getClasstype());
+				System.out.println("\tStart Timing\t" + show.getTime_start());
+				System.out.println("\tEnd Timing\t" + show.getTime_end());
+				System.out.println("\tTickets Sold\t" + show.getTicketsSold());
+				System.out.println("...........................................");
+			}
+			System.out.println("\n-----------------------------------------------------------------\n");
+		}
+		
+	}
+	
+	public void printMovie(CineplexGroup cineplex_group){
+		for (Movie m : cineplex_group.getMovieList())
+		{
+			System.out.println("Movie ID:\t" + m.getMovieId());
+			System.out.println("Movie Name:\t"+ m.getTitle());
+			System.out.println("Movie Director:\t" + m.getDirector());
+			System.out.println("Movie Genre:\t"+ m.getGenre());
+			System.out.println("Movie Type:\t"+ m.getType());
+			System.out.println("Movie Synopsis:\t" + m.getSynopsis());
+			printStringArray("Movie Cast:\t", m.getCast());
+			System.out.println("Average Rating:\t" + m.getAvgRating());
+			System.out.println("Movie Showing Status:\t"+ m.getShowingStatus());
+			System.out.println("Total Tickets sold: \t" + m.getMovieSales());
+			System.out.println("...........................................");
+		}
+	}
+	
+	public void printShowingMovie(CineplexGroup cineplex_group){
+		for (Movie m : cineplex_group.getMovieList())
+		{
+			if (m.getShowingStatus() == Movie.ShowingStatus.NOW_SHOWING)
+			{
+				System.out.println("Movie ID:\t" + m.getMovieId());
+				System.out.println("Movie Name:\t"+ m.getTitle());
+				System.out.println("Movie Director:\t" + m.getDirector());
+				System.out.println("Movie Genre:\t"+ m.getGenre());
+				System.out.println("Movie Type:\t"+ m.getType());
+				System.out.println("Movie Synopsis:\t" + m.getSynopsis());
+				printStringArray("Movie Cast:\t", m.getCast());
+				System.out.println("Average Rating:\t" + m.getAvgRating());
+				System.out.println("Total Tickets sold: \t" + m.getMovieSales());
+				System.out.println("...........................................");
+			}
+		}
+	}
+	
+	public void printReview(CineplexGroup cineplex_group){
+		for (Movie m : cineplex_group.getMovieList())
+		{
+			System.out.println("\nMovie ID:\t" + m.getMovieId());
+			System.out.println("Movie Name:\t"+ m.getTitle());
+			
+			for (MovieReview r: m.getMovieReviewAndRatingList())
+			{
+				System.out.println("\n\tReview ID:" + r.getReviewID());
+				System.out.println("\tReview: " + r.getReview());
+				System.out.println("\tRating: " + r.getRating());
+				System.out.println("...........................................");
+			}
+			System.out.println("---------------------------------------------------");
+		}
+	}
 }
 

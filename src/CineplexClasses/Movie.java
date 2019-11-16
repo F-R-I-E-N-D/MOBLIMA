@@ -133,7 +133,7 @@ public class Movie implements Serializable {
 
     public double getAvgRating() 
     {
-    	if (MovieReviewAndRatingList.size()<1)
+    	if (MovieReviewAndRatingList.size()<=1)
     		return -1;
     	
     	double avg =0;

@@ -111,11 +111,11 @@ public class LoginInterface extends UserInterface{
 			
 			if (verified!=null)
 			{
-				System.out.println("Welcome "+ verified.getName() +", Succesful Login");
+				System.out.println("\n\tWelcome "+ verified.getName() +", Succesful Login");
 			}
 			else
 			{
-				System.out.println("Unsuccesful Login");
+				System.out.println("\n\tUnsuccesful Login\n");
 			}
 			return verified;
 		}
@@ -124,15 +124,14 @@ public class LoginInterface extends UserInterface{
 			ID = getOnlyInteger("Enter Employee ID:");
 			password = getString("Enter Password: ");
 			EmployeeUser verified = loginM.verifyExistingEmployee(ID, password);
-			System.out.println(verified);
 			
 			if(verified!=null) 
 			{
-				System.out.println("Welcome "+ verified.getName() + ", Succesful Login");
+				System.out.println("\n\tWelcome "+ verified.getName() + ", Succesful Login");
 			}
 			else
 			{
-				System.out.println("Unsuccesful Login");
+				System.out.println("\n\tUnsuccesful Login\n");
 			}
 			return verified;
 		}

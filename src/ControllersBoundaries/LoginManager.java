@@ -41,7 +41,6 @@ public class LoginManager extends Manager{
 	{
 		int i;
 		CustomerUser current;
-		System.out.println(customerRecord);
 		for(i=0; i<customerRecord.size(); i++) 
 		{
 			current = customerRecord.get(i);
@@ -66,7 +65,6 @@ public class LoginManager extends Manager{
 	{
 		int i;
 		EmployeeUser current;
-		System.out.println(employeeRecord);
 		for(i=0; i<employeeRecord.size(); i++) 
 		{
 			current = employeeRecord.get(i);

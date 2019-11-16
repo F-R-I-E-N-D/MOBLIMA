@@ -54,7 +54,7 @@ public class EmployeeInterface extends UserInterface
 	{
 		int option = -1;
 		
-		while (option!=6)
+		while (option!=7)
 		{
 			System.out.println("------------------------------------------------");
 			System.out.println("Cineplex Options:\n");
@@ -62,11 +62,13 @@ public class EmployeeInterface extends UserInterface
 			System.out.println("2.\tRemove Cineplex");
 			System.out.println("3.\tView Cineplexes (+ Constituent Cinemas)");
 			System.out.println("4.\tAdd Cinema to Cineplex");
-			System.out.println("5.\tRemove Cinema from Cineplex");
-			System.out.println("6.\tBack to Admin Menu");
+			System.out.println("5.\tUpdate Cinema Record");
+			System.out.println("6.\tRemove Cinema from Cineplex");
+			System.out.println("7.\tBack to Admin Menu");
 			
 			option = getOnlyInteger("Option: ");
 			System.out.println("==========================");
+			int cplexID, num_rows, i, option2; int [] column;
 			switch (option)
 			{
 				case 1:
@@ -87,29 +89,72 @@ public class EmployeeInterface extends UserInterface
 				case 4: 
 					System.out.println("Cineplexes & Cinemas:\n");
 					printCinema(cineplex_group);
-					int cplexID = getOnlyInteger("Enter Cineplex Id:\t");
+					cplexID = getOnlyInteger("Enter Cineplex Id:\t");
 					String cinemaName = getString("Enter New Cinema Name:");
-					int num_rows = getOnlyInteger("Enter number of rows:\t");
-					int[] column = getIntegerArray("Enter Seats Per Lane");
+					num_rows = getOnlyInteger("Enter number of rows:\t");
+					column = getIntegerArray("Enter Seats Per Lane");
 					
-					int i = 1;
+					i = 1;
 					for (ClassType classtype : ClassType.values())
 					{
 						System.out.println("("+(i++)+")" + classtype.name());
 					}
-					int option2 = getOnlyInteger("Class Type:\t", 1, ClassType.values().length);
+					option2 = getOnlyInteger("Class Type:\t", 1, ClassType.values().length);
 					
-					
-//					cineplex_group.createCinema(cplexID, cinemaName, num_rows, column, ClassType.GOLD);	
 					adminManager.createCinema(cineplex_group, cplexID, cinemaName, num_rows, column, ClassType.values()[option2-1]);
 					printCinema(cineplex_group);
 					break;
 					
 				case 5:
+					System.out.println("\nCineplexes & Cinemas:\n");
+					printCinema(cineplex_group);
+					cplexID = getOnlyInteger("Enter Cineplex ID:\t");
+					int cinemaID = getOnlyInteger("Enter Cinema ID:");
+					
+					System.out.println("Update:\n");
+					System.out.println("1.\tName");
+					System.out.println("2.\tRows");
+					System.out.println("3.\tNum of seats per Lane");
+					System.out.println("4.\tClass Type");
+					System.out.println("5.\t(No updates, Back)");
+					
+					option2 = getOnlyInteger("Option 1-4:",1 , 5);
+					
+					switch (option2)
+					{
+						case 1:
+							String new_name = getString("Enter new name:");
+							cineplex_group.getCineplexList().get(cplexID).getCinemaList().get(cinemaID)	.setName(new_name);					
+							break;
+						case 2:
+							num_rows = getOnlyInteger("Enter new number of rows:");
+							cineplex_group.getCineplexList().get(cplexID).getCinemaList().get(cinemaID).setNumRows(num_rows);					
+							break;
+						case 3:
+							column = getIntegerArray("Enter new seats Per Lane");
+							cineplex_group.getCineplexList().get(cplexID).getCinemaList().get(cinemaID).setColumn(column);					
+							break;
+						case 4:
+							i = 1;
+							for (ClassType classtype : ClassType.values())
+							{
+								System.out.println("("+(i++)+")" + classtype.name());
+							}
+							int option3 = getOnlyInteger("Class Type:\t", 1, ClassType.values().length);
+							
+							cineplex_group.getCineplexList().get(cplexID).getCinemaList().get(cinemaID).setClasstype(Cinema.ClassType.values()[option3-1]);			
+							break;
+						
+					}
+					System.out.println("Cinema Updated");
+					printCinema(cineplex_group);
+					break;
+					
+				case 6:
 					System.out.println("Cineplexes & Cinemas:\n");
 					printCinema(cineplex_group);
 					int cplexId = getOnlyInteger("Enter Cineplex Id:\t");
-					int cinemaID = getOnlyInteger("Enter Cinema Id:\t");
+					cinemaID = getOnlyInteger("Enter Cinema Id:\t");
 //					cineplex_group.removeCinema(cplexId, cinemaID);
 					adminManager.removeCinema(cineplex_group, cplexId, cinemaID);
 					printCinema(cineplex_group);
@@ -176,6 +221,7 @@ public class EmployeeInterface extends UserInterface
 //		    		System.out.println(date);
 					
 					adminManager.createShow(cineplex_group, cineplexID, cinemaID, movieID, time_start, time_end, daytype, date);
+					cineplex_group.getMovieList().get(movieID).setShowingStatus(Movie.ShowingStatus.NOW_SHOWING);
 					printShow(cineplex_group);
 					break;
 				case 2:
@@ -212,7 +258,7 @@ public class EmployeeInterface extends UserInterface
 			System.out.println("------------------------------------------------");
 			System.out.println("Movie Options:\n");
 			System.out.println("1.\tCreate Movie");
-			System.out.println("2.\tRemove Movie");
+			System.out.println("2.\tDiscontinue Movie");
 			System.out.println("3.\tView Movies");
 			System.out.println("4.\tView Movie Reviews");
 			System.out.println("5.\tRemove Movie Reviews");
@@ -269,8 +315,8 @@ public class EmployeeInterface extends UserInterface
 					}
 					
 					movieID = getOnlyInteger("Enter movieID to remove: ");
-//					cineplex_group.removeMovieFromlist(movieID);
-					adminManager.removeMovieFromlist(cineplex_group, movieID);
+//					adminManager.removeMovieFromlist(cineplex_group, movxieID);
+					cineplex_group.getMovieList().get(movieID).setShowingStatus(Movie.ShowingStatus.DISCONTINUED);
 					printMovie(cineplex_group);
 					break;
 				case 3:
@@ -349,106 +395,4 @@ public class EmployeeInterface extends UserInterface
 	    
 	}
 	
-	private void printPrices(PriceManager priceManager)
-	{
-		System.out.println("New Prices:");
-	    System.out.println("1\tstudentMarkdown:\t" + priceManager.getStudentMarkdown());
-	    System.out.println("2\telderlyMarkdown:\t" + priceManager.getElderlyMarkdown());
-	    System.out.println("3\tweekdayMarkup:\t\t" + priceManager.getWeekdayMarkup());
-	    System.out.println("4\tweekendMarkup:\t\t" + priceManager.getWeekendMarkup());
-	    System.out.println("5\tpublicHolidayMarkup:\t"+priceManager.getPublicHolidayMarkup());
-	    System.out.println("6\tthreeDMarkup:\t\t" + priceManager.getThreeDMarkup());
-	    System.out.println("7\tblockbusterMarkup:\t"+priceManager.getBlockbusterMarkup());
-	    System.out.println("8\tstandardPrice:\t\t"+priceManager.getStandardPrice());
-	    System.out.println("9\tgoldClassMarkup:\t"+priceManager.getGoldClassMarkup());
-	    System.out.println("10\tdeluxeClassMarkup:\t"+priceManager.getDeluxeClassMarkup());
-	    System.out.println("11\tgeminiClassMarkup:\t"+priceManager.getGeminiClassMarkup());
-	    System.out.println("12\tmaxClassMarkup:\t" + priceManager.getMaxClassMarkup());
-	    
-	    
-	}
-	
-	private void printCineplex (CineplexGroup cineplex_group)
-	{
-		for (Cineplex cplex : cineplex_group.getCineplexList())
-		{
-			System.out.println("Cineplex Id=\t" + cplex.getCineplexId());
-			System.out.println("Cineplex Name=\t" + cplex.getCineplexName());
-		}
-	}
-	
-	public void printCinema(CineplexGroup cineplex_group) {
-		for (Cineplex cplex : cineplex_group.getCineplexList())
-		{
-			System.out.println("Cineplex Id=\t" + cplex.getCineplexId());
-			System.out.println("Cineplex Name=\t" + cplex.getCineplexName());
-			
-			for (Cinema cinema: cplex.getCinemaList())
-			{
-				System.out.println("\n\tCinema Id=\t" + cinema.getHallId());
-				System.out.println("\tCinema Name=\t" + cinema.getName());
-				System.out.println("\tCinema Class:\t" + cinema.getClasstype());
-				System.out.println("\tCinema Rows=\t" + cinema.getNumRows());
-				System.out.println("\tCinema Lanes=\t" + Arrays.toString(cinema.getColumn()));
-				
-				System.out.println(".........................................");
-			}
-			System.out.println("\n-----------------------------------------------------------------\n");
-		}
-	}
-	
-	public void printShow(CineplexGroup cineplex_group) {
-		for (Cineplex cplex : cineplex_group.getCineplexList())
-		{
-			System.out.println("\nCineplex ID:\t"+ cplex.getCineplexId());
-			System.out.println("Cineplex Name:\t"+ cplex.getCineplexName());
-			for (Show show : cplex.getShowList())
-			{
-				System.out.println("\n\tShow ID:\t" + show.getShowID());
-				System.out.println("\tMovie Name:\t" + show.getMovie().getTitle());
-				System.out.println("\tCinema Name:\t" + show.getHall().getName());
-				System.out.println("\tCinema Class:\t" + show.getHall().getClasstype());
-				System.out.println("\tStart Timing\t" + show.getTime_start());
-				System.out.println("\tEnd Timing\t" + show.getTime_end());
-				System.out.println("\tTickets Sold\t" + show.getTicketsSold());
-				System.out.println("...........................................");
-			}
-			System.out.println("\n-----------------------------------------------------------------\n");
-		}
-		
-	}
-	
-	public void printMovie(CineplexGroup cineplex_group){
-		for (Movie m : cineplex_group.getMovieList())
-		{
-			System.out.println("Movie ID:\t" + m.getMovieId());
-			System.out.println("Movie Name:\t"+ m.getTitle());
-			System.out.println("Movie Director:\t" + m.getDirector());
-			System.out.println("Movie Genre:\t"+ m.getGenre());
-			System.out.println("Movie Type:\t"+ m.getType());
-			System.out.println("Movie Synopsis:\t" + m.getSynopsis());
-			printStringArray("Movie Cast:\t", m.getCast());
-			System.out.println("Average Rating:\t" + m.getAvgRating());
-			System.out.println("Movie Showing Status:\t"+ m.getShowingStatus());
-			System.out.println("Total Tickets sold: \t" + m.getMovieSales());
-			System.out.println("...........................................");
-		}
-		
-	}
-	public void printReview(CineplexGroup cineplex_group){
-		for (Movie m : cineplex_group.getMovieList())
-		{
-			System.out.println("\nMovie ID:\t" + m.getMovieId());
-			System.out.println("Movie Name:\t"+ m.getTitle());
-			
-			for (MovieReview r: m.getMovieReviewAndRatingList())
-			{
-				System.out.println("\n\tReview ID:" + r.getReviewID());
-				System.out.println("\tReview: " + r.getReview());
-				System.out.println("\tRating: " + r.getRating());
-				System.out.println("...........................................");
-			}
-			System.out.println("---------------------------------------------------");
-		}
-	}
 }
