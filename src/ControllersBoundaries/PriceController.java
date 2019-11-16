@@ -7,7 +7,7 @@ import CineplexClasses.Movie;
 import CineplexClasses.Show;
 import Users.CustomerUser;
 
-public class PriceManager implements Serializable{
+public class PriceController implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	

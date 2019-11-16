@@ -13,15 +13,15 @@ import CineplexClasses.Movie;
 import CineplexClasses.MovieReview;
 import CineplexClasses.Show;
 
-public abstract class UserInterface implements Serializable{
+public abstract class UserBoundary
+{
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	protected Scanner sc = new Scanner(System.in);
 	
-	public UserInterface() 
+	public UserBoundary() 
 	{
 		
 	}
@@ -130,7 +130,7 @@ public abstract class UserInterface implements Serializable{
 		System.out.println();
 	}
 	
-	public void printPrices(PriceManager priceManager)
+	public void printPrices(PriceController priceManager)
 	{
 		System.out.println("New Prices:");
 	    System.out.println("1\tstudentMarkdown:\t" + priceManager.getStudentMarkdown());
@@ -269,17 +269,27 @@ public abstract class UserInterface implements Serializable{
 	protected void printTop5Ratings(ArrayList<Movie>movieList)
 	{
 		System.out.println("Top Movies by Ratings are: \n");
-    	movieList.sort(Comparator.comparing(Movie::getAvgRating).reversed());
+		
+		ArrayList<Movie> filteredMovieList = new ArrayList<Movie> ();
+		for (Movie m: movieList)
+		{
+			if (m.getShowingStatus()==Movie.ShowingStatus.NOW_SHOWING)
+			{
+				filteredMovieList.add(m);
+			}
+		}
+		
+		filteredMovieList.sort(Comparator.comparing(Movie::getAvgRating).reversed());
         int i;
         int max =5;
-        if(movieList.size() <= 5 ) {
-        	max = movieList.size();
+        if(filteredMovieList.size() <= 5 ) {
+        	max = filteredMovieList.size();
         }
         for (i = 0; i < max; i++) {
-        	if (movieList.get(i).getAvgRating()!=-1.0)
+        	if (filteredMovieList.get(i).getAvgRating()!=-1.0)
         	{
-                System.out.println((i+1) + ".\t" + movieList.get(i).getTitle());
-                System.out.println("Rating:\t" + movieList.get(i).getAvgRating()+"\n");
+                System.out.println((i+1) + ".\t\t" + filteredMovieList.get(i).getTitle());
+                System.out.printf("Average Rating:\t%.2f\n" ,filteredMovieList.get(i).getAvgRating());
         	}
         }
 	}
@@ -287,15 +297,25 @@ public abstract class UserInterface implements Serializable{
 	protected void printTop5Sales(ArrayList<Movie>movieList)
 	{
 		System.out.println("Top Movies by Ticket Sales are:\n");
-    	movieList.sort(Comparator.comparing(Movie::getMovieSales).reversed());
+		
+		ArrayList<Movie> filteredMovieList = new ArrayList<Movie> ();
+		for (Movie m: movieList)
+		{
+			if (m.getShowingStatus()==Movie.ShowingStatus.NOW_SHOWING)
+			{
+				filteredMovieList.add(m);
+			}
+		}
+		
+		filteredMovieList.sort(Comparator.comparing(Movie::getMovieSales).reversed());
         int i;
         int max =5;
-        if(movieList.size() <= 5 ) {
-        	max = movieList.size();
+        if(filteredMovieList.size() <= 5 ) {
+        	max = filteredMovieList.size();
         }
         for (i = 0; i < max; i++) {
-            System.out.println((i+1) + ".\t" + movieList.get(i).getTitle());
-            System.out.println("Sales:\t" + movieList.get(i).getMovieSales() + "\n");
+            System.out.println((i+1) + ".\t" + filteredMovieList.get(i).getTitle());
+            System.out.println("Sales:\t" + filteredMovieList.get(i).getMovieSales() + "\n");
         }
 	}
 }

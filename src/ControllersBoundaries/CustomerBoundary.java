@@ -1,10 +1,7 @@
 package ControllersBoundaries;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
 
 import CineplexClasses.Cineplex;
 import CineplexClasses.CineplexGroup;
@@ -12,13 +9,12 @@ import CineplexClasses.Movie;
 import CineplexClasses.Reservation;
 import CineplexClasses.Show;
 import Users.CustomerUser;
-import Users.CustomerUser.CustomerType;
 
-public class CustomerInterface extends UserInterface {
+public class CustomerBoundary extends UserBoundary {
 
 	private static final long serialVersionUID = 1L;
 	
-    public void startInterface(CineplexGroup cineplex_group, CustomerReviewController customerReviewController, ReservationController reservationController, PriceManager priceManager, CustomerUser customer) throws ParseException 
+    public void startInterface(CineplexGroup cineplex_group, CustomerReviewController customerReviewController, ReservationController reservationController, PriceController priceManager, CustomerUser customer) throws ParseException 
     {  
 
         int option = -1;
@@ -143,13 +139,16 @@ public class CustomerInterface extends UserInterface {
             	printReview(cineplex_group);
             	break;
             case 2:
+            	int i = 0;
             	for (Movie m: cineplex_group.getMovieList())
             	{
+            		
             		if (m.getShowingStatus()==Movie.ShowingStatus.NOW_SHOWING)
             		{
-	            		System.out.println("\nMovie ID:\t" + m.getMovieId());
+	            		System.out.println("\nMovie ID:\t" + (i++));
 	            		System.out.println("Movie Name:\t" + m.getTitle());
             		}
+            		else i++;
             	}
             	
             	int movieID = getOnlyInteger("Movie ID to add review: ");
@@ -165,7 +164,7 @@ public class CustomerInterface extends UserInterface {
 	}
 
 	//buyTicket method
-    private void buyTicket(CineplexGroup cineplex_group, ReservationController reservationController, PriceManager priceManager, CustomerUser customer) throws ParseException 
+    private void buyTicket(CineplexGroup cineplex_group, ReservationController reservationController, PriceController priceManager, CustomerUser customer) throws ParseException 
     {
         printShow(cineplex_group);
         int cineplexID = getOnlyInteger("Please enter Cineplex ID:", 0, cineplex_group.getCineplexList().size()-1);

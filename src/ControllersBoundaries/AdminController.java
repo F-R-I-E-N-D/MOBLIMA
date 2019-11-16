@@ -10,7 +10,7 @@ import CineplexClasses.Movie;
 import CineplexClasses.Show;
 
 
-public class AdminManager extends Manager implements Serializable
+public class AdminController implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 		

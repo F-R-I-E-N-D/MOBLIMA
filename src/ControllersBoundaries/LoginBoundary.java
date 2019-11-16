@@ -4,11 +4,10 @@ import Users.CustomerUser;
 import Users.EmployeeUser;
 import Users.User;
 
-public class LoginInterface extends UserInterface{
+public class LoginBoundary extends UserBoundary
+{	
 
-	private static final long serialVersionUID = 1L;
-	
-	public User startInterface(LoginManager loginM)
+	public User startInterface(LoginController loginM)
 	{
 		System.out.println("------------------------------------------------");
 		System.out.println("Proceed as:\n1.\tCustomer\n2.\tEmployee\n3.\tExit MOBLIMA");
@@ -24,7 +23,7 @@ public class LoginInterface extends UserInterface{
 	}
 	
 	
-	private User employeeLogin(LoginManager loginM)
+	private User employeeLogin(LoginController loginM)
 	{
 		System.out.println("------------------------------------------------");
 		System.out.println("\tEmployee Login\n\n\t1. Sign in to Account\n\t2. Create new Account\n\t3. Back");
@@ -50,7 +49,7 @@ public class LoginInterface extends UserInterface{
 	}
 	
 	
-	private User customerLogin(LoginManager loginM)
+	private User customerLogin(LoginController loginM)
 	{
 		System.out.println("------------------------------------------------");
 		System.out.println("\tCustomer Login\n\n\t1. Sign in to Account\n\t2. Create new Account\n\t3. Back");
@@ -75,94 +74,9 @@ public class LoginInterface extends UserInterface{
 		return null;
 	}
 	
-	
-//	public User chooseAction(LoginManager loginM) 
-//	{
-//		int option=0;
-//	
-//		System.out.println("Choose to:");
-//		System.out.println("1. Add new account");
-//		System.out.println("2. Sign in with existing account");
-////		System.out.println("3. Get all User Records (Requires Master Password)");
-//		System.out.println("3. Exit");
-//		
-//		option = getOnlyInteger("Option:" , 1, 4);
-//		
-//		if(option==1) 
-//		{
-//			addAccount(loginM);
-//			return chooseAction(loginM);
-//			
-//		}
-//		else if(option==2) 
-//		{
-//			User user_returned = getLoginDetails(loginM);
-//			if (user_returned==null)
-//			{
-//				return chooseAction(loginM);
-//			}
-//			else
-//			{
-//				return user_returned;
-//			}
-//		}
-//		else if(option==4) 
-//		{
-//			hackersDream(loginM); // Do not leave in final version
-//			return chooseAction(loginM);
-//		}
-//		else
-//		{
-//			System.out.println("Thank you and have a good day.");
-//			return null;
-//		}
-//		
-//	}
-	
-	private void hackersDream(LoginManager loginM) 
-	{
-		String Master_Password = "james";
-		String input_pw = getString("Enter Password: ");
-		
-		if (input_pw.equals(Master_Password))
-		{
-			System.out.println("==============================");
-			int option = getOnlyInteger("(1) Customer Records\n(2) Employee Records\nEnter Option:");
-			
-			if (option==1)
-			{
-				System.out.println("Customer Records:");
-				System.out.println("=================");
-				for (CustomerUser customer : loginM.getCustomerRecord())
-				{
-					System.out.println("Username:\t" + customer.getUsername());
-					System.out.println("Password:\t" + customer.getPassword());
-					System.out.println("Full Name:\t" + customer.getName());
-					System.out.println("Customer Type:\t" + customer.getCustomerType());
-					System.out.println("=================");
-				}
-			}
-			else
-			{
-				System.out.println("Employee Records:");
-				for (EmployeeUser employee : loginM.getEmployeeRecord())
-				{
-					System.out.println("EmployeeID:\t" + employee.getEmployeeID());
-					System.out.println("Password:\t" + employee.getPassword());
-					System.out.println("Full Name:\t" + employee.getName());
-				}
-			}
-		}
-		else
-		{
-			System.out.println("Wrong Password");
-		}
-		System.out.println("==============================");
-	}
-
 
 	//login attempts for employee and manager, check through existing ArrayList
-	public User getLoginDetails(LoginManager loginM, int type) 
+	public User getLoginDetails(LoginController loginM, int type) 
 	{
 		int ID = 0;
 		String password = null;
@@ -203,7 +117,7 @@ public class LoginInterface extends UserInterface{
 	}
 	
 	//add customer or employee accounts to ArrayList
-	public void addAccount(LoginManager loginM, int type) 
+	public void addAccount(LoginController loginM, int type) 
 	{
 		String name;
 		String password = null;

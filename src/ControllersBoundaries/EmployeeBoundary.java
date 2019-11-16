@@ -7,14 +7,12 @@ import CineplexClasses.Show.DayType;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 
-public class EmployeeInterface extends UserInterface
+public class EmployeeBoundary extends UserBoundary
 {	
-	private static final long serialVersionUID = 1L;
 	
-	public void startInterface(CineplexGroup cineplex_group, AdminManager adminManager, EmployeeReviewController employeeReviewController, PriceManager priceManager)
+	public void startInterface(CineplexGroup cineplex_group, AdminController adminManager, EmployeeReviewController employeeReviewController, PriceController priceManager)
 	{
 		int option = -1;
 		while (option!=5)
@@ -50,7 +48,7 @@ public class EmployeeInterface extends UserInterface
 		
 	}
 
-	private void cineplexOptions(CineplexGroup cineplex_group, AdminManager adminManager) 
+	private void cineplexOptions(CineplexGroup cineplex_group, AdminController adminManager) 
 	{
 		int option = -1;
 		
@@ -164,7 +162,7 @@ public class EmployeeInterface extends UserInterface
 		
 	}
 	
-	private void showOptions(CineplexGroup cineplex_group, AdminManager adminManager)
+	private void showOptions(CineplexGroup cineplex_group, AdminController adminManager)
 	{	
 		int option = -1;
 		
@@ -308,7 +306,7 @@ public class EmployeeInterface extends UserInterface
 		}
 	}
 	
-	private void movieOptions(CineplexGroup cineplex_group, AdminManager adminManager, EmployeeReviewController employeeReviewController) 
+	private void movieOptions(CineplexGroup cineplex_group, AdminController adminManager, EmployeeReviewController employeeReviewController) 
 	{
 		int option = -1;
 		
@@ -482,7 +480,7 @@ public class EmployeeInterface extends UserInterface
 		}
 	}
 	
-	private void priceOptions(PriceManager priceManager) 
+	private void priceOptions(PriceController priceManager) 
 	{		
 		System.out.println("1.View Price Settings");
 	    System.out.println("2.Change Price Settings");
@@ -505,7 +503,7 @@ public class EmployeeInterface extends UserInterface
 	    }
 	}
 	
-	private void setPrices(PriceManager priceManager)
+	private void setPrices(PriceController priceManager)
 	{
 		printPrices(priceManager);
 	    

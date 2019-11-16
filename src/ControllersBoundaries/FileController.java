@@ -4,7 +4,7 @@ import java.io.*;
 
 import CineplexClasses.CineplexGroup;
 
-public class FileManager
+public class FileController
 {
 	public CineplexGroup loadCineplexGroup()
 	{
@@ -15,21 +15,21 @@ public class FileManager
 		}
 		return returnCineplexGroup;
 	}
-	public LoginManager loadLoginManager ()
+	public LoginController loadLoginManager ()
 	{
-		LoginManager returnLoginManager =  (LoginManager)deserializeObject("loginManager.ser");
+		LoginController returnLoginManager =  (LoginController)deserializeObject("loginManager.ser");
 		if (returnLoginManager==null)
 		{
-			returnLoginManager = new LoginManager();
+			returnLoginManager = new LoginController();
 		}
 		return returnLoginManager;
 	}
-	public PriceManager loadPriceManager ()
+	public PriceController loadPriceManager ()
 	{
-		PriceManager returnPriceManager = (PriceManager)deserializeObject("priceManager.ser");
+		PriceController returnPriceManager = (PriceController)deserializeObject("priceManager.ser");
 		if (returnPriceManager==null)
 		{
-			returnPriceManager = new PriceManager();
+			returnPriceManager = new PriceController();
 		}
 		return returnPriceManager;
 	}

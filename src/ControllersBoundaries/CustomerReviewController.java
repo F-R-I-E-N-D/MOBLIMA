@@ -6,6 +6,7 @@ public class CustomerReviewController implements IReviewAddable, IReviewViewable
 {
 	public void createReview(CineplexGroup cineplexGroup, int movieID, String review, int rating, String userID)
     {
+		System.out.println(movieID );
     	if (rating<=5 && rating>=1)
     	{
     		cineplexGroup.getMovieList().get(movieID).addReview(review, rating, userID);

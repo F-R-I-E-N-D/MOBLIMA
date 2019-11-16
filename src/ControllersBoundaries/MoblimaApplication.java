@@ -11,53 +11,53 @@ public class MoblimaApplication
 {	
 	public static void main(String []args) throws ParseException
 	{
-		FileManager fileManager = new FileManager(); 
+		FileController fileController = new FileController(); 
 		boolean reset = false;
 		
 		// ---------Loading---------//
 		System.out.println("----------------");
-		CineplexGroup cineplexGroup = fileManager.loadCineplexGroup();
-		LoginManager loginManager = fileManager.loadLoginManager();
-		PriceManager priceManager = fileManager.loadPriceManager();
+		CineplexGroup cineplexGroup = fileController.loadCineplexGroup();
+		LoginController loginController = fileController.loadLoginManager();
+		PriceController priceController = fileController.loadPriceManager();
 		System.out.println("----------------");
 		if (reset)
 		{
 			System.out.println("Data Reset");
 			cineplexGroup = new CineplexGroup();
-			loginManager = new LoginManager();
-			priceManager = new PriceManager();
+			loginController = new LoginController();
+			priceController = new PriceController();
 			System.out.println("----------------");
 		}
 		// ---------Loading---------//
 		
-		AdminManager adminManager = new AdminManager();
+		AdminController adminController = new AdminController();
 		
-		LoginInterface loginInterface = new LoginInterface();
+		LoginBoundary loginBoundary = new LoginBoundary();
 	
-		User userRecord = loginInterface.startInterface(loginManager);//chooseAction(loginManager);
+		User userRecord = loginBoundary.startInterface(loginController);//chooseAction(loginManager);
 		// userRecord.printWelcomeMessage()
 		
 		if (userRecord instanceof CustomerUser)
 		{
-			CustomerInterface customerInterface = new CustomerInterface();
+			CustomerBoundary customerInterface = new CustomerBoundary();
 			CustomerReviewController customerReviewController = new CustomerReviewController(); 
 			ReservationController reservationController = new ReservationController();			
-			customerInterface.startInterface(cineplexGroup, customerReviewController, reservationController, priceManager, (CustomerUser)userRecord);
+			customerInterface.startInterface(cineplexGroup, customerReviewController, reservationController, priceController, (CustomerUser)userRecord);
 		}
 		else if (userRecord instanceof EmployeeUser)
 		{
-			EmployeeInterface employeeInterface = new EmployeeInterface();
+			EmployeeBoundary employeeInterface = new EmployeeBoundary();
 			EmployeeReviewController employeeReviewController = new EmployeeReviewController();
 			
-			employeeInterface.startInterface(cineplexGroup, adminManager, employeeReviewController, priceManager);
+			employeeInterface.startInterface(cineplexGroup, adminController, employeeReviewController, priceController);
 		}
 		
 		
 		// ---------Saving---------//
 		System.out.println("----------------");
-		fileManager.serializeObject(cineplexGroup, "cineplexGroup.ser");
-		fileManager.serializeObject(loginManager, "loginManager.ser");
-		fileManager.serializeObject(priceManager, "priceManager.ser");
+		fileController.serializeObject(cineplexGroup, "cineplexGroup.ser");
+		fileController.serializeObject(loginController, "loginManager.ser");
+		fileController.serializeObject(priceController, "priceManager.ser");
 		System.out.println("----------------");
 		// ---------Saving---------//
 	}

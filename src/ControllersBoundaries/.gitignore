@@ -27,3 +27,10 @@
 /IReviewDeletable.class
 /IReviewViewable.class
 /ReservationController.class
+/AdminController.class
+/CustomerBoundary.class
+/LoginBoundary.class
+/LoginController.class
+/FileController.class
+/PriceController.class
+/UserBoundary.class

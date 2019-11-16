@@ -1,17 +1,19 @@
 package ControllersBoundaries;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Users.CustomerUser;
 import Users.EmployeeUser;
 
-public class LoginManager extends Manager{
+public class LoginController implements Serializable
+{
 	
 	private static final long serialVersionUID = 1L;
 	private ArrayList<CustomerUser> customerRecord;
 	private ArrayList<EmployeeUser> employeeRecord;
 	
-	public LoginManager() 
+	public LoginController() 
 	{
 		customerRecord = new ArrayList<CustomerUser>();
 		employeeRecord = new ArrayList<EmployeeUser>();
