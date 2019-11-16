@@ -2,7 +2,7 @@ package ControllersBoundaries;
 
 import CineplexClasses.CineplexGroup;
 
-public class CustomerReviewController 
+public class CustomerReviewController implements IReviewAddable, IReviewViewable
 {
 	public void createReview(CineplexGroup cineplexGroup, int movieID, String review, int rating, String userID)
     {

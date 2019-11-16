@@ -14,7 +14,7 @@ public class EmployeeInterface extends UserInterface
 {	
 	private static final long serialVersionUID = 1L;
 	
-	public void startInterface(CineplexGroup cineplex_group, AdminManager adminManager, ReservationReviewManager reservationReviewManager, PriceManager priceManager) throws ParseException 
+	public void startInterface(CineplexGroup cineplex_group, AdminManager adminManager, EmployeeReviewController employeeReviewController, PriceManager priceManager) throws ParseException 
 	{
 		int option = -1;
 		while (option!=5)
@@ -38,7 +38,7 @@ public class EmployeeInterface extends UserInterface
 					showOptions(cineplex_group, adminManager);
 					break;
 				case 3:
-					movieOptions(cineplex_group, adminManager, reservationReviewManager);
+					movieOptions(cineplex_group, adminManager, employeeReviewController);
 					break;
 				case 4:
 					priceOptions(priceManager);
@@ -71,28 +71,22 @@ public class EmployeeInterface extends UserInterface
 			{
 				case 1:
 					String name = getString("Enter Cineplex Name:");
-//					cineplex_group.addCineplexToList(name);
 					adminManager.addCineplexToList(cineplex_group, name);
+					printCinema(cineplex_group);
 					break;
 				case 2:
 					System.out.println("Cineplexes:\n");
-					for (Cineplex cplex : cineplex_group.getCineplexList())
-					{
-						System.out.println("\nCineplex Id=\t" + cplex.getCineplexId());
-						System.out.println("Cineplex Name=\t" + cplex.getCineplexName());
-					}
-					
-//					System.out.print("Enter Cineplex Id to delete:\t");
-//					cineplex_group.removeCineplexFromlist(sc.nextInt());
+					printCineplex(cineplex_group);
 					adminManager.removeCineplexFromlist(cineplex_group, getOnlyInteger("Enter Cineplex Id to delete:\t"));
+					printCinema(cineplex_group);
 					break;
 				case 3:
-					viewCineplexes(cineplex_group);
+					printCinema(cineplex_group);
 					break;
 					
 				case 4: 
 					System.out.println("Cineplexes & Cinemas:\n");
-					viewCineplexes(cineplex_group);
+					printCinema(cineplex_group);
 					int cplexID = getOnlyInteger("Enter Cineplex Id:\t");
 					String cinemaName = getString("Enter New Cinema Name:");
 					int num_rows = getOnlyInteger("Enter number of rows:\t");
@@ -108,17 +102,18 @@ public class EmployeeInterface extends UserInterface
 					
 //					cineplex_group.createCinema(cplexID, cinemaName, num_rows, column, ClassType.GOLD);	
 					adminManager.createCinema(cineplex_group, cplexID, cinemaName, num_rows, column, ClassType.values()[option2-1]);
+					printCinema(cineplex_group);
 					break;
 					
 				case 5:
 					System.out.println("Cineplexes & Cinemas:\n");
-					viewCineplexes(cineplex_group);
+					printCinema(cineplex_group);
 					int cplexId = getOnlyInteger("Enter Cineplex Id:\t");
 					int cinemaID = getOnlyInteger("Enter Cinema Id:\t");
 //					cineplex_group.removeCinema(cplexId, cinemaID);
 					adminManager.removeCinema(cineplex_group, cplexId, cinemaID);
+					printCinema(cineplex_group);
 					break;
-				
 			}
 		}
 		
@@ -146,19 +141,7 @@ public class EmployeeInterface extends UserInterface
 			switch (option)
 			{
 				case 1:
-					for (Cineplex cplex : cineplex_group.getCineplexList())
-					{
-						System.out.println("Cineplex Id=\t" + cplex.getCineplexId());
-						System.out.println("Cineplex Name=\t" + cplex.getCineplexName());
-						
-						for (Cinema cinema: cplex.getCinemaList())
-						{
-							System.out.println("\nCinema Id=\t" + cinema.getHallId());
-							System.out.println("Cinema Name=\t" + cinema.getName());
-						}
-						System.out.println();
-					}
-					System.out.println();
+					printCinema(cineplex_group);
 					
 					for (Movie m : cineplex_group.getMovieList())
 					{
@@ -172,7 +155,7 @@ public class EmployeeInterface extends UserInterface
 					movieID = getOnlyInteger("Enter Movie ID used:");
 					int time_start = getOnlyInteger("Enter Starting Time in HHHH Hours:");
 					int time_end = getOnlyInteger("Enter Ending Time in HHHH Hours:");
-					int choice = getOnlyInteger("(1) PUBLIC HOLIDAY (2) WEEKEND (Others) WEEKDAY");
+					int choice = getOnlyInteger("(1) PUBLIC HOLIDAY (2) WEEKEND (3) WEEKDAY", 1, 3);
 					
 					DayType daytype;
 					switch (choice)
@@ -193,64 +176,24 @@ public class EmployeeInterface extends UserInterface
 //		    		System.out.println(date);
 					
 					adminManager.createShow(cineplex_group, cineplexID, cinemaID, movieID, time_start, time_end, daytype, date);
+					printShow(cineplex_group);
 					break;
 				case 2:
-					for (Cineplex cplex : cineplex_group.getCineplexList())
-					{
-						System.out.println("\nCineplex ID: "+ cplex.getCineplexId());
-						System.out.println("Cineplex Name: "+ cplex.getCineplexName());
-						for (Show show : cplex.getShowList())
-						{
-							System.out.println("Show ID: " + show.getShowID());
-							System.out.println("Movie Name: " + show.getMovie().getTitle());
-							System.out.println("Cinema Name: " + show.getHall().getName());
-							System.out.println("Tickets Sold: " + show.getTicketsSold());
-							System.out.println("Start Timing" + show.getTime_start());
-							System.out.println("End Timing" + show.getTime_end());
-						}
-						System.out.println("");
-					}
+					printShow(cineplex_group);
 					
 					cineplexID = getOnlyInteger("Enter Cineplex ID to delete from:");
 					showID = getOnlyInteger("Enter show ID to delete:");
 					
 					adminManager.deleteShow(cineplex_group, cineplexID, showID);
+					printShow(cineplex_group);
 					break;
 				case 3:
 					
-					for (Cineplex cplex : cineplex_group.getCineplexList())
-					{
-						System.out.println("\nCineplex ID:\t"+ cplex.getCineplexId());
-						System.out.println("Cineplex Name:\t"+ cplex.getCineplexName());
-						for (Show show : cplex.getShowList())
-						{
-							System.out.println("\nShow ID:\t" + show.getShowID());
-							System.out.println("Movie Name:\t" + show.getMovie().getTitle());
-							System.out.println("Cinema Name:\t" + show.getHall().getName());
-							System.out.println("Start Timing:\t" + show.getTime_start());
-							System.out.println("End Timing:\t" + show.getTime_end());
-							System.out.println("Day Type:\t" + show.getDaytype());
-						}
-						System.out.println("==CINEPLEX END==");
-					}
-					
+					printShow(cineplex_group);
 					break;
 					
 				case 4:
-					for (Cineplex cplex : cineplex_group.getCineplexList())
-					{
-						System.out.println("\nCineplex ID:\t"+ cplex.getCineplexId());
-						System.out.println("Cineplex Name:\t"+ cplex.getCineplexName());
-						for (Show show : cplex.getShowList())
-						{
-							System.out.println("Show ID:\t" + show.getShowID());
-							System.out.println("Movie Name:\t" + show.getMovie().getTitle());
-							System.out.println("Cinema Name:\t" + show.getHall().getName());
-							System.out.println("Start Timing\t" + show.getTime_start());
-							System.out.println("End Timing\t" + show.getTime_end());
-						}
-						System.out.println("==CINEPLEX END==");
-					}
+					printShow(cineplex_group);
 					
 					cineplexID = getOnlyInteger("Enter Cineplex ID to view from:");
 					showID = getOnlyInteger("Enter show ID to view:");
@@ -260,7 +203,7 @@ public class EmployeeInterface extends UserInterface
 		}
 	}
 	
-	private void movieOptions(CineplexGroup cineplex_group, AdminManager adminManager, ReservationReviewManager reservationReviewManager) 
+	private void movieOptions(CineplexGroup cineplex_group, AdminManager adminManager, EmployeeReviewController employeeReviewController) 
 	{
 		int option = -1;
 		
@@ -316,6 +259,7 @@ public class EmployeeInterface extends UserInterface
 					
 //					cineplex_group.addMovieToList(title, synopsis, cast, director, genre, type);
 					adminManager.addMovieToList(cineplex_group, title, synopsis, cast, director, genre, type);
+					printMovie(cineplex_group);
 					break;
 				case 2:
 					for (Movie m : cineplex_group.getMovieList())
@@ -327,48 +271,24 @@ public class EmployeeInterface extends UserInterface
 					movieID = getOnlyInteger("Enter movieID to remove: ");
 //					cineplex_group.removeMovieFromlist(movieID);
 					adminManager.removeMovieFromlist(cineplex_group, movieID);
+					printMovie(cineplex_group);
 					break;
 				case 3:
-					for (Movie m : cineplex_group.getMovieList())
-					{
-						System.out.println("Movie ID:\t" + m.getMovieId());
-						System.out.println("Movie Name:\t"+ m.getTitle());
-						System.out.println("Movie Director:\t" + m.getDirector());
-						System.out.println("Movie Genre:\t"+ m.getGenre());
-						System.out.println("Tickets Sold:t" + m.getMovieSales());
-						System.out.println("Movie Type:\t"+ m.getType());
-						System.out.println("Movie Synopsis:\t" + m.getSynopsis());
-						printStringArray("Movie Cast:", m.getCast());
-						System.out.println("Average Rating:\t" + m.getAvgRating());
-					}
-					System.out.println("");
+					printMovie(cineplex_group);
 					break;
 					
 				case 4:
-					for (Movie m : cineplex_group.getMovieList())
-					{
-						System.out.println("\nMovie ID:\t" + m.getMovieId());
-						System.out.println("Movie Name:\t"+ m.getTitle());
-					}
-					
-					movieID = getOnlyInteger("Enter movieID to get reviews for: ");
-					for (MovieReview r: cineplex_group.getReviews(movieID))
-					{
-						System.out.println("Review ID:\t" + r.getReviewID());
-						System.out.println("Review: " + r.getReview());
-						System.out.println("Rating: " + r.getRating());
-					}
-
+					printReview(cineplex_group);
 					break;
 					
 				case 5:
-					
+					printReview(cineplex_group);
 					movieID = getOnlyInteger("Enter movieID to delete review");
 					int reviewID = getOnlyInteger("Enter reviewID to delete (-1 to cancel)");
 					
 //					cineplex_group.removeReview(movieID, reviewID);
-					reservationReviewManager.removeReview(cineplex_group, movieID, reviewID);
-					
+					employeeReviewController.removeReview(cineplex_group, movieID, reviewID);
+					printReview(cineplex_group);
 					break;
 			}
 		}
@@ -448,8 +368,16 @@ public class EmployeeInterface extends UserInterface
 	    
 	}
 	
-	private void viewCineplexes (CineplexGroup cineplex_group)
+	private void printCineplex (CineplexGroup cineplex_group)
 	{
+		for (Cineplex cplex : cineplex_group.getCineplexList())
+		{
+			System.out.println("Cineplex Id=\t" + cplex.getCineplexId());
+			System.out.println("Cineplex Name=\t" + cplex.getCineplexName());
+		}
+	}
+	
+	public void printCinema(CineplexGroup cineplex_group) {
 		for (Cineplex cplex : cineplex_group.getCineplexList())
 		{
 			System.out.println("Cineplex Id=\t" + cplex.getCineplexId());
@@ -457,14 +385,70 @@ public class EmployeeInterface extends UserInterface
 			
 			for (Cinema cinema: cplex.getCinemaList())
 			{
-				System.out.println("\nCinema Id=\t" + cinema.getHallId());
-				System.out.println("Cinema Name=\t" + cinema.getName());
-				System.out.println("Cinema Class=\t" + cinema.getClasstype());
-				System.out.println("Cinema Rows=\t" + cinema.getNumRows());
-				System.out.println("Cinema Lanes=\t" + Arrays.toString(cinema.getColumn()));
+				System.out.println("\n\tCinema Id=\t" + cinema.getHallId());
+				System.out.println("\tCinema Name=\t" + cinema.getName());
+				System.out.println("\tCinema Class:\t" + cinema.getClasstype());
+				System.out.println("\tCinema Rows=\t" + cinema.getNumRows());
+				System.out.println("\tCinema Lanes=\t" + Arrays.toString(cinema.getColumn()));
+				
+				System.out.println(".........................................");
 			}
-			System.out.println("\n-------\n");
+			System.out.println("\n-----------------------------------------------------------------\n");
 		}
 	}
 	
+	public void printShow(CineplexGroup cineplex_group) {
+		for (Cineplex cplex : cineplex_group.getCineplexList())
+		{
+			System.out.println("\nCineplex ID:\t"+ cplex.getCineplexId());
+			System.out.println("Cineplex Name:\t"+ cplex.getCineplexName());
+			for (Show show : cplex.getShowList())
+			{
+				System.out.println("\n\tShow ID:\t" + show.getShowID());
+				System.out.println("\tMovie Name:\t" + show.getMovie().getTitle());
+				System.out.println("\tCinema Name:\t" + show.getHall().getName());
+				System.out.println("\tCinema Class:\t" + show.getHall().getClasstype());
+				System.out.println("\tStart Timing\t" + show.getTime_start());
+				System.out.println("\tEnd Timing\t" + show.getTime_end());
+				System.out.println("\tTickets Sold\t" + show.getTicketsSold());
+				System.out.println("...........................................");
+			}
+			System.out.println("\n-----------------------------------------------------------------\n");
+		}
+		
+	}
+	
+	public void printMovie(CineplexGroup cineplex_group){
+		for (Movie m : cineplex_group.getMovieList())
+		{
+			System.out.println("Movie ID:\t" + m.getMovieId());
+			System.out.println("Movie Name:\t"+ m.getTitle());
+			System.out.println("Movie Director:\t" + m.getDirector());
+			System.out.println("Movie Genre:\t"+ m.getGenre());
+			System.out.println("Movie Type:\t"+ m.getType());
+			System.out.println("Movie Synopsis:\t" + m.getSynopsis());
+			printStringArray("Movie Cast:\t", m.getCast());
+			System.out.println("Average Rating:\t" + m.getAvgRating());
+			System.out.println("Movie Showing Status:\t"+ m.getShowingStatus());
+			System.out.println("Total Tickets sold: \t" + m.getMovieSales());
+			System.out.println("...........................................");
+		}
+		
+	}
+	public void printReview(CineplexGroup cineplex_group){
+		for (Movie m : cineplex_group.getMovieList())
+		{
+			System.out.println("\nMovie ID:\t" + m.getMovieId());
+			System.out.println("Movie Name:\t"+ m.getTitle());
+			
+			for (MovieReview r: m.getMovieReviewAndRatingList())
+			{
+				System.out.println("\n\tReview ID:" + r.getReviewID());
+				System.out.println("\tReview: " + r.getReview());
+				System.out.println("\tRating: " + r.getRating());
+				System.out.println("...........................................");
+			}
+			System.out.println("---------------------------------------------------");
+		}
+	}
 }

@@ -18,7 +18,7 @@ public class CustomerInterface extends UserInterface {
 
 	private static final long serialVersionUID = 1L;
 	
-    public void startInterface(CineplexGroup cineplex_group, ReservationReviewManager reservationReviewManager, PriceManager priceManager, CustomerUser customer) throws ParseException 
+    public void startInterface(CineplexGroup cineplex_group, CustomerReviewController customerReviewController, ReservationController reservationController, PriceManager priceManager, CustomerUser customer) throws ParseException 
     {  
 
         int option = -1;
@@ -36,13 +36,13 @@ public class CustomerInterface extends UserInterface {
             {
                 case 1: 
                 {
-                    viewMovies(cineplex_group, reservationReviewManager, customer);
+                    viewMovies(cineplex_group, customerReviewController, customer);
                     break;
                 }
 
                 case 2: 
                 {
-                    buyTicket(cineplex_group, reservationReviewManager, priceManager, customer);
+                    buyTicket(cineplex_group, reservationController, priceManager, customer);
                     break;
                 }
 
@@ -73,7 +73,7 @@ public class CustomerInterface extends UserInterface {
 	}
 
 	// viewMovies method
-    public void viewMovies(CineplexGroup cineplex_group, ReservationReviewManager reservationReviewManager, CustomerUser customer) 
+    public void viewMovies(CineplexGroup cineplex_group, CustomerReviewController customerReviewController, CustomerUser customer) 
     {
         int option2 = -1;
 //        System.out.println("we are in "+ cineplex_group.getCineplexList().get(0).getCineplexName());
@@ -181,7 +181,7 @@ public class CustomerInterface extends UserInterface {
                     {
                     	rating  = getOnlyInteger("Enter rating from 1 to 5");
                     }
-                    reservationReviewManager.createReview(cineplex_group, movieID, getString("Enter Review: "), rating, customer.getUsername());
+                    customerReviewController.createReview(cineplex_group, movieID, getString("Enter Review: "), rating, customer.getUsername());
                     
                 }
             }
@@ -189,7 +189,7 @@ public class CustomerInterface extends UserInterface {
     }
 
     //buyTicket method
-    public void buyTicket(CineplexGroup cineplex_group, ReservationReviewManager reservationReviewManager, PriceManager priceManager, CustomerUser customer) throws ParseException 
+    public void buyTicket(CineplexGroup cineplex_group, ReservationController reservationController, PriceManager priceManager, CustomerUser customer) throws ParseException 
     {
         System.out.println("------------------------------------------------");
         System.out.println("Cineplexes:");
@@ -252,7 +252,7 @@ public class CustomerInterface extends UserInterface {
             sum+=price;
             System.out.println("Price Charged:\t$" + (price));
             
-            reservationReviewManager.createReservation(cineplex_group, cineplexID, customer.getUsername(), showID, row, lane, seat, price);
+            reservationController.createReservation(cineplex_group, cineplexID, customer.getUsername(), showID, row, lane, seat, price);
         }
         
         cineplex_group.getShowList(cineplexID).get(showID).addTicketsSold(numOfSeats);

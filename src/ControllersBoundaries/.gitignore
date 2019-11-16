@@ -21,3 +21,9 @@
 /FileManager.class
 /MoblimaApplication.class
 /ReservationReviewManager.class
+/CustomerReviewController.class
+/EmployeeReviewController.class
+/IReviewAddable.class
+/IReviewDeletable.class
+/IReviewViewable.class
+/ReservationController.class

@@ -174,11 +174,7 @@ public class LoginInterface extends UserInterface{
 			{
 				System.out.println("("+(i++)+")"+customerType);
 			}
-			int sel_type = 0;
-			while (sel_type<1 || sel_type>CustomerUser.CustomerType.values().length)
-			{
-				sel_type = getOnlyInteger("Option: ");
-			}
+			int sel_type =  getOnlyInteger("Option: ", 1, CustomerUser.CustomerType.values().length);
 			
 			CustomerUser custUser = new CustomerUser(username, password, name, CustomerUser.CustomerType.values()[sel_type-1]);
 			loginM.addNewCustomer(custUser);
