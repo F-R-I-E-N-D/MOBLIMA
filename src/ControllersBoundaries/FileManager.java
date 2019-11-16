@@ -8,15 +8,30 @@ public class FileManager
 {
 	public CineplexGroup loadCineplexGroup()
 	{
-		return (CineplexGroup)deserializeObject("cineplexGroup.ser");
+		CineplexGroup returnCineplexGroup = (CineplexGroup)deserializeObject("cineplexGroup.ser");
+		if (returnCineplexGroup==null)
+		{
+			returnCineplexGroup = new CineplexGroup();
+		}
+		return returnCineplexGroup;
 	}
 	public LoginManager loadLoginManager ()
 	{
-		return (LoginManager)deserializeObject("loginManager.ser");
+		LoginManager returnLoginManager =  (LoginManager)deserializeObject("loginManager.ser");
+		if (returnLoginManager==null)
+		{
+			returnLoginManager = new LoginManager();
+		}
+		return returnLoginManager;
 	}
 	public PriceManager loadPriceManager ()
 	{
-		return (PriceManager)deserializeObject("priceManager.ser");
+		PriceManager returnPriceManager = (PriceManager)deserializeObject("priceManager.ser");
+		if (returnPriceManager==null)
+		{
+			returnPriceManager = new PriceManager();
+		}
+		return returnPriceManager;
 	}
 	
 	public void serializeObject(Object objectToBeSaved, String filename) 

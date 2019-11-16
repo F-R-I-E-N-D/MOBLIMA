@@ -121,7 +121,7 @@ public class LoginInterface extends UserInterface{
 		}
 		else if(option==2) 
 		{
-			ID = getOnlyInteger("Enter Employee ID:");
+			ID = getOnlyInteger("Enter Employee ID (numeric):");
 			password = getString("Enter Password: ");
 			EmployeeUser verified = loginM.verifyExistingEmployee(ID, password);
 			

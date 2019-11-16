@@ -14,7 +14,7 @@ public class EmployeeInterface extends UserInterface
 {	
 	private static final long serialVersionUID = 1L;
 	
-	public void startInterface(CineplexGroup cineplex_group, AdminManager adminManager, EmployeeReviewController employeeReviewController, PriceManager priceManager) throws ParseException 
+	public void startInterface(CineplexGroup cineplex_group, AdminManager adminManager, EmployeeReviewController employeeReviewController, PriceManager priceManager)
 	{
 		int option = -1;
 		while (option!=5)
@@ -22,7 +22,7 @@ public class EmployeeInterface extends UserInterface
 			System.out.println("------------------------------------------------");
 			System.out.println("Welcome, Administrator\nWhat would you like to do?\n");
 			System.out.println("1.\tCineplex Options");
-			System.out.println("2.\tMovie-Show Options");
+			System.out.println("2.\tShow Options");
 			System.out.println("3.\tMovie Options");
 			System.out.println("4.\tConfigure Price Settings");
 			System.out.println("5.\tQuit");
@@ -118,21 +118,21 @@ public class EmployeeInterface extends UserInterface
 					System.out.println("4.\tClass Type");
 					System.out.println("5.\t(No updates, Back)");
 					
-					option2 = getOnlyInteger("Option 1-4:",1 , 5);
+					option2 = getOnlyInteger("Option 1-5:",1 , 5);
 					
 					switch (option2)
 					{
 						case 1:
 							String new_name = getString("Enter new name:");
-							cineplex_group.getCineplexList().get(cplexID).getCinemaList().get(cinemaID)	.setName(new_name);					
+							adminManager.updateCinemaName(cineplex_group, new_name, cplexID, cinemaID);					
 							break;
 						case 2:
 							num_rows = getOnlyInteger("Enter new number of rows:");
-							cineplex_group.getCineplexList().get(cplexID).getCinemaList().get(cinemaID).setNumRows(num_rows);					
+							adminManager.updateCinemaRows(cineplex_group, num_rows, cplexID, cinemaID);					
 							break;
 						case 3:
 							column = getIntegerArray("Enter new seats Per Lane");
-							cineplex_group.getCineplexList().get(cplexID).getCinemaList().get(cinemaID).setColumn(column);					
+							adminManager.updateCinemaSeatsPerLane(cineplex_group, column, cplexID, cinemaID);				
 							break;
 						case 4:
 							i = 1;
@@ -142,7 +142,7 @@ public class EmployeeInterface extends UserInterface
 							}
 							int option3 = getOnlyInteger("Class Type:\t", 1, ClassType.values().length);
 							
-							cineplex_group.getCineplexList().get(cplexID).getCinemaList().get(cinemaID).setClasstype(Cinema.ClassType.values()[option3-1]);			
+							adminManager.updateCinemaClassType(cineplex_group, option3, cplexID, cinemaID);			
 							break;
 						
 					}
@@ -164,11 +164,11 @@ public class EmployeeInterface extends UserInterface
 		
 	}
 	
-	private void showOptions(CineplexGroup cineplex_group, AdminManager adminManager) throws ParseException 
+	private void showOptions(CineplexGroup cineplex_group, AdminManager adminManager)
 	{	
 		int option = -1;
 		
-		while (option!=5)
+		while (option!=6)
 		{
 			System.out.println("------------------------------------------------");
 			System.out.println("Show Options:\n");
@@ -176,9 +176,10 @@ public class EmployeeInterface extends UserInterface
 			System.out.println("2.\tRemove Show");
 			System.out.println("3.\tView Shows");
 			System.out.println("4.\tView Show Seats");
-			System.out.println("5.\tBack to Admin Menu");
+			System.out.println("5.\tUpdate Show");
+			System.out.println("6.\tBack to Admin Menu");
 			
-			option = getOnlyInteger("Option: ");
+			option = getOnlyInteger("Option: ",1,6);
 			System.out.println("==========================");
 			
 			int cineplexID, cinemaID,  movieID, showID;
@@ -187,10 +188,10 @@ public class EmployeeInterface extends UserInterface
 			{
 				case 1:
 					printCinema(cineplex_group);
-					
+					int i=0;
 					for (Movie m : cineplex_group.getMovieList())
 					{
-						System.out.println("Movie ID: "+ m.getMovieId());
+						System.out.println("Movie ID: "+ (i++));
 						System.out.println("Movie Name: "+ m.getTitle());
 					}
 					System.out.println();
@@ -217,7 +218,19 @@ public class EmployeeInterface extends UserInterface
 					}
 					
 					Date date =  new Date();
-		    		date = new SimpleDateFormat("dd/MM/yyyy").parse(getString("Enter date DD/MM/YYYY"));  
+					while (true)
+					{
+						try
+						{
+				    		date = new SimpleDateFormat("dd/MM/yyyy").parse(getString("Enter date DD/MM/YYYY"));  
+				    		break;
+						}
+						catch (ParseException e)
+						{
+							System.out.println("Wrong date format");
+							continue;
+						}
+					}
 //		    		System.out.println(date);
 					
 					adminManager.createShow(cineplex_group, cineplexID, cinemaID, movieID, time_start, time_end, daytype, date);
@@ -245,6 +258,52 @@ public class EmployeeInterface extends UserInterface
 					showID = getOnlyInteger("Enter show ID to view:");
 					adminManager.printShowLayout(cineplex_group, cineplexID, showID);
 					break;
+				case 5:
+					System.out.println("\nShows:\n");
+					printShow(cineplex_group);
+					cineplexID = getOnlyInteger("Enter Cineplex ID to add to:",0,cineplex_group.getCineplexList().size()-1);
+					showID = getOnlyInteger("Enter Show ID used:",0,cineplex_group.getShowList(cineplexID).size()-1);
+					
+					cinemaID = cineplex_group.getShowList(cineplexID).get(showID).getHall().getHallId();
+
+					System.out.println("Update:\n");
+					System.out.println("1.\tStart time");
+					System.out.println("2.\tEnd time");
+					System.out.println("3.\tDate");
+					System.out.println("4.\t(No updates, Back)");
+					
+					int option2 = getOnlyInteger("Option 1-4:",1 , 4);
+					
+					switch (option2)
+					{
+						case 1:
+							int tstart = getOnlyInteger("Enter Starting Time in HHHH Hours:");
+							adminManager.updateShowStartTime(cineplex_group, cineplexID, cinemaID, showID, tstart);
+							break;
+						case 2:
+							int tend = getOnlyInteger("Enter Ending Time in HHHH Hours:");
+							adminManager.updateShowEndTime(cineplex_group, cineplexID, cinemaID, showID, tend);
+							break;
+						case 3:
+							Date datenew =  new Date();
+							while (true)
+							{
+								try
+								{
+						    		datenew = new SimpleDateFormat("dd/MM/yyyy").parse(getString("Enter date DD/MM/YYYY"));  
+						    		break;
+								}
+								catch (ParseException e)
+								{
+									System.out.println("Wrong date format");
+									continue;
+								}
+							}
+							adminManager.updateShowDate(cineplex_group, cineplexID, cinemaID, showID, datenew);
+					}
+					System.out.println("Show has been Updated");
+					printShow(cineplex_group);
+					break;
 			}
 		}
 	}
@@ -253,7 +312,7 @@ public class EmployeeInterface extends UserInterface
 	{
 		int option = -1;
 		
-		while (option!=6)
+		while (option!=9)
 		{
 			System.out.println("------------------------------------------------");
 			System.out.println("Movie Options:\n");
@@ -262,9 +321,12 @@ public class EmployeeInterface extends UserInterface
 			System.out.println("3.\tView Movies");
 			System.out.println("4.\tView Movie Reviews");
 			System.out.println("5.\tRemove Movie Reviews");
-			System.out.println("6.\tBack to Admin Menu");
+			System.out.println("6.\tView Top Movies by Ratings");
+			System.out.println("7.\tView Top Movies by Tickets Sold");
+			System.out.println("8.\tUpdate Movie");
+			System.out.println("9.\tBack to Admin Menu");
 			
-			option = getOnlyInteger("Option: ");
+			option = getOnlyInteger("Option: ", 1, 9);
 			System.out.println("==========================");
 			
 			String title, synopsis,  director;
@@ -308,12 +370,7 @@ public class EmployeeInterface extends UserInterface
 					printMovie(cineplex_group);
 					break;
 				case 2:
-					for (Movie m : cineplex_group.getMovieList())
-					{
-						System.out.println("\nMovie ID:\t" + m.getMovieId());
-						System.out.println("Movie Name:\t"+ m.getTitle());
-					}
-					
+					printMovie(cineplex_group);
 					movieID = getOnlyInteger("Enter movieID to remove: ");
 //					adminManager.removeMovieFromlist(cineplex_group, movxieID);
 					cineplex_group.getMovieList().get(movieID).setShowingStatus(Movie.ShowingStatus.DISCONTINUED);
@@ -335,6 +392,91 @@ public class EmployeeInterface extends UserInterface
 //					cineplex_group.removeReview(movieID, reviewID);
 					employeeReviewController.removeReview(cineplex_group, movieID, reviewID);
 					printReview(cineplex_group);
+					break;
+				case 6:
+					printTop5Ratings(cineplex_group.getMovieList());
+					break;
+				case 7:
+					printTop5Sales(cineplex_group.getMovieList());
+					break;
+				case 8:
+					printMovie(cineplex_group);
+					movieID = getOnlyInteger("Enter movieID to Update: ");
+					
+					System.out.println("Update:\n");
+					System.out.println("1.\tTitle");
+					System.out.println("2.\tSynopsis");
+					System.out.println("3.\tCast");
+					System.out.println("4.\tDirector");
+					System.out.println("5.\tGenre");
+					System.out.println("6.\tType");
+					System.out.println("7.\tShowing Status");
+					System.out.println("8.\t(No updates, Back)");
+					
+					int option2 = getOnlyInteger("Option 1-8:",1 , 8);
+					
+					switch(option2) {
+						case 1:
+							title = getString("Enter Movie Title: ");
+							adminManager.updateMovieTitle(cineplex_group, movieID, title);
+							break;
+						case 2: 
+							synopsis = getString("Enter Movie Synopsis: ");
+							adminManager.updateMovieSynopsis(cineplex_group, movieID, synopsis);
+							break;
+						case 3: 
+							director = getString("Enter Movie Director: ");
+							adminManager.updateMovieDirector(cineplex_group, movieID, director);
+							break;
+						case 4: 
+							cast = getString("Enter Movie Cast (Seperated by commas): ").split(",");
+							adminManager.updateMovieCast(cineplex_group, movieID, cast);
+							break;
+						case 5: 
+							i = 1;
+							for (Genre genrenew : Genre.values())
+							{
+								System.out.println("("+(i++)+")" + genrenew.name());
+							}
+			
+							option1 = getOnlyInteger("Enter Genre: (out of range will default to 1)");
+							if (option1>Genre.values().length)
+								option1 = 1;
+							
+							Genre genrenew = Genre.values()[option1-1];
+							adminManager.updateMovieGenre(cineplex_group, movieID, genrenew);
+							break;
+						case 6:
+							i = 1;
+							for (Movie.Type typenew : Movie.Type.values())
+							{
+								System.out.println("("+(i++)+")" + typenew.name());
+							}
+			
+							option1 = getOnlyInteger("Enter Movie Type: (out of range will default to 1)");
+							if (option1>Movie.Type.values().length)
+								option1 = 1;
+							
+							Movie.Type typenew = Movie.Type.values()[option1-1];
+							adminManager.updateMovieType(cineplex_group, movieID, typenew);
+							break;
+						case 7:
+							i = 1;
+							for (Movie.ShowingStatus status : Movie.ShowingStatus.values())
+							{
+								System.out.println("("+(i++)+")" + status.name());
+							}
+			
+							option1 = getOnlyInteger("Enter Movie Showing Status: (out of range will default to 1)");
+							if (option1>Movie.ShowingStatus.values().length)
+								option1 = 1;
+							
+							Movie.ShowingStatus status = Movie.ShowingStatus.values()[option1-1];
+							adminManager.updateMovieShowingStatus(cineplex_group, movieID, status);
+							break;
+					}
+					System.out.println("Movie Updated");
+					printMovie(cineplex_group);
 					break;
 			}
 		}
@@ -367,8 +509,8 @@ public class EmployeeInterface extends UserInterface
 	{
 		printPrices(priceManager);
 	    
-	    int option = getOnlyInteger("Price to change: ", 1, 12);
-	    double price_set = getOnlyDouble("Price set: ", 1, 12);
+	    int option = getOnlyInteger("Price Option to change: ", 1, 12);
+	    double price_set = getOnlyDouble("Price set: ", 0, 12);
 	    switch (option)
 	    {
 		    case 1: priceManager.setStudentMarkdown(price_set); break;

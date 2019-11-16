@@ -80,6 +80,7 @@ public class PriceManager implements Serializable{
                 calculatePrice += blockbusterMarkup + threeDMarkup;
                 break;
         }
+
         return calculatePrice;
     }
 

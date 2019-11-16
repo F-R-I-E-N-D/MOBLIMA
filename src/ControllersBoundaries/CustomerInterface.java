@@ -109,35 +109,12 @@ public class CustomerInterface extends UserInterface {
                 }
                 case 4: 
                 {
-                	System.out.println("Top Movies by Ratings are: \n");
-                	movieList.sort(Comparator.comparing(Movie::getAvgRating).reversed());
-                    int i;
-                    int max =5;
-                    if(movieList.size() <= 5 ) {
-                    	max = movieList.size();
-                    }
-                    for (i = 0; i < max; i++) {
-                    	if (movieList.get(i).getAvgRating()!=-1.0)
-                    	{
-	                        System.out.println((i+1) + ".\t" + movieList.get(i).getTitle());
-	                        System.out.println("Rating:\t" + movieList.get(i).getAvgRating()+"\n");
-                    	}
-                    }
+                	printTop5Ratings(movieList);
                     break;
                 }
                 case 5: 
                 {
-                	System.out.println("Top Movies by Ticket Sales are:\n");
-                	movieList.sort(Comparator.comparing(Movie::getMovieSales).reversed());
-                    int i;
-                    int max =5;
-                    if(movieList.size() <= 5 ) {
-                    	max = movieList.size();
-                    }
-                    for (i = 0; i < max; i++) {
-                        System.out.println((i+1) + ".\t" + movieList.get(i).getTitle());
-                        System.out.println("Sales:\t" + movieList.get(i).getMovieSales() + "\n");
-                    }
+                	printTop5Sales(movieList);
                     break;
                 }
 
@@ -168,10 +145,11 @@ public class CustomerInterface extends UserInterface {
             case 2:
             	for (Movie m: cineplex_group.getMovieList())
             	{
-            		
-            		System.out.println("\nMovie ID:\t" + m.getMovieId());
-            		System.out.println("Movie Name:\t" + m.getTitle());
-            		
+            		if (m.getShowingStatus()==Movie.ShowingStatus.NOW_SHOWING)
+            		{
+	            		System.out.println("\nMovie ID:\t" + m.getMovieId());
+	            		System.out.println("Movie Name:\t" + m.getTitle());
+            		}
             	}
             	
             	int movieID = getOnlyInteger("Movie ID to add review: ");
@@ -205,18 +183,15 @@ public class CustomerInterface extends UserInterface {
         showChoice.printLayout();
 
         System.out.println("------------------------------------------------");
-        System.out.println("Please enter number of tickets:");
-        int numOfSeats = sc.nextInt();
+        int numOfSeats = getOnlyInteger("Please enter number of tickets:", 1, 10);
         int i;
         double sum = 0;
         for (i = 0; i < numOfSeats; i++) {
             System.out.println("Ticket " + (i + 1));
             System.out.println("Please enter row letter:");
             char row = sc.next().charAt(0);
-            System.out.println("Please enter lane:");
-            int lane = sc.nextInt();
-            System.out.println("Please enter seat:");
-            int seat = sc.nextInt();
+            int lane = getOnlyInteger("Please enter lane:");
+            int seat = getOnlyInteger("Please enter seat:");
 
             
             double price = priceManager.getPrice(cineplex_group.getShowList(cineplexID).get(showID).getDaytype(), 
@@ -226,7 +201,7 @@ public class CustomerInterface extends UserInterface {
             sum+=price;
             System.out.println("Price Charged:\t$" + (price));
             
-            if (reservationController.createReservation(cineplex_group, cineplexID, customer.getUsername(), showID, row, lane, seat, price))
+            if (!reservationController.createReservation(cineplex_group, cineplexID, customer.getUsername(), showID, row, lane, seat, price))
             {
             	sum-=price;
             	i--;

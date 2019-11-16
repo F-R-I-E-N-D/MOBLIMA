@@ -95,6 +95,62 @@ public class AdminManager extends Manager implements Serializable
         	System.out.println("Invalid MovieID");
     }   
     
+    public void updateCinemaName(CineplexGroup cineplexGroup, String name, int cplexID, int cinemaID) {
+		cineplexGroup.getCineplexList().get(cplexID).getCinemaList().get(cinemaID).setName(name);
+	}
+	public void updateCinemaRows(CineplexGroup cineplexGroup,int rows, int cplexID, int cinemaID) {
+		cineplexGroup.getCineplexList().get(cplexID).getCinemaList().get(cinemaID).setNumRows(rows);
+	}
+	public void updateCinemaSeatsPerLane(CineplexGroup cineplexGroup,int[] seats, int cplexID, int cinemaID) {
+		cineplexGroup.getCineplexList().get(cplexID).getCinemaList().get(cinemaID).setColumn(seats);
+	}
+	public void updateCinemaClassType(CineplexGroup cineplexGroup,int option, int cplexID, int cinemaID) {
+		cineplexGroup.getCineplexList().get(cplexID).getCinemaList().get(cinemaID).setClasstype(Cinema.ClassType.values()[option-1]);
+	}
+	public void updateShowHall(CineplexGroup cineplexGroup, int cineplexID, int cinemaID, int showID) {
+		Cinema new_hall = cineplexGroup.getCineplexList().get(cineplexID).getCinemaList().get(cinemaID);
+		cineplexGroup.getCineplexList().get(cineplexID).getShowList().get(showID).changeHall(new_hall);
+	}
+	public void updateShowStartTime(CineplexGroup cineplexGroup, int cineplexID, int cinemaID, int showID, int time_start) {
+		cineplexGroup.getCineplexList().get(cineplexID).getShowList().get(showID).setTime_start(time_start);
+	}
+	public void updateShowEndTime(CineplexGroup cineplexGroup, int cineplexID, int cinemaID, int showID, int time_end) {
+		cineplexGroup.getCineplexList().get(cineplexID).getShowList().get(showID).setTime_end(time_end);
+	}
+	public void updateShowDayType(CineplexGroup cineplexGroup, int cineplexID, int cinemaID, int showID, int option) {
+		cineplexGroup.getCineplexList().get(cineplexID).getShowList().get(showID).setDaytype(Show.DayType.values()[option-1]);
+	}
+	public void updateShowDate(CineplexGroup cineplexGroup, int cineplexID, int cinemaID, int showID, Date show_date) {
+		cineplexGroup.getCineplexList().get(cineplexID).getShowList().get(showID).setShow_date(show_date);
+	}
+
+    public void updateMovieTitle(CineplexGroup cineplexGroup,int movieID, String title) {
+        cineplexGroup.getMovieList().get(movieID).setTitle(title);
+    }
+
+    public void updateMovieShowingStatus(CineplexGroup cineplexGroup,int movieID,Movie.ShowingStatus showingStatus) {
+    	cineplexGroup.getMovieList().get(movieID).setShowingStatus(showingStatus);
+    }
+
+    public void updateMovieSynopsis(CineplexGroup cineplexGroup,int movieID,String synopsis) {
+    	cineplexGroup.getMovieList().get(movieID).setSynopsis(synopsis);
+    }
+    
+    public void updateMovieDirector(CineplexGroup cineplexGroup,int movieID,String director) {
+    	cineplexGroup.getMovieList().get(movieID).setDirector(director);
+    }
+
+    public void updateMovieCast(CineplexGroup cineplexGroup,int movieID,String[] cast) {
+    	cineplexGroup.getMovieList().get(movieID).setCast(cast);
+    }
+
+    public void updateMovieType(CineplexGroup cineplexGroup,int movieID, Movie.Type type) {
+    	cineplexGroup.getMovieList().get(movieID).setType(type);
+    }
+
+    public void updateMovieGenre(CineplexGroup cineplexGroup,int movieID,Movie.Genre genre) {
+    	cineplexGroup.getMovieList().get(movieID).setGenre(genre);
+    }
     
 }
 

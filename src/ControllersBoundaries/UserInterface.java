@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 import CineplexClasses.Cinema;
 import CineplexClasses.Cineplex;
@@ -121,7 +122,7 @@ public abstract class UserInterface implements Serializable{
 	
 	public void printStringArray(String message, String [] array)
 	{
-		System.out.println(message);
+		System.out.print(message + "\n\t");
 		for (String s : array)
 		{
 			System.out.print(s + ", ");
@@ -143,29 +144,32 @@ public abstract class UserInterface implements Serializable{
 	    System.out.println("9\tgoldClassMarkup:\t"+priceManager.getGoldClassMarkup());
 	    System.out.println("10\tdeluxeClassMarkup:\t"+priceManager.getDeluxeClassMarkup());
 	    System.out.println("11\tgeminiClassMarkup:\t"+priceManager.getGeminiClassMarkup());
-	    System.out.println("12\tmaxClassMarkup:\t" + priceManager.getMaxClassMarkup());
+	    System.out.println("12\tmaxClassMarkup:\t\t" + priceManager.getMaxClassMarkup());
 	    
 	    
 	}
 	
 	public void printCineplex (CineplexGroup cineplex_group)
 	{
+		int i=0;
 		for (Cineplex cplex : cineplex_group.getCineplexList())
 		{
-			System.out.println("Cineplex Id=\t" + cplex.getCineplexId());
+			System.out.println("Cineplex Id=\t" + (i++));
 			System.out.println("Cineplex Name=\t" + cplex.getCineplexName());
 		}
 	}
 	
 	public void printCinema(CineplexGroup cineplex_group) {
+		int i=0;
 		for (Cineplex cplex : cineplex_group.getCineplexList())
 		{
-			System.out.println("Cineplex Id=\t" + cplex.getCineplexId());
+			System.out.println("Cineplex Id=\t" + (i++));
 			System.out.println("Cineplex Name=\t" + cplex.getCineplexName());
 			
+			int j=0;
 			for (Cinema cinema: cplex.getCinemaList())
 			{
-				System.out.println("\n\tCinema Id=\t" + cinema.getHallId());
+				System.out.println("\n\tCinema Id=\t" + (j++));
 				System.out.println("\tCinema Name=\t" + cinema.getName());
 				System.out.println("\tCinema Class:\t" + cinema.getClasstype());
 				System.out.println("\tCinema Rows=\t" + cinema.getNumRows());
@@ -178,16 +182,19 @@ public abstract class UserInterface implements Serializable{
 	}
 	
 	public void printShow(CineplexGroup cineplex_group) {
+		int i=0;
 		for (Cineplex cplex : cineplex_group.getCineplexList())
 		{
-			System.out.println("\nCineplex ID:\t"+ cplex.getCineplexId());
+			System.out.println("\nCineplex ID:\t"+ (i++));
 			System.out.println("Cineplex Name:\t"+ cplex.getCineplexName());
+			int j=0;
 			for (Show show : cplex.getShowList())
 			{
-				System.out.println("\n\tShow ID:\t" + show.getShowID());
-				System.out.println("\tMovie Name:\t" + show.getMovie().getTitle());
-				System.out.println("\tCinema Name:\t" + show.getHall().getName());
-				System.out.println("\tCinema Class:\t" + show.getHall().getClasstype());
+				System.out.println("\n\tShow ID\t" + (j++));
+				System.out.println("\tMovie Name\t" + show.getMovie().getTitle());
+				System.out.println("\tCinema Name\t" + show.getHall().getName());
+				System.out.println("\tCinema Class\t" + show.getHall().getClasstype());
+				System.out.println("\tShow Date\t" + show.getShow_date());
 				System.out.println("\tStart Timing\t" + show.getTime_start());
 				System.out.println("\tEnd Timing\t" + show.getTime_end());
 				System.out.println("\tTickets Sold\t" + show.getTicketsSold());
@@ -199,35 +206,38 @@ public abstract class UserInterface implements Serializable{
 	}
 	
 	public void printMovie(CineplexGroup cineplex_group){
+		int i =0;
 		for (Movie m : cineplex_group.getMovieList())
 		{
-			System.out.println("Movie ID:\t" + m.getMovieId());
+			System.out.println("Movie ID:\t" + (i++));
 			System.out.println("Movie Name:\t"+ m.getTitle());
 			System.out.println("Movie Director:\t" + m.getDirector());
 			System.out.println("Movie Genre:\t"+ m.getGenre());
 			System.out.println("Movie Type:\t"+ m.getType());
 			System.out.println("Movie Synopsis:\t" + m.getSynopsis());
 			printStringArray("Movie Cast:\t", m.getCast());
-			System.out.println("Average Rating:\t" + m.getAvgRating());
+			System.out.printf("Average Rating:\t%.2f\n" ,m.getAvgRating());
 			System.out.println("Movie Showing Status:\t"+ m.getShowingStatus());
 			System.out.println("Total Tickets sold: \t" + m.getMovieSales());
 			System.out.println("...........................................");
 		}
 	}
 	
-	public void printShowingMovie(CineplexGroup cineplex_group){
+	public void printShowingMovie(CineplexGroup cineplex_group)
+	{
+		int i = 0;
 		for (Movie m : cineplex_group.getMovieList())
 		{
 			if (m.getShowingStatus() == Movie.ShowingStatus.NOW_SHOWING)
 			{
-				System.out.println("Movie ID:\t" + m.getMovieId());
+				System.out.println("Movie ID:\t" + (i++));
 				System.out.println("Movie Name:\t"+ m.getTitle());
 				System.out.println("Movie Director:\t" + m.getDirector());
 				System.out.println("Movie Genre:\t"+ m.getGenre());
 				System.out.println("Movie Type:\t"+ m.getType());
 				System.out.println("Movie Synopsis:\t" + m.getSynopsis());
 				printStringArray("Movie Cast:\t", m.getCast());
-				System.out.println("Average Rating:\t" + m.getAvgRating());
+				System.out.printf("Average Rating:\t%.2f\n" ,m.getAvgRating());
 				System.out.println("Total Tickets sold: \t" + m.getMovieSales());
 				System.out.println("...........................................");
 			}
@@ -235,20 +245,58 @@ public abstract class UserInterface implements Serializable{
 	}
 	
 	public void printReview(CineplexGroup cineplex_group){
+		int i =0;
 		for (Movie m : cineplex_group.getMovieList())
 		{
-			System.out.println("\nMovie ID:\t" + m.getMovieId());
-			System.out.println("Movie Name:\t"+ m.getTitle());
-			
-			for (MovieReview r: m.getMovieReviewAndRatingList())
-			{
-				System.out.println("\n\tReview ID:" + r.getReviewID());
-				System.out.println("\tReview: " + r.getReview());
-				System.out.println("\tRating: " + r.getRating());
-				System.out.println("...........................................");
-			}
-			System.out.println("---------------------------------------------------");
+			if (m.getShowingStatus()==Movie.ShowingStatus.NOW_SHOWING)
+	    	{
+				System.out.println("\nMovie ID:\t" + (i++));
+				System.out.println("Movie Name:\t"+ m.getTitle());
+				
+				for (MovieReview r: m.getMovieReviewAndRatingList())
+				{
+					System.out.println("\n\tReview ID:\t" + r.getReviewID());
+					System.out.println("\tReview:\t" + r.getReview());
+					System.out.println("\tRating:\t" + r.getRating());
+					System.out.println("...........................................");
+				}
+				System.out.println("---------------------------------------------------");
+		
+	    	}	
 		}
+	}
+	
+	protected void printTop5Ratings(ArrayList<Movie>movieList)
+	{
+		System.out.println("Top Movies by Ratings are: \n");
+    	movieList.sort(Comparator.comparing(Movie::getAvgRating).reversed());
+        int i;
+        int max =5;
+        if(movieList.size() <= 5 ) {
+        	max = movieList.size();
+        }
+        for (i = 0; i < max; i++) {
+        	if (movieList.get(i).getAvgRating()!=-1.0)
+        	{
+                System.out.println((i+1) + ".\t" + movieList.get(i).getTitle());
+                System.out.println("Rating:\t" + movieList.get(i).getAvgRating()+"\n");
+        	}
+        }
+	}
+	
+	protected void printTop5Sales(ArrayList<Movie>movieList)
+	{
+		System.out.println("Top Movies by Ticket Sales are:\n");
+    	movieList.sort(Comparator.comparing(Movie::getMovieSales).reversed());
+        int i;
+        int max =5;
+        if(movieList.size() <= 5 ) {
+        	max = movieList.size();
+        }
+        for (i = 0; i < max; i++) {
+            System.out.println((i+1) + ".\t" + movieList.get(i).getTitle());
+            System.out.println("Sales:\t" + movieList.get(i).getMovieSales() + "\n");
+        }
 	}
 }
 

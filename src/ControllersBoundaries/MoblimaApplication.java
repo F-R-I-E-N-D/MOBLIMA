@@ -12,7 +12,7 @@ public class MoblimaApplication
 	public static void main(String []args) throws ParseException
 	{
 		FileManager fileManager = new FileManager(); 
-		boolean reset = true;
+		boolean reset = false;
 		
 		// ---------Loading---------//
 		System.out.println("----------------");
