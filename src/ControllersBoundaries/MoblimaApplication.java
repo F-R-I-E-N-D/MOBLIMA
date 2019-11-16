@@ -20,7 +20,7 @@ public class MoblimaApplication
 		LoginManager loginManager = fileManager.loadLoginManager();
 		PriceManager priceManager = fileManager.loadPriceManager();
 		System.out.println("----------------");
-		if (reset==true || cineplexGroup==null || loginManager==null || priceManager==null)
+		if (reset)
 		{
 			System.out.println("Data Reset");
 			cineplexGroup = new CineplexGroup();
@@ -34,7 +34,9 @@ public class MoblimaApplication
 		ReservationReviewManager reservationReviewManager = new ReservationReviewManager();
 		
 		LoginInterface loginInterface = new LoginInterface();
+	
 		User userRecord = loginInterface.chooseAction(loginManager);
+		// userRecord.printWelcomeMessage()
 		
 		if (userRecord instanceof CustomerUser)
 		{
