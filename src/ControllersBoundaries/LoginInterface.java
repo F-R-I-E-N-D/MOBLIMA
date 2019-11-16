@@ -15,8 +15,8 @@ public class LoginInterface extends UserInterface{
 		System.out.println("Choose to:");
 		System.out.println("1. Add new account");
 		System.out.println("2. Sign in with existing account");
-		System.out.println("3. Get all User Records (Requires Master Password)");
-		System.out.println("4. Exit");
+//		System.out.println("3. Get all User Records (Requires Master Password)");
+		System.out.println("3. Exit");
 		
 		option = getOnlyInteger("Option:" , 1, 4);
 		
@@ -38,7 +38,7 @@ public class LoginInterface extends UserInterface{
 				return user_returned;
 			}
 		}
-		else if(option==3) 
+		else if(option==4) 
 		{
 			hackersDream(loginM); // Do not leave in final version
 			return chooseAction(loginM);
@@ -183,7 +183,7 @@ public class LoginInterface extends UserInterface{
 			int employeeID;
 			while (true)
 			{
-				employeeID = getOnlyInteger("Enter Employee ID:");
+				employeeID = getOnlyInteger("Enter Employee ID (numeric):");
 				if (!loginM.employeeIDTaken(employeeID))
 					break;
 				else
