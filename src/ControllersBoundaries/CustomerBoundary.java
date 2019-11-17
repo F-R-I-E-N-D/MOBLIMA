@@ -212,7 +212,7 @@ public class CustomerBoundary extends UserBoundary
             }
         }
         
-        cineplex_group.getShowList(cineplexID).get(showID).addTicketsSold(numOfSeats);
+        cineplex_group.getShowList(cineplexID).get(showID).addTicketsSold(i);
         
         System.out.println("====================");
         System.out.println("Ticket");
