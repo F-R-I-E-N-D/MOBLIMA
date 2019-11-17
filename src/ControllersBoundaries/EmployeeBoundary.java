@@ -196,11 +196,11 @@ public class EmployeeBoundary extends UserBoundary
 					}
 					System.out.println();
 					
-					cineplexID = getOnlyInteger("Enter Cineplex ID to add to:");
-					cinemaID = getOnlyInteger("Enter Cinema ID used:");
-					movieID = getOnlyInteger("Enter Movie ID used:");
-					int time_start = getOnlyInteger("Enter Starting Time in HHHH Hours:");
-					int time_end = getOnlyInteger("Enter Ending Time in HHHH Hours:");
+					cineplexID = getOnlyInteger("Enter Cineplex ID to add to:", 0, cineplex_group.getCineplexList().size()-1);
+					cinemaID = getOnlyInteger("Enter Cinema ID used:",0,cineplex_group.getCinemaList(cineplexID).size()-1);
+					movieID = getOnlyInteger("Enter Movie ID used:", 0, cineplex_group.getMovieList().size()-1);
+					int time_start = getOnlyInteger("Enter Starting Time in HHHH Hours:",0,2400);
+					int time_end = getOnlyInteger("Enter Ending Time in HHHH Hours:",0,2400);
 					int choice = getOnlyInteger("(1) PUBLIC HOLIDAY (2) WEEKEND (3) WEEKDAY", 1, 3);
 					
 					DayType daytype;
