@@ -1,7 +1,6 @@
 package ControllersBoundaries;
 
 import java.util.Scanner;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -15,10 +14,6 @@ import CineplexClasses.Show;
 
 public abstract class UserBoundary
 {
-	
-	/**
-	 * 
-	 */
 	protected Scanner sc = new Scanner(System.in);
 	
 	public UserBoundary() 
@@ -26,7 +21,7 @@ public abstract class UserBoundary
 		
 	}
 	
-	public int [] getIntegerArray(String message)
+	protected int [] getIntegerArray(String message)
 	{
 		System.out.println(message);
 		System.out.println("(end with -1)");
@@ -45,7 +40,7 @@ public abstract class UserBoundary
 		return column.stream().mapToInt(i->i).toArray();
 	}
 	
-	public String getString (String message)
+	protected String getString (String message)
 	{
 		String input = "";
 		System.out.println(message);
@@ -57,7 +52,7 @@ public abstract class UserBoundary
 		return input; 
 	}
 	
-	public int getOnlyInteger(String message) 
+	protected int getOnlyInteger(String message) 
 	{
 		int option = -1;
 		System.out.println(message);
@@ -75,7 +70,7 @@ public abstract class UserBoundary
 	}
 	
 	
-	public int getOnlyInteger(String message, int low_inclusive, int high_inclusive) 
+	protected int getOnlyInteger(String message, int low_inclusive, int high_inclusive) 
 	{
 		int option = -1;
 		System.out.println(message);
@@ -97,7 +92,7 @@ public abstract class UserBoundary
 		return option;
 	}
 	
-	public double getOnlyDouble (String message, double low_inclusive, double high_inclusive) 
+	protected double getOnlyDouble (String message, double low_inclusive, double high_inclusive) 
 	{
 		double return_double = -1;
 		System.out.println(message);
@@ -120,7 +115,7 @@ public abstract class UserBoundary
 	}
 	
 	
-	public void printStringArray(String message, String [] array)
+	protected void printStringArray(String message, String [] array)
 	{
 		System.out.print(message + "\n\t");
 		for (String s : array)
@@ -130,7 +125,7 @@ public abstract class UserBoundary
 		System.out.println();
 	}
 	
-	public void printPrices(PriceController priceManager)
+	protected void printPrices(PriceController priceManager)
 	{
 		System.out.println("New Prices:");
 	    System.out.println("1\tstudentMarkdown:\t" + priceManager.getStudentMarkdown());
@@ -149,7 +144,7 @@ public abstract class UserBoundary
 	    
 	}
 	
-	public void printCineplex (CineplexGroup cineplex_group)
+	protected void printCineplex (CineplexGroup cineplex_group)
 	{
 		int i=0;
 		for (Cineplex cplex : cineplex_group.getCineplexList())
@@ -159,7 +154,7 @@ public abstract class UserBoundary
 		}
 	}
 	
-	public void printCinema(CineplexGroup cineplex_group) {
+	protected void printCinema(CineplexGroup cineplex_group) {
 		int i=0;
 		for (Cineplex cplex : cineplex_group.getCineplexList())
 		{
@@ -181,7 +176,7 @@ public abstract class UserBoundary
 		}
 	}
 	
-	public void printShow(CineplexGroup cineplex_group) {
+	protected void printShow(CineplexGroup cineplex_group) {
 		int i=0;
 		for (Cineplex cplex : cineplex_group.getCineplexList())
 		{
@@ -205,7 +200,7 @@ public abstract class UserBoundary
 		
 	}
 	
-	public void printMovie(CineplexGroup cineplex_group){
+	protected void printMovie(CineplexGroup cineplex_group){
 		int i =0;
 		for (Movie m : cineplex_group.getMovieList())
 		{
@@ -223,7 +218,7 @@ public abstract class UserBoundary
 		}
 	}
 	
-	public void printShowingMovie(CineplexGroup cineplex_group)
+	protected void printShowingMovie(CineplexGroup cineplex_group)
 	{
 		int i = 0;
 		for (Movie m : cineplex_group.getMovieList())
@@ -241,10 +236,12 @@ public abstract class UserBoundary
 				System.out.println("Total Tickets sold: \t" + m.getMovieSales());
 				System.out.println("...........................................");
 			}
+			else
+				i++;
 		}
 	}
 	
-	public void printReview(CineplexGroup cineplex_group){
+	protected void printReview(CineplexGroup cineplex_group){
 		int i =0;
 		for (Movie m : cineplex_group.getMovieList())
 		{
@@ -263,6 +260,8 @@ public abstract class UserBoundary
 				System.out.println("---------------------------------------------------");
 		
 	    	}	
+			else
+				i++;
 		}
 	}
 	

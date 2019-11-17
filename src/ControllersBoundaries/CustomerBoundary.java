@@ -10,9 +10,8 @@ import CineplexClasses.Reservation;
 import CineplexClasses.Show;
 import Users.CustomerUser;
 
-public class CustomerBoundary extends UserBoundary {
-
-	private static final long serialVersionUID = 1L;
+public class CustomerBoundary extends UserBoundary 
+{
 	
     public void startInterface(CineplexGroup cineplex_group, CustomerReviewController customerReviewController, ReservationController reservationController, PriceController priceManager, CustomerUser customer) throws ParseException 
     {  

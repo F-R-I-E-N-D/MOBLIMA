@@ -64,9 +64,11 @@ public class Cineplex implements Serializable
     	return cinemaList;
     }
     
-    public void addCinemaToList(String name, int num_rows, int [] column, Cinema.ClassType classtype) 
+    public void addCinemaToList(String name, int num_rows, int numHandicappedRows, int [] column,int [] columnHandicapped,  Cinema.ClassType classtype) 
     {
-        cinemaList.add(new Cinema(cinemaList.size(), name, num_rows, column, classtype));
+    	
+    	cinemaList.add(new Cinema(cinemaList.size(), name, num_rows, numHandicappedRows, column, columnHandicapped, classtype));
+//        cinemaList.add(new Cinema(cinemaList.size(), name, num_rows, column, classtype));
     }
     
     public void removeCinemaFromlist(int cinemaID) 

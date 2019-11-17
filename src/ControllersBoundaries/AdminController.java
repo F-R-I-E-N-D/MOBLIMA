@@ -15,9 +15,9 @@ public class AdminController implements Serializable
 	private static final long serialVersionUID = 1L;
 		
 	// Cinema Hall
-    public void createCinema (CineplexGroup cineplexGroup, int cineplexID, String name, int num_rows, int [] column, Cinema.ClassType classtype)
+    public void createCinema (CineplexGroup cineplexGroup, int cineplexID, String name, int num_rows, int numHandicappedRows, int [] column, int [] columnHandicapped, Cinema.ClassType classtype)
     {
-    	cineplexGroup.getCineplexList().get(cineplexID).addCinemaToList(name, num_rows, column, classtype);   
+    	cineplexGroup.getCineplexList().get(cineplexID).addCinemaToList(name, num_rows, numHandicappedRows, column, columnHandicapped, classtype);  
     }
     
     public void removeCinema (CineplexGroup cineplexGroup, int cineplexID, int cinemaID)

@@ -10,18 +10,22 @@ public class Cinema implements Serializable {
 	public enum ClassType {GOLD, DELUXE, GEMINI, MAX, STANDARD}
 	
 	private ClassType classtype;
-	private int hall_id;
+	private int HallID;
 	private String name;
 	private int numRows;
+	private int numHandicappedRows;
 	private int [] column; 
+	private int [] columnHandicapped;
 	
-	public Cinema (int hall_id, String name, int num_rows, int [] column, ClassType classtype)
+	public Cinema (int hallID, String name, int numRows, int numHandicappedRows, int [] column, int [] columnHandicapped, ClassType classtype)
 	{
-		this.setHallId(hall_id);
-		this.setNumRows(num_rows);
+		this.setHallId(hallID);
+		this.setNumRows(numRows);
 		this.setColumn(column);
 		this.setName(name);
 		this.setClasstype(classtype);
+		this.setColumnHandicapped(columnHandicapped);
+		this.setNumHandicappedRows(numHandicappedRows);
 	}
 	
 	public Cinema (int hall_id)
@@ -46,11 +50,11 @@ public class Cinema implements Serializable {
 	}
 	
 	public int getHallId() {
-		return hall_id;
+		return HallID;
 	}
 
 	public void setHallId(int hall_id) {
-		this.hall_id = hall_id;
+		this.HallID = hall_id;
 	}
 
 	public String getName() {
@@ -67,5 +71,21 @@ public class Cinema implements Serializable {
 
 	public void setClasstype(ClassType classtype) {
 		this.classtype = classtype;
+	}
+
+	public int [] getColumnHandicapped() {
+		return columnHandicapped;
+	}
+
+	public void setColumnHandicapped(int [] columnHandicapped) {
+		this.columnHandicapped = columnHandicapped;
+	}
+
+	public int getNumHandicappedRows() {
+		return numHandicappedRows;
+	}
+
+	public void setNumHandicappedRows(int numHandicappedRows) {
+		this.numHandicappedRows = numHandicappedRows;
 	}
 }

@@ -82,7 +82,7 @@ public class Show implements java.io.Serializable
  
     private void setLayout(Cinema hall)
     {
-        hallLayout = new Layout(hall.getNumRows(), hall.getColumn());
+        hallLayout = new Layout(hall.getNumRows(), hall.getNumHandicappedRows(), hall.getColumn(), hall.getColumnHandicapped());
     }
     
     public void printLayout()

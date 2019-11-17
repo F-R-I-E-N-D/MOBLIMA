@@ -66,7 +66,7 @@ public class EmployeeBoundary extends UserBoundary
 			
 			option = getOnlyInteger("Option: ");
 			System.out.println("==========================");
-			int cplexID, num_rows, i, option2; int [] column;
+			int cplexID, num_rows, i, num_rows_hand, option2; int [] column, columnHand;
 			switch (option)
 			{
 				case 1:
@@ -90,7 +90,9 @@ public class EmployeeBoundary extends UserBoundary
 					cplexID = getOnlyInteger("Enter Cineplex Id:\t");
 					String cinemaName = getString("Enter New Cinema Name:");
 					num_rows = getOnlyInteger("Enter number of rows:\t");
+					num_rows_hand = getOnlyInteger("Enter number of handicapped rows:\n(excess rows will be ignored)");
 					column = getIntegerArray("Enter Seats Per Lane");
+					columnHand = getIntegerArray("Enter Handicapped Seats Per Lane\n(excess rows will be ignored)");
 					
 					i = 1;
 					for (ClassType classtype : ClassType.values())
@@ -99,7 +101,7 @@ public class EmployeeBoundary extends UserBoundary
 					}
 					option2 = getOnlyInteger("Class Type:\t", 1, ClassType.values().length);
 					
-					adminManager.createCinema(cineplex_group, cplexID, cinemaName, num_rows, column, ClassType.values()[option2-1]);
+					adminManager.createCinema(cineplex_group, cplexID, cinemaName, num_rows, num_rows_hand, column, columnHand, ClassType.values()[option2-1]);
 					printCinema(cineplex_group);
 					break;
 					
