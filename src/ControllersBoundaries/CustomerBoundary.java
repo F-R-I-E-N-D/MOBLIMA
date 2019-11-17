@@ -152,12 +152,10 @@ public class CustomerBoundary extends UserBoundary
             		else i++;
             	}
             	
-            	int movieID = getOnlyInteger("Movie ID to add review: ");
-                int rating  = getOnlyInteger("Enter rating from 1 to 5");
-                while (rating>5 || rating <1)
-                {
-                	rating  = getOnlyInteger("Enter rating from 1 to 5");
-                }
+            	int movieID = getOnlyInteger("Movie ID to add review: (-1 to go back)",-1,cineplex_group.getMovieList().size()-1);
+                if (movieID==-1)
+                	return;
+            	int	rating  = getOnlyInteger("Enter rating from 1 to 5", 1, 5);
                 customerReviewController.createReview(cineplex_group, movieID, getString("Enter Review: "), rating, customer.getUsername());
              
             }
@@ -191,9 +189,10 @@ public class CustomerBoundary extends UserBoundary
         int numOfSeats = getOnlyInteger("Please enter number of tickets: (0 to go back)", 0, 10);
         if (numOfSeats==0)
         	return;
-        int i;
         double sum = 0;
-        for (i = 0; i < numOfSeats; i++) {
+        int i = 0;
+        while (numOfSeats>0) 
+        {
             System.out.println("Ticket " + (i + 1));
             System.out.println("Please enter row letter:");
             char row = sc.next().charAt(0);
@@ -205,13 +204,13 @@ public class CustomerBoundary extends UserBoundary
             		cineplex_group.getShowList(cineplexID).get(showID).getTime_start(), customer.getCustomerType(), 
             		cineplex_group.getShowList(cineplexID).get(showID).getHall().getClasstype(), 
             		cineplex_group.getShowList(cineplexID).get(showID).getMovie().getType());
-            sum+=price;
-            System.out.println("Price Charged:\t$" + (price));
             
-            if (!reservationController.createReservation(cineplex_group, cineplexID, customer.getUsername(), showID, row, lane, seat, price))
+            if (reservationController.createReservation(cineplex_group, cineplexID, customer.getUsername(), showID, row, lane, seat, price))
             {
-            	sum-=price;
-            	i--;
+            	sum+=price;
+            	numOfSeats--;
+            	i++;
+            	System.out.println("Price Charged:\t$" + (price));
             }
         }
         

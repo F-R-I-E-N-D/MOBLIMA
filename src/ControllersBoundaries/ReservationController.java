@@ -9,13 +9,22 @@ public class ReservationController
 	// Reservation
     public boolean createReservation(CineplexController cineplexGroup, int cineplexID, String userID, int showID, char row, int lane, int seat, double price)
     {
-    	if (cineplexGroup.getCineplexList().get(cineplexID).addReservationToList(userID, showID, row, lane, seat, price))
+    	try
     	{
-    		cineplexGroup.getCineplexList().get(cineplexID).getShowList().get(showID).assignSeat(row, lane, seat);
-    		return true;
+    		if (cineplexGroup.getCineplexList().get(cineplexID).addReservationToList(userID, showID, row, lane, seat, price))
+        	{
+        		cineplexGroup.getCineplexList().get(cineplexID).getShowList().get(showID).assignSeat(row, lane, seat);
+        		return true;
+        	}
+        	else
+        		return false;
     	}
-    	else
+    	catch (ArrayIndexOutOfBoundsException e)
+    	{
+    		System.out.println("Invalid Selection");
     		return false;
+    	}
+    	
     }
     
     public void deleteReservation(CineplexController cineplexGroup, int cineplexID, int reservationID)

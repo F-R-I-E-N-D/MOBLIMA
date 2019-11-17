@@ -33,7 +33,6 @@ public class MoblimaApplication
 		LoginBoundary loginBoundary = new LoginBoundary();
 	
 		User userRecord = loginBoundary.startInterface(loginController);//chooseAction(loginManager);
-		// userRecord.printWelcomeMessage()
 		
 		if (userRecord instanceof CustomerUser)
 		{
