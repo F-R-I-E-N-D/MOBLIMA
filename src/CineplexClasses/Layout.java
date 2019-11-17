@@ -58,6 +58,8 @@ public class Layout implements Serializable
 		return seats[row][lane];
 	}
 	
+	
+	
 	public void printSeats ()
 	{
 		Lane [] row;

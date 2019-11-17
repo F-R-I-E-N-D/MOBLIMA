@@ -23,10 +23,10 @@ public class LaneHandicapped extends Lane
 
 	public void printLane()
 	{
-		
+		int handicappedSeats = handicapped_seats;
 		for (int k=0; k<getNum_seats(); k++)
 		{
-			if (handicapped_seats-- > 0)
+			if (handicappedSeats-- > 0)
 			{
 				if (getSeat(k))
 					System.out.print("H[_X_]H\t");
