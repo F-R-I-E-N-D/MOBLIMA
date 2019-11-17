@@ -123,7 +123,7 @@ public class CustomerBoundary extends UserBoundary
     {
 		int option = 0;
         
-        while (option != 5) 
+        while (option != 3) 
         {
             System.out.println("-----------------------------------------------------------------");
             System.out.println("1.\tPrint Reviews");
@@ -131,8 +131,6 @@ public class CustomerBoundary extends UserBoundary
             System.out.println("3.\tBack");
              
             option = getOnlyInteger("Option: ", 1, 3);
-            if (option==3)
-            	break;
             
             switch (option)
             {
@@ -193,7 +191,7 @@ public class CustomerBoundary extends UserBoundary
         int i = 0;
         while (numOfSeats>0) 
         {
-            System.out.println("Ticket " + (i + 1));
+            System.out.println("\nTicket " + (i + 1));
             System.out.println("Please enter row letter:");
             char row = sc.next().charAt(0);
             int lane = getOnlyInteger("Please enter lane:");
@@ -221,7 +219,7 @@ public class CustomerBoundary extends UserBoundary
         System.out.println("===========");
         System.out.println("Movie:\t\t" +showChoice.getMovie().getTitle() );
         System.out.println("Show Date:\t" +showChoice.getShow_date().getDate() + "/" + showChoice.getShow_date().getMonth() + "/" + (1900+showChoice.getShow_date().getYear()));
-        System.out.println("Tickets Bought:\t" + numOfSeats);
+        System.out.println("Tickets Bought:\t" + i);
         System.out.println("Total Price:\t" + sum);
         System.out.println("====================");
         System.out.println("-----------------------------------------------------------------");

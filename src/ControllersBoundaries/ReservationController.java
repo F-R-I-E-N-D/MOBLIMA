@@ -13,8 +13,7 @@ public class ReservationController
     	{
     		if (cineplexGroup.getCineplexList().get(cineplexID).addReservationToList(userID, showID, row, lane, seat, price))
         	{
-        		cineplexGroup.getCineplexList().get(cineplexID).getShowList().get(showID).assignSeat(row, lane, seat);
-        		return true;
+        		return (cineplexGroup.getCineplexList().get(cineplexID).getShowList().get(showID).assignSeat(row, lane, seat));
         	}
         	else
         		return false;

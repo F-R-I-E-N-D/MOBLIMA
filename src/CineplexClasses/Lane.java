@@ -28,7 +28,7 @@ public class Lane implements Serializable {
 		{
 			if (seats [index])
 			{
-				System.out.println("Already Occupied");
+				System.out.println("\n\tAlready Occupied\n");
 				return false;
 			}
 			seats[index] = true;

@@ -91,12 +91,12 @@ public class Show implements java.io.Serializable
     }
     
 	// Seats
-	public void assignSeat(char row_letter, int lane, int seat)
+	public boolean assignSeat(char row_letter, int lane, int seat)
 	{	   
 	   int row = (int)(row_letter-'A');
 	   lane--;
 	   seat--;
-	   hallLayout.getlane(row, lane).assignSeat(seat);    
+	   return (hallLayout.getlane(row, lane).assignSeat(seat));    
 	}
 	    
 	public boolean unassignSeat(char row_letter, int lane, int seat)
