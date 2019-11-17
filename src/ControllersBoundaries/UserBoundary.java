@@ -164,12 +164,14 @@ public abstract class UserBoundary
 			int j=0;
 			for (Cinema cinema: cplex.getCinemaList())
 			{
-				System.out.println("\n\tCinema Id=\t" + (j++));
-				System.out.println("\tCinema Name=\t" + cinema.getName());
-				System.out.println("\tCinema Class:\t" + cinema.getClasstype());
-				System.out.println("\tCinema Rows=\t" + cinema.getNumRows());
-				System.out.println("\tCinema Lanes=\t" + Arrays.toString(cinema.getColumn()));
-				
+				System.out.println("\n\tCinema Id=\t\t" + (j++));
+				System.out.println("\tCinema Name=\t\t" + cinema.getName());
+				System.out.println("\tCinema Class:\t\t" + cinema.getClasstype());
+				System.out.println("\tCinema Rows=\t\t" + cinema.getNumRows());
+				System.out.println("\tHandicapped Rows=\t" + cinema.getNumHandicappedRows());
+				System.out.println("\tCinema Lanes=\t\t" + Arrays.toString(cinema.getColumn()));
+				System.out.println("\tHandicapped Lanes=\t" + Arrays.toString(cinema.getColumnHandicapped()));
+
 				System.out.println(".........................................");
 			}
 			System.out.println("\n-----------------------------------------------------------------\n");

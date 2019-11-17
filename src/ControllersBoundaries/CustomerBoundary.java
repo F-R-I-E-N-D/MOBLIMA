@@ -1,6 +1,7 @@
 package ControllersBoundaries;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import CineplexClasses.Cineplex;
 import CineplexClasses.CineplexGroup;
@@ -58,8 +59,10 @@ public class CustomerBoundary extends UserBoundary
     			if (r.getUsername().equals(customer.getUsername()))
     			{
     				System.out.println("\nReservation ID:\t" + r.getReservationID());
-    				System.out.println("Date:\t\t" + r.getReservationDate());
+//    				System.out.println("Booking Date:\t" + r.getReservationDate());
     				System.out.println("Movie Name:\t" + cplex.getShowList().get(r.getShowID()).getMovie().getTitle());
+    				Date showdate =  cplex.getShowList().get(r.getShowID()).getShow_date();
+    				System.out.println("Show Date:\t" + showdate.getDate() + "/" + showdate.getMonth() + "/" + (1900+showdate.getYear()));
     				System.out.println("Seat:\t\t" + r.getRow() +"-"+ r.getLane() + "-" + r.getSeat());
     			}
     		}

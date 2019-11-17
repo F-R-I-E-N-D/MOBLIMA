@@ -424,11 +424,11 @@ public class EmployeeBoundary extends UserBoundary
 							synopsis = getString("Enter Movie Synopsis: ");
 							adminManager.updateMovieSynopsis(cineplex_group, movieID, synopsis);
 							break;
-						case 3: 
+						case 4: 
 							director = getString("Enter Movie Director: ");
 							adminManager.updateMovieDirector(cineplex_group, movieID, director);
 							break;
-						case 4: 
+						case 3: 
 							cast = getString("Enter Movie Cast (Seperated by commas): ").split(",");
 							adminManager.updateMovieCast(cineplex_group, movieID, cast);
 							break;
