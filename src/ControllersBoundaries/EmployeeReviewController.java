@@ -1,15 +1,15 @@
 package ControllersBoundaries;
 
-import CineplexClasses.CineplexGroup;
+import CineplexClasses.CineplexController;
 
 public class EmployeeReviewController implements IReviewDeletable, IReviewViewable
 {
-	public void removeReview (CineplexGroup cineplexGroup, int movieID, int reviewID)
+	public void removeReview (CineplexController cineplexGroup, int movieID, int reviewID)
     {
     	cineplexGroup.getMovieList().get(movieID).deleteReview(reviewID);
     }
     
-    public void printAvgRating (CineplexGroup cineplexGroup, int movieID)
+    public void printAvgRating (CineplexController cineplexGroup, int movieID)
     {
     	double avg = cineplexGroup.getMovieList().get(movieID).getAvgRating();
     	if (avg==-1)

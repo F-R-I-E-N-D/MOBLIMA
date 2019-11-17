@@ -2,16 +2,16 @@ package ControllersBoundaries;
 
 import java.io.*;
 
-import CineplexClasses.CineplexGroup;
+import CineplexClasses.CineplexController;
 
 public class FileController
 {
-	public CineplexGroup loadCineplexGroup()
+	public CineplexController loadCineplexGroup()
 	{
-		CineplexGroup returnCineplexGroup = (CineplexGroup)deserializeObject("cineplexGroup.ser");
+		CineplexController returnCineplexGroup = (CineplexController)deserializeObject("cineplexGroup.ser");
 		if (returnCineplexGroup==null)
 		{
-			returnCineplexGroup = new CineplexGroup();
+			returnCineplexGroup = new CineplexController();
 		}
 		return returnCineplexGroup;
 	}

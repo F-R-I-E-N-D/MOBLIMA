@@ -1,10 +1,10 @@
 package ControllersBoundaries;
 
-import CineplexClasses.CineplexGroup;
+import CineplexClasses.CineplexController;
 
 public class CustomerReviewController implements IReviewAddable, IReviewViewable
 {
-	public void createReview(CineplexGroup cineplexGroup, int movieID, String review, int rating, String userID)
+	public void createReview(CineplexController cineplexGroup, int movieID, String review, int rating, String userID)
     {
 		System.out.println(movieID );
     	if (rating<=5 && rating>=1)
@@ -15,7 +15,7 @@ public class CustomerReviewController implements IReviewAddable, IReviewViewable
     		System.out.println("Rating must be 1 and 5 (inclusive)");
     }
 	
-	public void printAvgRating (CineplexGroup cineplexGroup, int movieID)
+	public void printAvgRating (CineplexController cineplexGroup, int movieID)
     {
     	double avg = cineplexGroup.getMovieList().get(movieID).getAvgRating();
     	if (avg==-1)

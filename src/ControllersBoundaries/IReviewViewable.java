@@ -1,8 +1,8 @@
 package ControllersBoundaries;
 
-import CineplexClasses.CineplexGroup;
+import CineplexClasses.CineplexController;
 
 public interface IReviewViewable 
 {
-	public void printAvgRating (CineplexGroup cineplexGroup, int movieID);
+	public void printAvgRating (CineplexController cineplexGroup, int movieID);
 }

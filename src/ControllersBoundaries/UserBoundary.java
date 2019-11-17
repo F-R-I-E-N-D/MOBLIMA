@@ -7,7 +7,7 @@ import java.util.Comparator;
 
 import CineplexClasses.Cinema;
 import CineplexClasses.Cineplex;
-import CineplexClasses.CineplexGroup;
+import CineplexClasses.CineplexController;
 import CineplexClasses.Movie;
 import CineplexClasses.MovieReview;
 import CineplexClasses.Show;
@@ -144,7 +144,7 @@ public abstract class UserBoundary
 	    
 	}
 	
-	protected void printCineplex (CineplexGroup cineplex_group)
+	protected void printCineplex (CineplexController cineplex_group)
 	{
 		int i=0;
 		for (Cineplex cplex : cineplex_group.getCineplexList())
@@ -154,7 +154,7 @@ public abstract class UserBoundary
 		}
 	}
 	
-	protected void printCinema(CineplexGroup cineplex_group) {
+	protected void printCinema(CineplexController cineplex_group) {
 		int i=0;
 		for (Cineplex cplex : cineplex_group.getCineplexList())
 		{
@@ -178,7 +178,7 @@ public abstract class UserBoundary
 		}
 	}
 	
-	protected void printShow(CineplexGroup cineplex_group) {
+	protected void printShow(CineplexController cineplex_group) {
 		int i=0;
 		for (Cineplex cplex : cineplex_group.getCineplexList())
 		{
@@ -202,7 +202,7 @@ public abstract class UserBoundary
 		
 	}
 	
-	protected void printMovie(CineplexGroup cineplex_group){
+	protected void printMovie(CineplexController cineplex_group){
 		int i =0;
 		for (Movie m : cineplex_group.getMovieList())
 		{
@@ -220,7 +220,7 @@ public abstract class UserBoundary
 		}
 	}
 	
-	protected void printShowingMovie(CineplexGroup cineplex_group)
+	protected void printShowingMovie(CineplexController cineplex_group)
 	{
 		int i = 0;
 		for (Movie m : cineplex_group.getMovieList())
@@ -243,7 +243,7 @@ public abstract class UserBoundary
 		}
 	}
 	
-	protected void printReview(CineplexGroup cineplex_group){
+	protected void printReview(CineplexController cineplex_group){
 		int i =0;
 		for (Movie m : cineplex_group.getMovieList())
 		{

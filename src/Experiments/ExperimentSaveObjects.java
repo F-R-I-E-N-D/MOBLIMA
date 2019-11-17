@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import CineplexClasses.CineplexGroup;
+import CineplexClasses.CineplexController;
 import CineplexClasses.Movie;
 
 public class ExperimentSaveObjects
@@ -13,7 +13,7 @@ public class ExperimentSaveObjects
 	public static void main(String[] args) 
 	{
 		ExperimentSaveObjects exptclass = new ExperimentSaveObjects();
-		CineplexGroup cineplexGroup = new CineplexGroup ();
+		CineplexController cineplexGroup = new CineplexController ();
 //		CineplexGroup cineplexGroup = (CineplexGroup)exptclass.deserializeObject("cineplexGroup.ser");
 		
 		String[] cast = {"sdsa", "sfafsfa"};

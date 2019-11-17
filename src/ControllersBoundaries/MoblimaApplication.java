@@ -1,6 +1,6 @@
 package ControllersBoundaries;
 
-import CineplexClasses.CineplexGroup;
+import CineplexClasses.CineplexController;
 import Users.CustomerUser;
 import Users.EmployeeUser;
 import Users.User;
@@ -14,14 +14,14 @@ public class MoblimaApplication
 		
 		// ---------Loading---------//
 		System.out.println("----------------");
-		CineplexGroup cineplexGroup = fileController.loadCineplexGroup();
+		CineplexController cineplexGroup = fileController.loadCineplexGroup();
 		LoginController loginController = fileController.loadLoginManager();
 		PriceController priceController = fileController.loadPriceManager();
 		System.out.println("----------------");
 		if (reset)
 		{
 			System.out.println("Data Reset");
-			cineplexGroup = new CineplexGroup();
+			cineplexGroup = new CineplexController();
 			loginController = new LoginController();
 			priceController = new PriceController();
 			System.out.println("----------------");

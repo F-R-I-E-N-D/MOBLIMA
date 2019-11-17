@@ -1,8 +1,8 @@
 package ControllersBoundaries;
 
-import CineplexClasses.CineplexGroup;
+import CineplexClasses.CineplexController;
 
 public interface IReviewDeletable 
 {
-	public void removeReview (CineplexGroup cineplexGroup, int movieID, int reviewID);
+	public void removeReview (CineplexController cineplexGroup, int movieID, int reviewID);
 }

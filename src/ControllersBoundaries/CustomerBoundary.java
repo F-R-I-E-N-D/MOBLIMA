@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import CineplexClasses.Cineplex;
-import CineplexClasses.CineplexGroup;
+import CineplexClasses.CineplexController;
 import CineplexClasses.Movie;
 import CineplexClasses.Reservation;
 import CineplexClasses.Show;
@@ -13,7 +13,7 @@ import Users.CustomerUser;
 public class CustomerBoundary extends UserBoundary 
 {
 	
-    public void startInterface(CineplexGroup cineplex_group, CustomerReviewController customerReviewController, ReservationController reservationController, PriceController priceManager, CustomerUser customer) 
+    public void startInterface(CineplexController cineplex_group, CustomerReviewController customerReviewController, ReservationController reservationController, PriceController priceManager, CustomerUser customer) 
     {  
 
         int option = -1;
@@ -50,7 +50,7 @@ public class CustomerBoundary extends UserBoundary
         }
     }
 
-    private void printBookingHistory(CineplexGroup cineplex_group, CustomerUser customer) 
+    private void printBookingHistory(CineplexController cineplex_group, CustomerUser customer) 
     {
     	for (Cineplex cplex : cineplex_group.getCineplexList())
     	{
@@ -70,7 +70,7 @@ public class CustomerBoundary extends UserBoundary
 	}
 
 	// viewMovies method
-    private void viewMovies(CineplexGroup cineplex_group, CustomerReviewController customerReviewController, CustomerUser customer) 
+    private void viewMovies(CineplexController cineplex_group, CustomerReviewController customerReviewController, CustomerUser customer) 
     {
         int option = 0;
         
@@ -119,7 +119,7 @@ public class CustomerBoundary extends UserBoundary
         }
     }
 
-    private void reviewOptions(CineplexGroup cineplex_group, CustomerReviewController customerReviewController, CustomerUser customer) 
+    private void reviewOptions(CineplexController cineplex_group, CustomerReviewController customerReviewController, CustomerUser customer) 
     {
 		int option = 0;
         
@@ -165,7 +165,7 @@ public class CustomerBoundary extends UserBoundary
 	}
 
 	//buyTicket method
-    private void buyTicket(CineplexGroup cineplex_group, ReservationController reservationController, PriceController priceManager, CustomerUser customer)
+    private void buyTicket(CineplexController cineplex_group, ReservationController reservationController, PriceController priceManager, CustomerUser customer)
     {
         printShow(cineplex_group);
         int cineplexID = getOnlyInteger("Please enter Cineplex ID:", 0, cineplex_group.getCineplexList().size()-1);

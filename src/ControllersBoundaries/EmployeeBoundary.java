@@ -12,7 +12,7 @@ import java.util.Date;
 public class EmployeeBoundary extends UserBoundary
 {	
 	
-	public void startInterface(CineplexGroup cineplex_group, AdminController adminManager, EmployeeReviewController employeeReviewController, PriceController priceManager)
+	public void startInterface(CineplexController cineplex_group, AdminController adminManager, EmployeeReviewController employeeReviewController, PriceController priceManager)
 	{
 		int option = -1;
 		while (option!=5)
@@ -48,7 +48,7 @@ public class EmployeeBoundary extends UserBoundary
 		
 	}
 
-	private void cineplexOptions(CineplexGroup cineplex_group, AdminController adminManager) 
+	private void cineplexOptions(CineplexController cineplex_group, AdminController adminManager) 
 	{
 		int option = -1;
 		
@@ -164,7 +164,7 @@ public class EmployeeBoundary extends UserBoundary
 		
 	}
 	
-	private void showOptions(CineplexGroup cineplex_group, AdminController adminManager)
+	private void showOptions(CineplexController cineplex_group, AdminController adminManager)
 	{	
 		int option = -1;
 		
@@ -230,9 +230,7 @@ public class EmployeeBoundary extends UserBoundary
 							System.out.println("Wrong date format");
 							continue;
 						}
-					}
-//		    		System.out.println(date);
-					
+					}					
 					adminManager.createShow(cineplex_group, cineplexID, cinemaID, movieID, time_start, time_end, daytype, date);
 					cineplex_group.getMovieList().get(movieID).setShowingStatus(Movie.ShowingStatus.NOW_SHOWING);
 					printShow(cineplex_group);
@@ -308,7 +306,7 @@ public class EmployeeBoundary extends UserBoundary
 		}
 	}
 	
-	private void movieOptions(CineplexGroup cineplex_group, AdminController adminManager, EmployeeReviewController employeeReviewController) 
+	private void movieOptions(CineplexController cineplex_group, AdminController adminManager, EmployeeReviewController employeeReviewController) 
 	{
 		int option = -1;
 		

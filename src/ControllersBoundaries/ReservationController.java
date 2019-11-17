@@ -1,13 +1,13 @@
 package ControllersBoundaries;
 
 import CineplexClasses.Cineplex;
-import CineplexClasses.CineplexGroup;
+import CineplexClasses.CineplexController;
 import CineplexClasses.Reservation;
 
 public class ReservationController 
 {	
 	// Reservation
-    public boolean createReservation(CineplexGroup cineplexGroup, int cineplexID, String userID, int showID, char row, int lane, int seat, double price)
+    public boolean createReservation(CineplexController cineplexGroup, int cineplexID, String userID, int showID, char row, int lane, int seat, double price)
     {
     	if (cineplexGroup.getCineplexList().get(cineplexID).addReservationToList(userID, showID, row, lane, seat, price))
     	{
@@ -18,7 +18,7 @@ public class ReservationController
     		return false;
     }
     
-    public void deleteReservation(CineplexGroup cineplexGroup, int cineplexID, int reservationID)
+    public void deleteReservation(CineplexController cineplexGroup, int cineplexID, int reservationID)
     {
     	Reservation r = cineplexGroup.getCineplexList().get(cineplexID).getReservationList().get(reservationID);
     	int showID = r.getShowID();
@@ -30,7 +30,7 @@ public class ReservationController
     		cineplexGroup.getCineplexList().get(cineplexID).removeReservationFromList(reservationID);
     }
     
-    public int countNumTicketSales (CineplexGroup cineplexGroup, int movieID)
+    public int countNumTicketSales (CineplexController cineplexGroup, int movieID)
     {
     	int count = 0;
     	for (Cineplex cplex : cineplexGroup.getCineplexList())

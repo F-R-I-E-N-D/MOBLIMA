@@ -1,8 +1,8 @@
 package ControllersBoundaries;
 
-import CineplexClasses.CineplexGroup;
+import CineplexClasses.CineplexController;
 
 public interface IReviewAddable 
 {
-	public void createReview(CineplexGroup cineplexGroup, int movieID, String review, int rating, String userID);
+	public void createReview(CineplexController cineplexGroup, int movieID, String review, int rating, String userID);
 }
