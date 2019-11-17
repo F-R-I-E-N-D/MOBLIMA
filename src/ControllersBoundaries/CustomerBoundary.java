@@ -19,7 +19,7 @@ public class CustomerBoundary extends UserBoundary
         int option = -1;
 
         while (option != 4) {
-            System.out.println("------------------------------------------------");
+            System.out.println("-----------------------------------------------------------------");
             System.out.println("Welcome to Golden Village!\nWhat would you like to do?\n");
             System.out.println("1.\tMovies & Reviews");
             System.out.println("2.\tBuy Movie Ticket");
@@ -75,7 +75,7 @@ public class CustomerBoundary extends UserBoundary
         int option = 0;
         
         while (option != 6) {
-            System.out.println("------------------------------------------------");
+            System.out.println("-----------------------------------------------------------------");
             System.out.println("1.\tView All Shows Available");
             System.out.println("2.\tView All Movies Showing");
             System.out.println("3.\tMovie Reviews");
@@ -125,7 +125,7 @@ public class CustomerBoundary extends UserBoundary
         
         while (option != 5) 
         {
-            System.out.println("------------------------------------------------");
+            System.out.println("-----------------------------------------------------------------");
             System.out.println("1.\tPrint Reviews");
             System.out.println("2.\tAdd Reviews");
             System.out.println("3.\tBack");
@@ -224,7 +224,7 @@ public class CustomerBoundary extends UserBoundary
         System.out.println("Tickets Bought:\t" + numOfSeats);
         System.out.println("Total Price:\t" + sum);
         System.out.println("====================");
-        System.out.println("------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------");
         System.out.println("New Hall Layout:");
         showChoice.printLayout();
     }

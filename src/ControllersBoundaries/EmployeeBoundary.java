@@ -17,7 +17,7 @@ public class EmployeeBoundary extends UserBoundary
 		int option = -1;
 		while (option!=5)
 		{
-			System.out.println("------------------------------------------------");
+			System.out.println("-----------------------------------------------------------------");
 			System.out.println("Welcome, Administrator\nWhat would you like to do?\n");
 			System.out.println("1.\tCineplex Options");
 			System.out.println("2.\tShow Options");
@@ -44,7 +44,7 @@ public class EmployeeBoundary extends UserBoundary
 			}
 		}
 		
-		System.out.println("------------------------------------------------");
+		System.out.println("-----------------------------------------------------------------");
 		
 	}
 
@@ -54,7 +54,7 @@ public class EmployeeBoundary extends UserBoundary
 		
 		while (option!=7)
 		{
-			System.out.println("------------------------------------------------");
+			System.out.println("-----------------------------------------------------------------");
 			System.out.println("Cineplex Options:\n");
 			System.out.println("1.\tCreate Cineplex");
 			System.out.println("2.\tRemove Cineplex");
@@ -170,7 +170,7 @@ public class EmployeeBoundary extends UserBoundary
 		
 		while (option!=6)
 		{
-			System.out.println("------------------------------------------------");
+			System.out.println("-----------------------------------------------------------------");
 			System.out.println("Show Options:\n");
 			System.out.println("1.\tCreate Show");
 			System.out.println("2.\tRemove Show");
@@ -312,7 +312,7 @@ public class EmployeeBoundary extends UserBoundary
 		
 		while (option!=9)
 		{
-			System.out.println("------------------------------------------------");
+			System.out.println("-----------------------------------------------------------------");
 			System.out.println("Movie Options:\n");
 			System.out.println("1.\tCreate Movie");
 			System.out.println("2.\tDiscontinue Movie");

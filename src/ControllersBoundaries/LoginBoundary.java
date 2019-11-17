@@ -9,7 +9,7 @@ public class LoginBoundary extends UserBoundary
 
 	public User startInterface(LoginController loginM)
 	{
-		System.out.println("------------------------------------------------");
+		System.out.println("-----------------------------------------------------------------");
 		System.out.println("Proceed as:\n1.\tCustomer\n2.\tEmployee\n3.\tExit MOBLIMA");
 		int option = getOnlyInteger("Option:" , 1, 3);
 		switch (option)
@@ -25,7 +25,7 @@ public class LoginBoundary extends UserBoundary
 	
 	private User employeeLogin(LoginController loginM)
 	{
-		System.out.println("------------------------------------------------");
+		System.out.println("-----------------------------------------------------------------");
 		System.out.println("\tEmployee Login\n\n\t1. Sign in to Account\n\t2. Create new Account\n\t3. Back");
 		int option2 = getOnlyInteger("\nOption: ", 0, 3);
 		
@@ -51,7 +51,7 @@ public class LoginBoundary extends UserBoundary
 	
 	private User customerLogin(LoginController loginM)
 	{
-		System.out.println("------------------------------------------------");
+		System.out.println("-----------------------------------------------------------------");
 		System.out.println("\tCustomer Login\n\n\t1. Sign in to Account\n\t2. Create new Account\n\t3. Back");
 		int option2 = getOnlyInteger("\nOption: ", 0, 3);
 		
