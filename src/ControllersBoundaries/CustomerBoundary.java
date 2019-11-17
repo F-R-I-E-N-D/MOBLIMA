@@ -1,6 +1,5 @@
 package ControllersBoundaries;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 
 import CineplexClasses.Cineplex;
@@ -13,7 +12,7 @@ import Users.CustomerUser;
 public class CustomerBoundary extends UserBoundary 
 {
 	
-    public void startInterface(CineplexGroup cineplex_group, CustomerReviewController customerReviewController, ReservationController reservationController, PriceController priceManager, CustomerUser customer) throws ParseException 
+    public void startInterface(CineplexGroup cineplex_group, CustomerReviewController customerReviewController, ReservationController reservationController, PriceController priceManager, CustomerUser customer) 
     {  
 
         int option = -1;
@@ -56,12 +55,12 @@ public class CustomerBoundary extends UserBoundary
     	{
     		for (Reservation r : cplex.getReservationList())
     		{
-    			if (r.getUsername() == customer.getUsername())
+    			if (r.getUsername().equals(customer.getUsername()))
     			{
-    				System.out.println("Reservation ID:\t" + r.getReservationID());
-    				System.out.println("Date:\t" + r.getReservationDate());
+    				System.out.println("\nReservation ID:\t" + r.getReservationID());
+    				System.out.println("Date:\t\t" + r.getReservationDate());
     				System.out.println("Movie Name:\t" + cplex.getShowList().get(r.getShowID()).getMovie().getTitle());
-    				System.out.println("Seat:\t" + r.getRow() +"-"+ r.getLane() + "-" + r.getSeat());
+    				System.out.println("Seat:\t\t" + r.getRow() +"-"+ r.getLane() + "-" + r.getSeat());
     			}
     		}
     	}
@@ -163,7 +162,7 @@ public class CustomerBoundary extends UserBoundary
 	}
 
 	//buyTicket method
-    private void buyTicket(CineplexGroup cineplex_group, ReservationController reservationController, PriceController priceManager, CustomerUser customer) throws ParseException 
+    private void buyTicket(CineplexGroup cineplex_group, ReservationController reservationController, PriceController priceManager, CustomerUser customer)
     {
         printShow(cineplex_group);
         int cineplexID = getOnlyInteger("Please enter Cineplex ID:", 0, cineplex_group.getCineplexList().size()-1);
@@ -175,13 +174,20 @@ public class CustomerBoundary extends UserBoundary
             if (show.getShowID() == showID)
                 showChoice = show;
         }
+        if (showChoice == null)
+        {
+        	System.out.println("No such show");
+        	return;
+        }
 
         System.out.println("------------------------------------------------");
         System.out.println("Hall Layout:");
         showChoice.printLayout();
 
         System.out.println("------------------------------------------------");
-        int numOfSeats = getOnlyInteger("Please enter number of tickets:", 1, 10);
+        int numOfSeats = getOnlyInteger("Please enter number of tickets: (0 to go back)", 0, 10);
+        if (numOfSeats==0)
+        	return;
         int i;
         double sum = 0;
         for (i = 0; i < numOfSeats; i++) {
@@ -207,7 +213,15 @@ public class CustomerBoundary extends UserBoundary
         }
         
         cineplex_group.getShowList(cineplexID).get(showID).addTicketsSold(numOfSeats);
-        System.out.println("Total Price: " + sum);
+        
+        System.out.println("====================");
+        System.out.println("Ticket");
+        System.out.println("===========");
+        System.out.println("Movie:\t\t" +showChoice.getMovie().getTitle() );
+        System.out.println("Show Date:\t" +showChoice.getShow_date().getDate() + "/" + showChoice.getShow_date().getMonth() + "/" + (1900+showChoice.getShow_date().getYear()));
+        System.out.println("Tickets Bought:\t" + numOfSeats);
+        System.out.println("Total Price:\t" + sum);
+        System.out.println("====================");
         System.out.println("------------------------------------------------");
         System.out.println("New Hall Layout:");
         showChoice.printLayout();

@@ -1,7 +1,5 @@
 package ControllersBoundaries;
 
-import java.text.ParseException;
-
 import CineplexClasses.CineplexGroup;
 import Users.CustomerUser;
 import Users.EmployeeUser;
@@ -9,7 +7,7 @@ import Users.User;
 
 public class MoblimaApplication 
 {	
-	public static void main(String []args) throws ParseException
+	public static void main(String []args)
 	{
 		FileController fileController = new FileController(); 
 		boolean reset = false;
