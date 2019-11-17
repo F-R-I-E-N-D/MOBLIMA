@@ -8,7 +8,7 @@ public class FileController
 {
 	public CineplexController loadCineplexGroup()
 	{
-		CineplexController returnCineplexGroup = (CineplexController)deserializeObject("cineplexGroupJames.ser");
+		CineplexController returnCineplexGroup = (CineplexController)deserializeObject("cineplexGroup.ser");
 		if (returnCineplexGroup==null)
 		{
 			returnCineplexGroup = new CineplexController();

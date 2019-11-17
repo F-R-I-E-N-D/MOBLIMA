@@ -87,10 +87,10 @@ public class EmployeeBoundary extends UserBoundary
 				case 4: 
 					System.out.println("Cineplexes & Cinemas:\n");
 					printCinema(cineplex_group);
-					cplexID = getOnlyInteger("Enter Cineplex Id:\t");
+					cplexID = getOnlyInteger("Enter Cineplex Id:\t",0, cineplex_group.getCineplexList().size()-1);
 					String cinemaName = getString("Enter New Cinema Name:");
-					num_rows = getOnlyInteger("Enter number of rows:\t");
-					num_rows_hand = getOnlyInteger("Enter number of handicapped rows:\n(excess rows will be ignored)");
+					num_rows = getOnlyInteger("Enter number of rows:\t", 1, 26);
+					num_rows_hand = getOnlyInteger("Enter number of handicapped rows:\n(excess rows will be ignored)", 1, num_rows);
 					column = getIntegerArray("Enter Seats Per Lane");
 					columnHand = getIntegerArray("Enter Handicapped Seats Per Lane\n(excess rows will be ignored)");
 					
@@ -108,8 +108,8 @@ public class EmployeeBoundary extends UserBoundary
 				case 5:
 					System.out.println("\nCineplexes & Cinemas:\n");
 					printCinema(cineplex_group);
-					cplexID = getOnlyInteger("Enter Cineplex ID:\t");
-					int cinemaID = getOnlyInteger("Enter Cinema ID:");
+					cplexID = getOnlyInteger("Enter Cineplex ID:\t", 0, cineplex_group.getCineplexList().size()-1);
+					int cinemaID = getOnlyInteger("Enter Cinema ID:",0,cineplex_group.getCinemaList(cplexID).size()-1);
 					
 					System.out.println("Update:\n");
 					System.out.println("1.\tName");
@@ -127,7 +127,7 @@ public class EmployeeBoundary extends UserBoundary
 							adminManager.updateCinemaName(cineplex_group, new_name, cplexID, cinemaID);					
 							break;
 						case 2:
-							num_rows = getOnlyInteger("Enter new number of rows:");
+							num_rows = getOnlyInteger("Enter new number of rows:",1,26);
 							adminManager.updateCinemaRows(cineplex_group, num_rows, cplexID, cinemaID);					
 							break;
 						case 3:
@@ -153,8 +153,8 @@ public class EmployeeBoundary extends UserBoundary
 				case 6:
 					System.out.println("Cineplexes & Cinemas:\n");
 					printCinema(cineplex_group);
-					int cplexId = getOnlyInteger("Enter Cineplex Id:\t");
-					cinemaID = getOnlyInteger("Enter Cinema Id:\t");
+					int cplexId = getOnlyInteger("Enter Cineplex Id:\t",0, cineplex_group.getCineplexList().size()-1);
+					cinemaID = getOnlyInteger("Enter Cinema Id:\t",0,cineplex_group.getCinemaList(cplexId).size()-1);
 //					cineplex_group.removeCinema(cplexId, cinemaID);
 					adminManager.removeCinema(cineplex_group, cplexId, cinemaID);
 					printCinema(cineplex_group);
@@ -238,8 +238,8 @@ public class EmployeeBoundary extends UserBoundary
 				case 2:
 					printShow(cineplex_group);
 					
-					cineplexID = getOnlyInteger("Enter Cineplex ID to delete from:");
-					showID = getOnlyInteger("Enter show ID to delete:");
+					cineplexID = getOnlyInteger("Enter Cineplex ID to delete from:", 0, cineplex_group.getCineplexList().size()-1);
+					showID = getOnlyInteger("Enter show ID to delete:",0,cineplex_group.getShowList(cineplexID).size()-1);
 					
 					adminManager.deleteShow(cineplex_group, cineplexID, showID);
 					printShow(cineplex_group);
@@ -252,8 +252,8 @@ public class EmployeeBoundary extends UserBoundary
 				case 4:
 					printShow(cineplex_group);
 					
-					cineplexID = getOnlyInteger("Enter Cineplex ID to view from:");
-					showID = getOnlyInteger("Enter show ID to view:");
+					cineplexID = getOnlyInteger("Enter Cineplex ID to view from:", 0, cineplex_group.getCineplexList().size()-1);
+					showID = getOnlyInteger("Enter show ID to view:",0,cineplex_group.getShowList(cineplexID).size()-1);
 					adminManager.printShowLayout(cineplex_group, cineplexID, showID);
 					break;
 				case 5:
@@ -369,7 +369,7 @@ public class EmployeeBoundary extends UserBoundary
 					break;
 				case 2:
 					printMovie(cineplex_group);
-					movieID = getOnlyInteger("Enter movieID to remove: ");
+					movieID = getOnlyInteger("Enter movieID to remove: ",0, cineplex_group.getMovieList().size()-1);
 //					adminManager.removeMovieFromlist(cineplex_group, movxieID);
 					cineplex_group.getMovieList().get(movieID).setShowingStatus(Movie.ShowingStatus.DISCONTINUED);
 					printMovie(cineplex_group);
@@ -384,8 +384,8 @@ public class EmployeeBoundary extends UserBoundary
 					
 				case 5:
 					printReview(cineplex_group);
-					movieID = getOnlyInteger("Enter movieID to delete review");
-					int reviewID = getOnlyInteger("Enter reviewID to delete (-1 to cancel)");
+					movieID = getOnlyInteger("Enter movieID to delete review",0, cineplex_group.getMovieList().size()-1);
+					int reviewID = getOnlyInteger("Enter reviewID to delete (-1 to cancel)",0, cineplex_group.getReviews(movieID).size()-1);
 					
 //					cineplex_group.removeReview(movieID, reviewID);
 					employeeReviewController.removeReview(cineplex_group, movieID, reviewID);
@@ -399,7 +399,7 @@ public class EmployeeBoundary extends UserBoundary
 					break;
 				case 8:
 					printMovie(cineplex_group);
-					movieID = getOnlyInteger("Enter movieID to Update: ");
+					movieID = getOnlyInteger("Enter movieID to Update: ",0, cineplex_group.getMovieList().size()-1);
 					
 					System.out.println("Update:\n");
 					System.out.println("1.\tTitle");
@@ -508,7 +508,7 @@ public class EmployeeBoundary extends UserBoundary
 		printPrices(priceManager);
 	    
 	    int option = getOnlyInteger("Price Option to change: ", 1, 12);
-	    double price_set = getOnlyDouble("Price set: ", 0, 12);
+	    double price_set = getOnlyDouble("Price set: ", 0, 15);
 	    switch (option)
 	    {
 		    case 1: priceManager.setStudentMarkdown(price_set); break;

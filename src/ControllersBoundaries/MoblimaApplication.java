@@ -52,7 +52,7 @@ public class MoblimaApplication
 		
 		// ---------Saving---------//
 		System.out.println("----------------");
-		fileController.serializeObject(cineplexGroup, "cineplexGroupJames.ser");
+		fileController.serializeObject(cineplexGroup, "cineplexGroup.ser");
 		fileController.serializeObject(loginController, "loginManager.ser");
 		fileController.serializeObject(priceController, "priceManager.ser");
 		System.out.println("----------------");
